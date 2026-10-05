@@ -43,8 +43,8 @@ function spawnBird(){
 
    // Rufus actually travels toward the bird before the bite lands.
    const birdRect=b.getBoundingClientRect(), boardRect=gameBoard.getBoundingClientRect();
-   const targetX=((birdRect.left+birdRect.width/2-boardRect.left)/boardRect.width)*100;
-   const targetY=((birdRect.top+birdRect.height/2-boardRect.top)/boardRect.height)*100;
+   const targetX=Math.max(8,Math.min(72,((birdRect.left+birdRect.width/2-boardRect.left)/boardRect.width)*100));
+   const targetY=Math.max(28,Math.min(72,((birdRect.top+birdRect.height/2-boardRect.top)/boardRect.height)*100));
    gameRufus?.style.setProperty('--rufus-x',targetX+'%');
    gameRufus?.style.setProperty('--rufus-y',targetY+'%');
    gameBoard.classList.add('rufus-attack');
@@ -86,6 +86,7 @@ function startGame(){
 function endGame(){
  if(!running)return;running=false;clearTimeout(spawnTimer);clearInterval(clockTimer);
  timeEl.textContent=fmt(Date.now()-startTime);
+ clearTimeout(spawnTimer); if(birds) birds.innerHTML='';
  const newBest=score>best;
  if(newBest){best=score;localStorage.setItem('woaEarlyBirdsBest',best);bestEl.textContent='BEST '+best}
  overlay.style.display='grid';

@@ -642,3 +642,25 @@
     background-position:center !important;
   }
 }
+
+/* WORM ON ACID game */
+.acid-worm{display:flex!important;align-items:center!important;justify-content:center!important;background:radial-gradient(circle at 50% 50%,#26351b,#11160e 68%)!important}
+.acid-preview{font-size:82px;transform:rotate(-12deg);filter:drop-shadow(4px 5px 0 #171510);position:relative}
+.acid-preview span{position:absolute;right:-34px;top:6px;font-family:"Bangers",cursive;font-size:22px;color:#b5ff21;transform:rotate(14deg)}
+.worm-game{position:relative;background:#0c100b;border:3px solid #171510;box-shadow:7px 8px 0 rgba(0,0,0,.55);padding:18px 18px 54px;overflow:hidden}
+#worm-canvas{display:block;width:100%;height:auto;max-height:68vh;image-rendering:auto;background:#11160e;touch-action:none}
+.worm-overlay{position:absolute;inset:18px 18px 54px;display:grid;place-content:center;text-align:center;padding:25px;background:rgba(9,12,8,.82);backdrop-filter:blur(2px);z-index:4}
+.worm-overlay h3{font-size:48px;color:#b5ff21;margin:0 0 10px}
+.worm-overlay p{max-width:620px;margin:0 auto 20px;color:#eee9d8;font-size:19px}
+.worm-hud{position:absolute;left:18px;right:18px;bottom:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;background:#171a14;border-top:2px solid #30382c;color:#b5ff21;font-family:"Bangers",cursive;font-size:18px;letter-spacing:1px}
+.worm-help{margin-top:20px;background:#eee1bd;color:#27231a;padding:22px;border:3px solid #171510;box-shadow:6px 7px 0 #171510;transform:rotate(-.4deg)}
+.worm-help b{font-family:"Bangers",cursive;font-size:22px}
+.worm-help p{margin:.35em 0 0;font-size:18px}
+@media(max-width:800px){
+ .worm-game{padding:10px 10px 48px}
+ .worm-overlay{inset:10px 10px 48px;padding:16px}
+ .worm-overlay h3{font-size:39px}
+ .worm-overlay p{font-size:17px}
+ .worm-hud{left:10px;right:10px;height:48px;font-size:16px}
+ .worm-help{padding:18px}
+}

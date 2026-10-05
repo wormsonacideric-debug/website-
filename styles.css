@@ -664,3 +664,9 @@
  .worm-hud{left:10px;right:10px;height:48px;font-size:16px}
  .worm-help{padding:18px}
 }
+
+
+/* Game route state — keeps PLAY NOW cards working across all mini-games */
+body.game-open > .page:not(.game-detail){display:none!important}
+body.game-open .game-detail{display:none!important}
+body.game-open .game-detail.active-game{display:block!important}

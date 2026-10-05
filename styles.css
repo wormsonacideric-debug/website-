@@ -170,7 +170,7 @@
   .nav>a:last-child{grid-column:2;grid-row:1;font-size:20px;align-self:center}
   .hero{display:flex;flex-direction:column;align-items:stretch;min-height:0;margin:0;border:2px solid #252b22;box-shadow:5px 6px 0 rgba(0,0,0,.45);padding:0;background:#0b0e0a}
   .hero-art{order:0;height:430px;width:100%;margin:0;flex:none;border-bottom:2px solid #171510}
-  .hero-art:before{background:linear-gradient(180deg,rgba(5,8,5,.05),rgba(5,8,5,.38)),url("./assets/Highscrapparal.png?v=1") center/cover}
+  .hero-art:before{background:linear-gradient(180deg,rgba(5,8,5,.05),rgba(5,8,5,.38)),url("./assets/Ericisawakening.png?v=1") center/cover}
   .hero-art img{width:78%;height:390px;max-height:none;object-fit:contain;align-self:end;filter:drop-shadow(5px 7px 0 rgba(0,0,0,.75)) saturate(1.02) contrast(1.02)}
   .hero>div:first-child{order:1;padding:18px 18px 8px}
   .hero .eyebrow{font-size:15px;line-height:1.05;color:var(--acid);max-width:500px}
@@ -202,7 +202,7 @@
   .hero{grid-template-columns:44% 56%;padding:0;min-height:650px}
   .hero>div:first-child{grid-column:1;grid-row:1;padding:52px 38px;z-index:4;align-self:center}
   .hero-art{grid-column:1 / -1;grid-row:1;height:650px;z-index:1}
-  .hero-art:before{background:linear-gradient(90deg,rgba(6,9,6,.92) 0%,rgba(6,9,6,.72) 34%,rgba(6,9,6,.1) 62%,rgba(6,9,6,.12)),url("./assets/Highscrapparal.png?v=1") center/cover}
+  .hero-art:before{background:linear-gradient(90deg,rgba(6,9,6,.92) 0%,rgba(6,9,6,.72) 34%,rgba(6,9,6,.1) 62%,rgba(6,9,6,.12)),url("./assets/Ericisawakening.png?v=1") center/cover}
   .hero-art img{position:absolute;right:6%;bottom:0;width:52%;max-width:520px;height:590px;max-height:none}
   .hero .note{right:4%;bottom:7%;max-width:310px}
 }
@@ -218,7 +218,7 @@
 
   .hero{position:relative;display:block;height:535px;min-height:535px;padding:0;margin:0;border:2px solid #272d25;overflow:hidden;background:#11140f;box-shadow:5px 6px 0 rgba(0,0,0,.55)}
   .hero-art{position:absolute;inset:0;display:block;width:100%;height:100%;z-index:1}
-  .hero-art:before{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,5,.9) 0%,rgba(5,7,5,.68) 32%,rgba(5,7,5,.08) 70%),linear-gradient(180deg,rgba(5,7,5,.05),rgba(5,7,5,.4)),url("./assets/Highscrapparal.png?v=1") center/cover;filter:saturate(1.1) contrast(1.06)}
+  .hero-art:before{position:absolute;inset:0;background:linear-gradient(90deg,rgba(5,7,5,.9) 0%,rgba(5,7,5,.68) 32%,rgba(5,7,5,.08) 70%),linear-gradient(180deg,rgba(5,7,5,.05),rgba(5,7,5,.4)),url("./assets/Ericisawakening.png?v=1") center/cover;filter:saturate(1.1) contrast(1.06)}
   .hero-art img{position:absolute;right:3%;bottom:-2px;width:68%;height:455px;max-height:none;object-fit:contain;z-index:2;filter:drop-shadow(5px 8px 0 rgba(0,0,0,.78)) saturate(1.05)}
   .hero>div:first-child{position:absolute;left:0;top:0;width:53%;padding:30px 14px 18px;z-index:4;order:unset}
   .hero .eyebrow{font-family:"Patrick Hand",cursive;font-size:18px;line-height:1.02;color:#b5ff21;letter-spacing:.4px;text-shadow:2px 2px #171510}
@@ -288,7 +288,7 @@
     background:
       linear-gradient(90deg,rgba(5,7,5,.91) 0%,rgba(5,7,5,.70) 34%,rgba(5,7,5,.14) 72%),
       linear-gradient(180deg,rgba(5,7,5,.04),rgba(5,7,5,.42)),
-      url("./assets/Highscrapparal.png?v=1") center/cover!important;
+      url("./assets/Ericisawakening.png?v=1") center/cover!important;
   }
   .hero-art img{
     right:-8%!important; bottom:-3%!important;

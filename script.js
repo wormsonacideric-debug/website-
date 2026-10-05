@@ -214,3 +214,87 @@ function chooseFetch(item,button){
 $('#fetch-start')?.addEventListener('click',newFetchRound);
 if(location.hash==='#rufus-dog')newFetchRound();
 window.addEventListener('hashchange',()=>{if(location.hash==='#festival-escape')startFestival();if(location.hash==='#rufus-dog')newFetchRound()});
+
+/* WORM ON ACID — mini Snake-style game */
+(()=>{
+const canvas=$('#worm-canvas'),wrap=$('#worm-game'),overlay=$('#worm-overlay'),start=$('#worm-start');
+if(!canvas||!wrap||!overlay||!start)return;
+const ctx=canvas.getContext('2d'),scoreEl=$('#worm-score'),sizeEl=$('#worm-size'),effectEl=$('#worm-effect'),bestEl=$('#worm-best');
+const W=24,H=16; let cell=20,player=[],dir={x:1,y:0},nextDir={x:1,y:0},foods=[],enemies=[],running=false,score=0,last=0,timer=0,speed=135,effectTimer=0,effectText='NORMAL',touchStart=null;
+let best=Number(localStorage.getItem('woaWormBest')||0);bestEl.textContent='BEST '+best;
+function resize(){const r=wrap.getBoundingClientRect();cell=Math.max(10,Math.floor(Math.min(r.width/W,(r.height-48)/H)));canvas.width=W*cell;canvas.height=H*cell;draw()} resize();window.addEventListener('resize',resize);
+function rnd(){return {x:Math.floor(Math.random()*W),y:Math.floor(Math.random()*H)}}
+function occupied(p){return player.some(s=>s.x===p.x&&s.y===p.y)||enemies.some(e=>e.body.some(s=>s.x===p.x&&s.y===p.y))}
+function spot(){let p;do{p=rnd()}while(occupied(p)||foods.some(f=>f.x===p.x&&f.y===p.y));return p}
+function makeFood(kind){const p=spot();foods.push({...p,kind})}
+function reset(){
+ player=[{x:5,y:8},{x:4,y:8},{x:3,y:8}];dir={x:1,y:0};nextDir={x:1,y:0};score=0;speed=135;effectTimer=0;effectText='NORMAL';
+ foods=[];enemies=[];
+ makeFood('acid');makeFood('goo');makeFood('mystery');
+ for(let i=0;i<3;i++){let p=spot(),len=3+i*2,b=[];for(let j=0;j<len;j++)b.push({x:(p.x-j+W)%W,y:p.y});enemies.push({body:b,dir:{x:Math.random()<.5?1:-1,y:0},big:len>=5})}
+ updateHud();draw()
+}
+function updateHud(){scoreEl.textContent=score;sizeEl.textContent=player.length;effectEl.textContent=effectTimer>0?effectText:'NORMAL'}
+function setDir(x,y){if(x===-dir.x&&y===-dir.y)return;nextDir={x,y}}
+function eatFood(f){
+ foods=foods.filter(x=>x!==f);
+ if(f.kind==='acid'){score+=10;player.push({...player[player.length-1]});effectText='GROW';effectTimer=900;speed=Math.max(75,speed-3)}
+ if(f.kind==='goo'){score+=5;player.splice(Math.max(1,player.length-3),3);effectText='SHRINK';effectTimer=900}
+ if(f.kind==='mystery'){
+   const n=Math.floor(Math.random()*4);
+   if(n===0){for(let i=0;i<4;i++)player.push({...player[player.length-1]});effectText='MYSTERY: GROW';}
+   if(n===1){player.splice(Math.max(1,player.length-5),5);effectText='MYSTERY: SHRINK';}
+   if(n===2){speed=75;effectText='MYSTERY: FAST';}
+   if(n===3){score+=30;effectText='MYSTERY: +30';}
+   effectTimer=1800;
+ }
+ if(!foods.some(x=>x.kind==='acid'))makeFood('acid');
+ if(!foods.some(x=>x.kind==='goo'))makeFood('goo');
+ if(!foods.some(x=>x.kind==='mystery'))makeFood('mystery');
+ updateHud()
+}
+function moveEnemy(e){
+ const head=e.body[0], opts=[];
+ if(Math.random()<.65){
+   if(Math.abs(player[0].x-head.x)>Math.abs(player[0].y-head.y)) e.dir={x:Math.sign(player[0].x-head.x)||e.dir.x,y:0};
+   else e.dir={x:0,y:Math.sign(player[0].y-head.y)||e.dir.y};
+ }
+ const nh={x:(head.x+e.dir.x+W)%W,y:(head.y+e.dir.y+H)%H};
+ e.body.unshift(nh);e.body.pop()
+}
+function fail(msg){running=false;cancelAnimationFrame(timer);overlay.style.display='grid';overlay.querySelector('h3').textContent='WORMED OUT';overlay.querySelector('p').innerHTML=msg+'<br>Score: <b>'+score+'</b>';start.textContent='PLAY AGAIN →';if(score>best){best=score;localStorage.setItem('woaWormBest',best);bestEl.textContent='BEST '+best}draw()}
+function tick(now){
+ if(!running)return;
+ if(now-last<speed){timer=requestAnimationFrame(tick);return} last=now;
+ dir=nextDir;const head={x:(player[0].x+dir.x+W)%W,y:(player[0].y+dir.y+H)%H};
+ if(player.some((s,i)=>i>0&&s.x===head.x&&s.y===head.y)){fail('You ate yourself. Very on-brand.');return}
+ player.unshift(head);
+ let ate=false;
+ const fi=foods.find(f=>f.x===head.x&&f.y===head.y);if(fi){eatFood(fi);ate=true}
+ if(!ate)player.pop();
+ for(const e of enemies)moveEnemy(e);
+ for(const e of enemies){
+   const hit=e.body.findIndex(s=>s.x===head.x&&s.y===head.y);
+   if(hit>=0){
+     if(player.length>e.body.length){score+=25;effectText='LUNCH';effectTimer=900;enemies=enemies.filter(x=>x!==e);makeFood('mystery');updateHud()}
+     else{fail(player.length===e.body.length?'TWO WORMS ENTER. ONE WORM LEAVES.':'THAT WORM WAS MUCH BIGGER.');return}
+   }
+ }
+ if(effectTimer>0){effectTimer-=speed;if(effectTimer<=0){effectTimer=0;effectText='NORMAL';speed=135}}
+ updateHud();draw();timer=requestAnimationFrame(tick)
+}
+function draw(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ ctx.fillStyle='#11160e';ctx.fillRect(0,0,canvas.width,canvas.height);
+ for(let x=0;x<W;x++)for(let y=0;y<H;y++){ctx.fillStyle=(x+y)%2?'rgba(181,255,33,.018)':'rgba(255,255,255,.012)';ctx.fillRect(x*cell,y*cell,cell,cell)}
+ foods.forEach(f=>{ctx.beginPath();ctx.arc((f.x+.5)*cell,(f.y+.5)*cell,cell*.32,0,Math.PI*2);ctx.fillStyle=f.kind==='acid'?'#b5ff21':f.kind==='goo'?'#4db7ff':'#b45cff';ctx.fill();ctx.strokeStyle='#171510';ctx.lineWidth=2;ctx.stroke()});
+ enemies.forEach(e=>e.body.forEach((s,i)=>{ctx.fillStyle=e.body.length>4?'#ff5945':'#ffad22';ctx.fillRect(s.x*cell+2,s.y*cell+2,cell-4,cell-4);if(i===0){ctx.fillStyle='#171510';ctx.fillRect(s.x*cell+cell*.25,s.y*cell+cell*.25,cell*.16,cell*.16);ctx.fillRect(s.x*cell+cell*.59,s.y*cell+cell*.25,cell*.16,cell*.16)}}));
+ player.forEach((s,i)=>{ctx.fillStyle=i===0?'#f4eee0':'#8bd61d';ctx.beginPath();ctx.arc((s.x+.5)*cell,(s.y+.5)*cell,cell*(i===0?.42:.36),0,Math.PI*2);ctx.fill();if(i===0){ctx.fillStyle='#171510';ctx.beginPath();ctx.arc((s.x+.34)*cell,(s.y+.35)*cell,cell*.07,0,Math.PI*2);ctx.arc((s.x+.66)*cell,(s.y+.35)*cell,cell*.07,0,Math.PI*2);ctx.fill()}})}
+function startGame(){reset();overlay.style.display='none';running=true;last=performance.now();timer=requestAnimationFrame(tick)}
+start.addEventListener('click',startGame);
+document.addEventListener('keydown',e=>{if(location.hash!=='#worm-on-acid')return;const m={ArrowUp:[0,-1],w:[0,-1],ArrowDown:[0,1],s:[0,1],ArrowLeft:[-1,0],a:[-1,0],ArrowRight:[1,0],d:[1,0]}[e.key];if(m){e.preventDefault();setDir(m[0],m[1])}});
+canvas.addEventListener('touchstart',e=>{const t=e.changedTouches[0];touchStart={x:t.clientX,y:t.clientY}},{passive:true});
+canvas.addEventListener('touchend',e=>{if(!touchStart)return;const t=e.changedTouches[0],dx=t.clientX-touchStart.x,dy=t.clientY-touchStart.y;touchStart=null;if(Math.max(Math.abs(dx),Math.abs(dy))<20)return;if(Math.abs(dx)>Math.abs(dy))setDir(dx>0?1:-1,0);else setDir(0,dy>0?1:-1)},{passive:true});
+window.addEventListener('hashchange',()=>{if(location.hash==='#worm-on-acid'){reset();overlay.style.display='grid';running=false}else if(running){running=false;cancelAnimationFrame(timer)}});
+reset();
+})();

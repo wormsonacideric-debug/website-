@@ -625,31 +625,11 @@
 }
 
 
-/* HERO MOBILE COMPOSITION — keep the supplied Hero artwork intact,
-   but bias the crop left so the tyre/text area stays left and Eric
-   remains visible to the right, matching the desktop composition. */
-@media(max-width:800px){
-  .hero{
-    overflow:hidden!important;
-  }
-  .hero-art:before{
-    background-position:left center!important;
-  }
-  .hero>div:first-child{
-    width:52%!important;
-    z-index:3!important;
-  }
-  .hero .note{
-    z-index:4!important;
-  }
-}
-
-
 /* HERO FINAL: Hero.png is already the complete composition.
    Show the supplied artwork edge-to-edge; do not crop it and do not
    overlay a second Eric image. */
 .hero-art:before{
-  background-image:url("./assets/Hero.png?v=2") !important;
+  background-image:url("./assets/Hero2.png?v=1") !important;
   background-size:100% 100% !important;
   background-position:center !important;
   background-repeat:no-repeat !important;

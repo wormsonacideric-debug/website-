@@ -27,6 +27,11 @@
   <div class="game-thumb rufus-card"><img src="./assets/nigel-rufus.png?v=1" alt="Nigel and Rufus"></div>
   <div class="game-card-copy"><h3>RUFUS THE DOG</h3><p>Fetch the thing Nigel throws. Rufus has his own ideas about what the thing is.</p><a class="card-play" href="#rufus-dog" aria-label="Play Rufus the Dog"><img src="./assets/Playnowbutton.png?v=2" alt="Play now"></a></div>
 </article>
+<article class="game-card">
+  <img class="card-frame" src="./assets/Card.png?v=2" alt="">
+  <div class="game-thumb acid-worm"><div class="acid-preview">🪱<span>ACID</span></div></div>
+  <div class="game-card-copy"><h3>WORM ON ACID</h3><p>Eat the good stuff. Avoid the big worms. Get weird with the mystery effects.</p><a class="card-play" href="#worm-on-acid" aria-label="Play Worm on Acid"><img src="./assets/Playnowbutton.png?v=2" alt="Play now"></a></div>
+</article>
 </div></section>
 <section id="game" class="game-detail page">
 <div class="game-top"><div><div class="eyebrow">GAME 01 · HIGH SCRAPARRAL</div><h2>EARLY BIRDS</h2><p>Protect Eric.<br>Tap the birds before they land. Rufus will take care of the rest.</p></div><div class="scorebox"><span>SCORE</span><strong id="score">0</strong><span>TIME</span><strong id="time">00:00</strong></div></div>
@@ -64,6 +69,16 @@
 <div class="fetch-message" id="fetch-message"><h3>RUFUS, FETCH!</h3><p>Choose what Rufus should bring back.</p><button class="button" id="fetch-start">THROW IT →</button></div>
 </div>
 <div class="festival-help"><b>HOW TO PLAY</b><p>Pick the thing Nigel threw. Sometimes Rufus will ignore it because he has spotted something more interesting.</p><div id="fetch-tip">Rufus is ready.</div></div>
+<div class="game-back"><a href="#games">← BACK TO GAMES</a></div>
+</section>
+<section id="worm-on-acid" class="game-detail page">
+<div class="game-top"><div><div class="eyebrow">GAME 05 · SOMEWHERE STRANGE</div><h2>WORM ON ACID</h2><p>Old-school Snake. WORM ON ACID rules.<br>Grow. Shrink. Get faster. Try not to become somebody else's lunch.</p></div><div class="scorebox worm-score"><span>SCORE</span><strong id="worm-score">0</strong><span>SIZE</span><strong id="worm-size">3</strong></div></div>
+<div class="worm-game" id="worm-game">
+  <canvas id="worm-canvas" aria-label="Worm on Acid game"></canvas>
+  <div class="worm-overlay" id="worm-overlay"><h3>WORM ON ACID</h3><p>Collect acid drops. Mystery pills do something weird. Toxic goo makes you shrink.<br>Smaller worms are lunch. Bigger worms are trouble.</p><button class="button" id="worm-start">START WORMING →</button></div>
+  <div class="worm-hud"><span id="worm-effect">NORMAL</span><span id="worm-best">BEST 0</span></div>
+</div>
+<div class="worm-help"><b>HOW TO PLAY</b><p>Swipe or use the arrow keys. 🟢 acid grows you · 🔵 goo shrinks you · 🟣 mystery changes the rules · other worms can be eaten only when they're smaller.</p></div>
 <div class="game-back"><a href="#games">← BACK TO GAMES</a></div>
 </section>
 

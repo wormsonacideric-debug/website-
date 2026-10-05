@@ -14,7 +14,7 @@ h1,h2,h3,.brand,.eyebrow,.nav a,.button,.scorebox,.meta,.game-stats{font-family:
 /* HERO — one clean definition. Hero2.png is the complete artwork and remains 16:9. */
 .hero{position:relative;overflow:hidden;min-height:0;height:auto;display:block;margin:auto;padding:0;background:#0d100c;border:1px solid #293126;box-shadow:0 10px 0 rgba(0,0,0,.28)}
 .hero-art{position:relative;width:100%;height:auto;overflow:hidden;display:block;line-height:0}
-.hero-art img{display:block;width:100%;height:auto;max-width:none;object-fit:initial;filter:saturate(1.05) contrast(1.03)}
+.hero-art img{display:block!important;width:100%!important;height:auto!important;max-width:100%!important;min-height:0!important;object-fit:contain!important;aspect-ratio:auto!important;filter:saturate(1.05) contrast(1.03)}
 .hero-copy,.hero>div:first-child{position:absolute;left:0;top:0;width:52%;height:100%;z-index:3;padding:7% 3.2%;display:flex;flex-direction:column;justify-content:center}
 .hero .eyebrow{color:var(--acid);font-size:clamp(16px,2vw,26px);font-weight:400;line-height:1.02;letter-spacing:.8px;text-transform:uppercase;text-shadow:2px 2px 0 #171510}
 .hero h1{font-size:clamp(72px,10vw,132px);line-height:.78;margin:10px 0 22px;letter-spacing:0;text-shadow:4px 4px 0 #171510;transform:rotate(-2deg);color:#f4eee0}
@@ -43,7 +43,7 @@ h2{font-size:clamp(40px,6vw,72px);line-height:.9;margin:8px 0 18px;letter-spacin
   .nav nav{order:3;width:100%;overflow-x:auto;overflow-y:hidden;gap:16px;margin:0;scrollbar-width:none}.nav nav::-webkit-scrollbar{display:none}.nav nav a{white-space:nowrap}
   .page{padding:46px 20px}
   /* Mobile hero remains the original 16:9 artwork. Text overlays it. */
-  .hero{width:100%;aspect-ratio:16/9;height:auto;min-height:0}
+  .hero{width:100%;height:auto;min-height:0}
   .hero-art{width:100%;height:auto}
   .hero-copy,.hero>div:first-child{width:58%;height:100%;padding:6% 3.5%;justify-content:flex-start}
   .hero .eyebrow{font-size:clamp(14px,3.1vw,19px);max-width:280px}
@@ -56,7 +56,7 @@ h2{font-size:clamp(40px,6vw,72px);line-height:.9;margin:8px 0 18px;letter-spacin
 }
 @media(max-width:500px){
   .page{padding:42px 14px}
-  .hero{width:100%;aspect-ratio:16/9}
+  .hero{width:100%;height:auto}
   .hero-art{width:100%;height:auto}
   .hero-copy,.hero>div:first-child{width:62%;padding:5% 3.5%}
   .hero .eyebrow{font-size:15px;line-height:1.02}

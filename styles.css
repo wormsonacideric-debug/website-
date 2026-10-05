@@ -2,7 +2,7 @@
 /* WOA game upgrade */
 body:has(.game-detail:target) .page:not(.game-detail){display:none}
 .game-detail:target{display:block}
-.game-detail:target~.page{display:none}
+.game-detail:target~.page{display:none}.game-detail{display:none}.game-detail:target{display:block}
 .game-board{background-image:linear-gradient(rgba(7,11,7,.12),rgba(7,11,7,.48)),url('./assets/Highscrapparal.png?v=1');background-size:cover;background-position:center;box-shadow:inset 0 -90px 100px rgba(0,0,0,.45)}
 .game-board .ground{z-index:1;background:linear-gradient(180deg,transparent,rgba(18,25,14,.35)),repeating-linear-gradient(165deg,rgba(40,50,25,.35) 0 2px,transparent 2px 18px)}
 #game-eric{z-index:3;filter:drop-shadow(5px 8px 4px rgba(0,0,0,.55))}

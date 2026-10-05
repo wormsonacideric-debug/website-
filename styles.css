@@ -405,3 +405,104 @@
   .game-card h3{margin-top:60%!important;font-size:30px!important}
   .game-card p{min-height:58px!important}
 }
+
+/* ===== WOA ASSET CARD PASS 2 =====
+   Card.png is the physical card surface. Content sits on top of it.
+   Playnowbutton.png supplies the actual WOA button artwork.
+*/
+.game-card{
+  min-height:500px!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:0!important;
+  overflow:hidden!important;
+  position:relative!important;
+}
+.game-card .card-frame{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:fill!important;
+  z-index:8!important;
+  pointer-events:none!important;
+}
+.game-card .game-thumb{
+  position:absolute!important;
+  z-index:2!important;
+  left:5.5%!important;
+  top:4.5%!important;
+  width:89%!important;
+  height:53%!important;
+  margin:0!important;
+  overflow:hidden!important;
+  border:0!important;
+  background:#161b14!important;
+}
+.game-card .game-thumb img{
+  width:100%!important;
+  height:100%!important;
+  object-fit:cover!important;
+}
+.game-card .game-card-copy{
+  position:absolute!important;
+  z-index:9!important;
+  left:8%!important;
+  right:8%!important;
+  top:58%!important;
+  bottom:4%!important;
+  margin:0!important;
+  display:flex!important;
+  flex-direction:column!important;
+  align-items:flex-start!important;
+}
+.game-card .game-card-copy h3{
+  margin:0 0 7px!important;
+  font-family:"Bangers","Patrick Hand",cursive!important;
+  font-size:31px!important;
+  line-height:.9!important;
+  letter-spacing:1px!important;
+  color:#241f16!important;
+  text-shadow:1px 1px 0 rgba(255,255,255,.2)!important;
+}
+.game-card .game-card-copy p{
+  margin:0!important;
+  min-height:0!important;
+  font-family:"Patrick Hand",cursive!important;
+  font-size:18px!important;
+  line-height:1.12!important;
+  color:#332d22!important;
+  max-width:92%!important;
+}
+.game-card .card-play{
+  display:block!important;
+  width:58%!important;
+  max-width:220px!important;
+  margin-top:auto!important;
+  margin-bottom:2px!important;
+  line-height:0!important;
+  transform:rotate(-1deg)!important;
+}
+.game-card .card-play img{
+  display:block!important;
+  width:100%!important;
+  height:auto!important;
+  object-fit:contain!important;
+}
+@media(max-width:800px){
+  .game-card{min-height:475px!important}
+  .game-card .game-thumb{top:4.5%!important;height:53%!important}
+  .game-card .game-card-copy{top:58%!important;left:8%!important;right:8%!important}
+  .game-card .game-card-copy h3{font-size:29px!important}
+  .game-card .game-card-copy p{font-size:17px!important}
+  .game-card .card-play{width:62%!important}
+}
+@media(max-width:500px){
+  .game-card{min-height:455px!important}
+  .game-card .game-thumb{height:52%!important}
+  .game-card .game-card-copy{top:57%!important}
+  .game-card .game-card-copy h3{font-size:27px!important}
+  .game-card .game-card-copy p{font-size:16px!important;line-height:1.08!important}
+  .game-card .card-play{width:64%!important}
+}

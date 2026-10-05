@@ -595,3 +595,18 @@
 .game-grid .game-card .game-thumb{
   background:#20251d;
 }
+
+
+/* ===== HERO ASSET TEST =====
+   Hero.png is now the complete hero artwork/background.
+   Do not stack the separate Eric cutout on top of it.
+*/
+.hero-art:before{
+  background:
+    linear-gradient(90deg,rgba(5,7,5,.78) 0%,rgba(5,7,5,.42) 35%,rgba(5,7,5,.08) 72%),
+    linear-gradient(180deg,rgba(5,7,5,.04),rgba(5,7,5,.28)),
+    url("./assets/Hero.png?v=1") center/cover no-repeat!important;
+}
+.hero-art img{
+  display:none!important;
+}

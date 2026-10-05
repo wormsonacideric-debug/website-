@@ -506,3 +506,76 @@
   .game-card .game-card-copy p{font-size:16px!important;line-height:1.08!important}
   .game-card .card-play{width:64%!important}
 }
+
+/* ===== WOA CARD GEOMETRY FIX =====
+   Fixed card height prevents percentage-positioned artwork from
+   stretching the whole card on mobile. The mockup is a compact
+   picture area + paper copy area.
+*/
+.game-grid .game-card{
+  height:520px!important;
+  min-height:520px!important;
+  max-height:520px!important;
+  box-sizing:border-box!important;
+  overflow:hidden!important;
+}
+.game-grid .game-card .card-frame{
+  width:100%!important;
+  height:100%!important;
+  object-fit:fill!important;
+}
+.game-grid .game-card .game-thumb{
+  left:6%!important;
+  top:5%!important;
+  width:88%!important;
+  height:52%!important;
+  max-height:none!important;
+  box-sizing:border-box!important;
+}
+.game-grid .game-card .game-card-copy{
+  left:8%!important;
+  right:8%!important;
+  top:59%!important;
+  bottom:5%!important;
+  height:auto!important;
+  box-sizing:border-box!important;
+  justify-content:flex-start!important;
+}
+.game-grid .game-card .game-card-copy h3{
+  margin:0 0 8px!important;
+  font-size:30px!important;
+  line-height:.9!important;
+  color:#241f16!important;
+}
+.game-grid .game-card .game-card-copy p{
+  margin:0!important;
+  font-size:18px!important;
+  line-height:1.08!important;
+  max-width:100%!important;
+}
+.game-grid .game-card .card-play{
+  width:58%!important;
+  margin-top:auto!important;
+  margin-bottom:0!important;
+}
+@media(max-width:500px){
+  .game-grid .game-card{
+    height:500px!important;
+    min-height:500px!important;
+    max-height:500px!important;
+  }
+  .game-grid .game-card .game-thumb{
+    left:6%!important;
+    width:88%!important;
+    top:5%!important;
+    height:51%!important;
+  }
+  .game-grid .game-card .game-card-copy{
+    top:58%!important;
+    left:8%!important;
+    right:8%!important;
+  }
+  .game-grid .game-card .game-card-copy h3{font-size:28px!important}
+  .game-grid .game-card .game-card-copy p{font-size:17px!important}
+  .game-grid .game-card .card-play{width:62%!important}
+}

@@ -80,3 +80,73 @@ function judgeBuild(){
 $('#scrap-reset')?.addEventListener('click',newScrapPile);
 if(location.hash==='#scrap-challenge')newScrapPile();
 window.addEventListener('hashchange',()=>{if(location.hash==='#scrap-challenge')newScrapPile();if(location.hash!=='#game'&&running){running=false;clearTimeout(spawnTimer);clearInterval(clockTimer)}});
+
+
+/* Eric's Festival Escape */
+const festivalGame=$('#festival-game'),festivalStart=$('#festival-start'),festivalEric=$('#festival-eric'),festivalSecurity=$('#festival-security');
+let festivalRunning=false,festivalStage=1,festivalLane=1,festivalGuard=1;
+const festivalTips=['Eric recommends confidence.','Walk like you know the band.','Act like you are supposed to be here.','Nobody checks the man with the hat.','Eric has absolutely no ticket.'];
+function festivalRound(){
+ if(!festivalRunning)return;
+ festivalLane=Math.floor(Math.random()*3);festivalGuard=Math.floor(Math.random()*3);
+ $('#festival-stage').textContent=festivalStage;$('#festival-status').textContent='OUTSIDE';
+ festivalSecurity.style.left=(16+festivalGuard*34)+'%';festivalSecurity.textContent=festivalStage>3?'🚨':'👮';
+ festivalEric.style.left=(18+festivalLane*34)+'%';
+ $('#festival-message h3').textContent='PICK A GAP';$('#festival-message p').textContent='Security is watching. Probably.';
+ festivalGame.classList.remove('festival-win','festival-fail');
+}
+function startFestival(){
+ festivalRunning=true;festivalStage=1;$('#festival-message').style.display='none';festivalRound();
+}
+function chooseFestivalLane(lane){
+ if(!festivalRunning)return;
+ if(lane===festivalGuard){
+   festivalRunning=false;festivalGame.classList.add('festival-fail');$('#festival-status').textContent='SPOTTED';
+   $('#festival-message').style.display='grid';$('#festival-message h3').textContent='NICE TRY';$('#festival-message p').textContent='Security noticed Eric. Eric acted like this was deliberate.';
+   $('#festival-start').textContent='TRY AGAIN →';$('#festival-tip').textContent=''+festivalTips[Math.min(festivalStage,festivalTips.length-1)];
+ }else{
+   festivalGame.classList.add('festival-win');festivalStage++;
+   $('#festival-status').textContent='IN!';
+   $('#festival-message').style.display='grid';$('#festival-message h3').textContent=festivalStage>6?'ERIC IS IN':'BANGING';
+   $('#festival-message p').textContent=festivalStage>6?'He made it. Nobody asked for a ticket.':'Through the fence. Next one is worse.';
+   $('#festival-start').textContent=festivalStage>6?'PLAY AGAIN →':'NEXT FENCE →';
+   $('#festival-tip').textContent=festivalTips[Math.min(festivalStage-1,festivalTips.length-1)];
+   if(festivalStage>6)festivalRunning=false;
+ }
+}
+festivalStart?.addEventListener('click',()=>{if(!festivalRunning||festivalStage===1&&$('#festival-start').textContent!=='NEXT FENCE →')startFestival();else {$('#festival-message').style.display='none';festivalRound()}});
+festivalGame?.querySelectorAll('.festival-gates button').forEach(b=>b.addEventListener('click',()=>chooseFestivalLane(Number(b.dataset.lane))));
+if(location.hash==='#festival-escape')startFestival();
+
+/* Rufus the Dog */
+const fetchThings=[['🦴','BONE'],['🛞','TYRE'],['🍞','DOUGHNUT'],['🪑','CHAIR'],['📺','TV'],['🐟','FISH'],['🍩','DOUGHNUT'],['🪣','BUCKET']];
+let fetchTarget=null,fetchRunning=false;
+function newFetchRound(){
+ fetchRunning=true;$('#fetch-message').style.display='none';
+ const choices=shuffle(fetchThings.slice()).slice(0,4);fetchTarget=choices[Math.floor(Math.random()*choices.length)];
+ $('#throw-item').textContent=fetchTarget[0];
+ const box=$('#fetch-options');box.innerHTML='';
+ shuffle(choices.slice()).forEach(x=>{const b=document.createElement('button');b.className='fetch-option';b.innerHTML='<span>'+x[0]+'</span><b>'+x[1]+'</b>';b.addEventListener('click',()=>chooseFetch(x,b));box.appendChild(b)});
+ $('#fetch-tip').textContent='Rufus is watching.';
+}
+function chooseFetch(item,button){
+ if(!fetchRunning)return;fetchRunning=false;
+ const score=$('#fetch-score'),streak=$('#fetch-streak'),msg=$('#fetch-message'),tip=$('#fetch-tip');
+ if(item[1]===fetchTarget[1]){
+   const newScore=Number(score.textContent)+1;const newStreak=Number(streak.textContent)+1;score.textContent=newScore;streak.textContent=newStreak;
+   button.classList.add('correct');$('#rufus-game').classList.add('fetch-success');
+   msg.querySelector('h3').textContent=newStreak>3?'VERY GOOD BOY':'GOOD BOY';
+   msg.querySelector('p').textContent=newStreak>3?'Rufus has become suspiciously competent.':'He brought back the correct thing. Eventually.';
+   tip.textContent='Rufus says: Woof.';
+ }else{
+   streak.textContent='0';button.classList.add('wrong');$('#rufus-game').classList.add('fetch-chaos');
+   const chaos=['Rufus has fetched the wrong thing.','Rufus has eaten the evidence.','Rufus has found something else.','Rufus is now chasing a bird.'];
+   msg.querySelector('h3').textContent='RUfUS';
+   msg.querySelector('p').textContent=chaos[Math.floor(Math.random()*chaos.length)];
+   tip.textContent='Nigel: “That is not what I threw.”';
+ }
+ msg.style.display='grid';setTimeout(()=>{$('#rufus-game').classList.remove('fetch-success','fetch-chaos')},400);
+}
+$('#fetch-start')?.addEventListener('click',newFetchRound);
+if(location.hash==='#rufus-dog')newFetchRound();
+window.addEventListener('hashchange',()=>{if(location.hash==='#festival-escape')startFestival();if(location.hash==='#rufus-dog')newFetchRound()});

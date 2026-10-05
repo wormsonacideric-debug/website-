@@ -670,3 +670,94 @@
 body.game-open > .page:not(.game-detail){display:none!important}
 body.game-open .game-detail{display:none!important}
 body.game-open .game-detail.active-game{display:block!important}
+
+
+/* ===== HERO MOBILE FINAL FIX =====
+   Keep the supplied Hero2 artwork intact. Do not stretch it to the
+   hero box; use cover and a stronger left-hand readability gradient.
+   The copy and quote sit above the artwork without fighting Eric.
+*/
+@media(max-width:800px){
+  .hero{
+    height:520px!important;
+    min-height:520px!important;
+  }
+  .hero-art{
+    height:100%!important;
+  }
+  .hero-art:before{
+    background:
+      linear-gradient(90deg,
+        rgba(5,7,5,.94) 0%,
+        rgba(5,7,5,.78) 30%,
+        rgba(5,7,5,.38) 52%,
+        rgba(5,7,5,.08) 78%),
+      linear-gradient(180deg,
+        rgba(5,7,5,.02) 0%,
+        rgba(5,7,5,.08) 58%,
+        rgba(5,7,5,.45) 100%),
+      url("./assets/Hero2.png?v=2") center center/cover no-repeat!important;
+    filter:none!important;
+  }
+  .hero-art img{
+    display:none!important;
+  }
+  .hero>div:first-child{
+    width:60%!important;
+    padding:30px 13px 8px!important;
+  }
+  .hero .eyebrow{
+    max-width:230px!important;
+  }
+  .hero h1{
+    margin:10px 0 16px!important;
+  }
+  .hero .lead{
+    max-width:250px!important;
+  }
+  .hero .button{
+    margin-top:8px!important;
+    white-space:nowrap!important;
+  }
+  .hero .note{
+    right:3%!important;
+    bottom:4%!important;
+    width:43%!important;
+    max-width:205px!important;
+    padding:14px 15px!important;
+    font-size:15px!important;
+  }
+}
+
+@media(max-width:500px){
+  .hero{
+    height:500px!important;
+    min-height:500px!important;
+  }
+  .hero>div:first-child{
+    width:61%!important;
+    padding:27px 12px 8px!important;
+  }
+  .hero .eyebrow{
+    font-size:16px!important;
+    max-width:220px!important;
+  }
+  .hero h1{
+    font-size:76px!important;
+  }
+  .hero .lead{
+    font-size:17px!important;
+    max-width:235px!important;
+  }
+  .hero .button{
+    font-size:16px!important;
+    padding:9px 12px!important;
+  }
+  .hero .note{
+    width:44%!important;
+    max-width:190px!important;
+    font-size:14px!important;
+    line-height:1.12!important;
+    padding:13px 13px!important;
+  }
+}

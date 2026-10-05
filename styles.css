@@ -248,3 +248,100 @@
   .hero .button{font-size:16px}
   .hero .note{width:43%;font-size:15px;padding:14px 15px;bottom:5%}
 }
+
+/* ===== WOA LAYOUT LOCK — structure first, imagery can be refined later ===== */
+@media(max-width:800px){
+  body{font-size:18px}
+  .page{padding:28px 12px 46px}
+  .nav{
+    height:78px!important; min-height:78px!important;
+    display:flex!important; flex-wrap:nowrap!important;
+    align-items:center!important; justify-content:space-between!important;
+    padding:0 18px!important; gap:0!important;
+    background:#080a08!important; border-bottom:2px solid #26301f!important;
+    box-shadow:0 2px 0 rgba(181,255,33,.55)!important;
+  }
+  .brand{
+    display:block!important; font-size:24px!important; line-height:1!important;
+    flex:0 0 auto; transform:rotate(-2deg);
+  }
+  .nav nav{display:none!important}
+  .nav>a:last-child{
+    display:block!important; margin-left:auto!important;
+    font-family:Arial,sans-serif!important; font-size:28px!important;
+    line-height:1!important; color:#eee9d8!important;
+  }
+  .nav:after{
+    content:"☰"; display:block; margin-left:18px;
+    color:#eee9d8; font:26px/1 Arial,sans-serif;
+  }
+
+  /* The home hero is one illustrated composition, not three stacked modules. */
+  .hero{
+    height:560px!important; min-height:560px!important;
+    margin:0!important; padding:0!important;
+    border:2px solid #171a14!important;
+    box-shadow:5px 6px 0 rgba(0,0,0,.55)!important;
+  }
+  .hero-art{position:absolute!important;inset:0!important;width:100%!important;height:100%!important;border:0!important}
+  .hero-art:before{
+    background:
+      linear-gradient(90deg,rgba(5,7,5,.91) 0%,rgba(5,7,5,.70) 34%,rgba(5,7,5,.14) 72%),
+      linear-gradient(180deg,rgba(5,7,5,.04),rgba(5,7,5,.42)),
+      url("./assets/Highscrapparal.png?v=1") center/cover!important;
+  }
+  .hero-art img{
+    right:-8%!important; bottom:-3%!important;
+    width:74%!important; height:455px!important;
+    object-fit:contain!important;
+  }
+  .hero>div:first-child{
+    left:0!important; top:0!important; width:62%!important;
+    padding:32px 15px 10px!important;
+  }
+  .hero .eyebrow{font-size:17px!important;line-height:1.02!important}
+  .hero h1{font-size:82px!important;line-height:.76!important;margin:10px 0 17px!important}
+  .hero .lead{font-size:18px!important;line-height:1.08!important}
+  .hero .button{font-size:17px!important;margin-top:10px!important}
+  .hero .note{
+    right:3%!important; bottom:4%!important; width:47%!important;
+    padding:16px 17px!important; font-size:16px!important;
+    line-height:1.18!important;
+  }
+
+  /* Sections are dense like the mockup rather than generous modern web sections. */
+  .section{padding-top:36px!important;padding-bottom:36px!important}
+  .section-head{margin-bottom:18px!important}
+  h2{font-size:54px!important;line-height:.86!important}
+  .intro{padding-top:34px!important}
+  .intro aside{padding:20px!important;font-size:22px!important}
+  .game-grid{gap:14px!important}
+  .game-card{
+    border-width:3px!important;
+    box-shadow:5px 6px 0 rgba(0,0,0,.65)!important;
+    transform:rotate(-.5deg)!important;
+  }
+  .game-thumb{height:175px!important}
+  .game-card>*:not(.game-thumb){margin-left:17px!important;margin-right:17px!important}
+  .game-card h3{font-size:31px!important;margin-top:13px!important}
+  .game-card p{font-size:18px!important;line-height:1.15!important}
+  .game-card .button{font-size:17px!important;margin-bottom:3px}
+
+  /* Keep game detail panels dense and square like the mockup. */
+  .game-top{padding-top:8px!important}
+  .game-board{border-radius:2px!important;margin-top:14px!important}
+  .game-help,.festival-help{border-radius:2px!important}
+}
+
+@media(max-width:500px){
+  .page{padding-left:8px!important;padding-right:8px!important}
+  .nav{padding:0 16px!important}
+  .brand{font-size:23px!important}
+  .hero{height:555px!important;min-height:555px!important}
+  .hero>div:first-child{width:61%!important;padding:28px 13px 8px!important}
+  .hero h1{font-size:78px!important}
+  .hero .lead{font-size:17px!important}
+  .hero-art img{width:78%!important;height:440px!important;right:-10%!important}
+  .hero .note{width:48%!important;font-size:15px!important;padding:15px 15px!important}
+  h2{font-size:48px!important}
+}

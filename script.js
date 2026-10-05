@@ -39,7 +39,7 @@ const recipes=[
  {a:'tv',b:'pipe',name:'THE SCRAPCASTER',points:125,reply:'That should not work. It does.'},
  {a:'tyre',b:'traffic-cone',name:'THE SAFETY MACHINE',points:90,reply:'Finally. Something responsible.'},
  {a:'bucket',b:'fan',name:'THE BUCKET FAN',points:60,reply:'It makes wind. Congratulations.'},
- {a:'lamp',b:'car-part',name:'THE SUN MACHINE',points:150,reply:'I wouldn't stand underneath it.'}
+ {a:'lamp',b:'car-part',name:'THE SUN MACHINE',points:150,reply:"I wouldn't stand underneath it."}
 ];
 const junk=[
  ['toaster','🍞','TOASTER'],['wheel','🛞','WHEEL'],['kettle','🫖','KETTLE'],['chair','🪑','CHAIR'],

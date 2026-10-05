@@ -345,3 +345,63 @@
   .hero .note{width:48%!important;font-size:15px!important;padding:15px 15px!important}
   h2{font-size:48px!important}
 }
+
+/* ===== CARD.PNG FRAME SYSTEM ===== */
+.game-card{
+  min-height:520px!important;
+  position:relative!important;
+  background:transparent!important;
+  border:0!important;
+  box-shadow:none!important;
+  padding:0 0 26px!important;
+  overflow:hidden!important;
+  transform:none!important;
+}
+.game-card .card-frame{
+  position:absolute!important;
+  inset:0!important;
+  width:100%!important;
+  height:100%!important;
+  object-fit:fill!important;
+  z-index:5!important;
+  pointer-events:none!important;
+}
+.game-card .game-thumb{
+  position:absolute!important;
+  left:5%!important;
+  right:5%!important;
+  top:4%!important;
+  width:90%!important;
+  height:56%!important;
+  z-index:1!important;
+  border:0!important;
+}
+.game-card h3,
+.game-card p,
+.game-card .button{
+  position:relative!important;
+  z-index:7!important;
+}
+.game-card h3{
+  margin-top:61%!important;
+  margin-bottom:8px!important;
+  font-size:32px!important;
+}
+.game-card p{
+  min-height:62px!important;
+  margin-bottom:14px!important;
+}
+.game-card .button{
+  margin-bottom:8px!important;
+}
+@media(max-width:800px){
+  .game-card{min-height:500px!important}
+  .game-card .game-thumb{height:56%!important}
+  .game-card h3{margin-top:61%!important;font-size:31px!important}
+}
+@media(max-width:500px){
+  .game-card{min-height:475px!important}
+  .game-card .game-thumb{height:55%!important}
+  .game-card h3{margin-top:60%!important;font-size:30px!important}
+  .game-card p{min-height:58px!important}
+}

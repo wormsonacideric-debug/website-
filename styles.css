@@ -610,3 +610,16 @@
 .hero-art img{
   display:none!important;
 }
+
+
+/* HERO TEST — final override: Hero.png is the sole hero artwork.
+   The separate Eric cutout must not be rendered or stacked over it. */
+.hero-art:before{
+  background:
+    linear-gradient(90deg,rgba(5,7,5,.91) 0%,rgba(5,7,5,.70) 34%,rgba(5,7,5,.14) 72%),
+    linear-gradient(180deg,rgba(5,7,5,.04),rgba(5,7,5,.42)),
+    url("./assets/Hero.png?v=1") center/cover no-repeat!important;
+}
+.hero-art img{
+  display:none!important;
+}

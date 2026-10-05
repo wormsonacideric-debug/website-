@@ -298,3 +298,45 @@ canvas.addEventListener('touchend',e=>{if(!touchStart)return;const t=e.changedTo
 window.addEventListener('hashchange',()=>{if(location.hash==='#worm-on-acid'){reset();overlay.style.display='grid';running=false}else if(running){running=false;cancelAnimationFrame(timer)}});
 reset();
 })();
+
+
+/* Robust game-card navigation */
+(()=>{
+  const gameIds=new Set(['game','scrap-challenge','festival-escape','rufus-dog','worm-on-acid']);
+  function showGame(id,scroll=true){
+    const target=document.getElementById(id);
+    if(!target||!gameIds.has(id))return false;
+    document.body.classList.add('game-open');
+    document.querySelectorAll('.game-detail').forEach(el=>{
+      el.classList.remove('active-game');
+      el.style.display='none';
+    });
+    target.classList.add('active-game');
+    target.style.display='block';
+    if(scroll) requestAnimationFrame(()=>target.scrollIntoView({behavior:'smooth',block:'start'}));
+    return true;
+  }
+  function closeGames(){
+    document.body.classList.remove('game-open');
+    document.querySelectorAll('.game-detail').forEach(el=>{
+      el.classList.remove('active-game');
+      el.style.removeProperty('display');
+    });
+  }
+  document.addEventListener('click',e=>{
+    const link=e.target.closest('a.card-play');
+    if(!link)return;
+    const id=(link.getAttribute('href')||'').replace(/^#/,'');
+    if(!showGame(id,false))return;
+    e.preventDefault();
+    if(location.hash!=='#'+id) history.pushState(null,'','#'+id);
+    requestAnimationFrame(()=>document.getElementById(id)?.scrollIntoView({behavior:'smooth',block:'start'}));
+  });
+  function syncGameRoute(){
+    const id=location.hash.replace(/^#/,'');
+    if(gameIds.has(id)) showGame(id,true); else closeGames();
+  }
+  window.addEventListener('hashchange',syncGameRoute);
+  window.addEventListener('popstate',syncGameRoute);
+  syncGameRoute();
+})();

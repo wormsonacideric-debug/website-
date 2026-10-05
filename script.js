@@ -14,7 +14,7 @@ function spawnBird(){
  const dur=Math.max(1.25,3.4-score*.018-Math.random()*.65); b.style.animationDuration=dur+'s';
  b.addEventListener('pointerdown',e=>{e.preventDefault();e.stopPropagation();if(!running)return;
    const value=Number(b.dataset.value);score+=value*combo;scoreEl.textContent=score;combo=Math.min(8,combo+1);comboEl.textContent='COMBO ×'+combo;
-   b.classList.add('caught');b.textContent='💥';gameBoard.classList.add('rufus-lunge');setStatus(value===5?'RUfUS GOT THE BIG ONE':'RUfUS GOT IT');
+   b.classList.add('caught');b.textContent='💥';gameBoard.classList.add('rufus-lunge');setStatus(value===5?'RUFUS GOT THE BIG ONE':'RUFUS GOT IT');
    setTimeout(()=>{b.remove();gameBoard.classList.remove('rufus-lunge')},160);
  });
  b.addEventListener('animationend',()=>{if(!running)return;birdsMissed++;combo=1;comboEl.textContent='COMBO ×1';endGame()});
@@ -27,8 +27,8 @@ function startGame(){
 }
 function endGame(){
  if(!running)return;running=false;clearTimeout(spawnTimer);clearInterval(clockTimer);
- timeEl.textContent=fmt(Date.now()-startTime);if(score>best){best=score;localStorage.setItem('woaEarlyBirdsBest',best);bestEl.textContent='BEST '+best}
- overlay.style.display='grid';overlay.querySelector('h3').textContent='ERIC SURVIVED';overlay.querySelector('p').innerHTML=`Score: <b>${score}</b><br>${score>best?'New best.': 'Rufus remains convinced this was a team effort.'}`;
+ timeEl.textContent=fmt(Date.now()-startTime);const newBest=score>best;if(newBest){best=score;localStorage.setItem('woaEarlyBirdsBest',best);bestEl.textContent='BEST '+best}
+ overlay.style.display='grid';overlay.querySelector('h3').textContent='ERIC SURVIVED';overlay.querySelector('p').innerHTML=`Score: <b>${score}</b><br>${newBest?'New best.':'Rufus remains convinced this was a team effort.'}`;
  start.textContent='PLAY AGAIN →';setStatus('SAFE... FOR NOW');
 }
 start?.addEventListener('click',startGame);
@@ -49,7 +49,7 @@ const junk=[
 let activeRecipe=null,selected=[];
 function shuffle(a){return a.sort(()=>Math.random()-.5)}
 function newScrapPile(){
- selected=[];$('#scrap-result').textContent='';$('#target-label').textContent='BUILD SOMETHING';
+ selected=[];$('#scrap-result').textContent='';$('#target-label').textContent='BUILD SOMETHING';$('#scrap-target').querySelectorAll('.target-piece').forEach(x=>x.remove());
  const recipe=recipes[Math.floor(Math.random()*recipes.length)];activeRecipe=recipe;
  const decoys=shuffle(junk.filter(x=>x[0]!==recipe.a&&x[0]!==recipe.b)).slice(0,4);
  const pile=shuffle([junk.find(x=>x[0]===recipe.a),junk.find(x=>x[0]===recipe.b),...decoys]);

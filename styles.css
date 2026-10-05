@@ -643,3 +643,22 @@
     z-index:4!important;
   }
 }
+
+
+/* HERO FINAL: Hero.png is already the complete composition.
+   Show the supplied artwork edge-to-edge; do not crop it and do not
+   overlay a second Eric image. */
+.hero-art:before{
+  background-image:url("./assets/Hero.png?v=2") !important;
+  background-size:100% 100% !important;
+  background-position:center !important;
+  background-repeat:no-repeat !important;
+  filter:none !important;
+}
+.hero-art img{display:none !important;}
+@media(max-width:800px){
+  .hero-art:before{
+    background-size:100% 100% !important;
+    background-position:center !important;
+  }
+}

@@ -67,3 +67,12 @@ h2{font-size:clamp(40px,6vw,72px);line-height:.9;margin:8px 0 18px;letter-spacin
   .hero .note{width:41%;bottom:4%;padding:11px 12px;font-size:13px}
   .character-grid{grid-template-columns:1fr}.game-board{height:430px}
 }
+
+
+/* HERO2 — let the artwork determine the hero height. Never distort the source image. */
+.hero,
+.hero-art,
+.hero-art img{aspect-ratio:auto!important}
+.hero{height:auto!important;min-height:0!important}
+.hero-art{position:relative!important;height:auto!important;display:block!important}
+.hero-art img{position:relative!important;display:block!important;width:100%!important;height:auto!important;max-height:none!important;min-height:0!important;object-fit:initial!important}

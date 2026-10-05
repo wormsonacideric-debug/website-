@@ -623,3 +623,23 @@
 .hero-art img{
   display:none!important;
 }
+
+
+/* HERO MOBILE COMPOSITION — keep the supplied Hero artwork intact,
+   but bias the crop left so the tyre/text area stays left and Eric
+   remains visible to the right, matching the desktop composition. */
+@media(max-width:800px){
+  .hero{
+    overflow:hidden!important;
+  }
+  .hero-art:before{
+    background-position:left center!important;
+  }
+  .hero>div:first-child{
+    width:52%!important;
+    z-index:3!important;
+  }
+  .hero .note{
+    z-index:4!important;
+  }
+}

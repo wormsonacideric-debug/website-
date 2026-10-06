@@ -15,5 +15,15 @@ endRound(){if(!this.running)return;this.running=false;this.clearBirds();const el
 clearBirds(){this.birds.forEach(b=>b.destroy());this.birds=[]}}
 function fmt(ms){let s=Math.floor(ms/1000),m=Math.floor(s/60);s%=60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")}
 function setStatus(t){if(statusEl)statusEl.textContent=t}
-function boot(){if(window.WOA?.earlyBirds)return;const game=WOA.Game.boot({parent:"early-birds-canvas",width:960,height:540,background:"#11160e",scene:EarlyBirds});window.WOA.earlyBirds=game;start?.addEventListener("click",()=>game.scene.getScene("EarlyBirds").startRound())}
+function boot(){
+ if(window.WOA?.earlyBirds)return;
+ const game=WOA.Game.boot({parent:"early-birds-canvas",width:960,height:540,background:"#11160e",scene:EarlyBirds});
+ window.WOA.earlyBirds=game;
+ const launch=()=>{
+   const scene=game.scene.getScene("EarlyBirds");
+   if(!scene){overlay.style.display="grid";overlay.querySelector("h3").textContent="GAME ERROR";overlay.querySelector("p").textContent="Early Birds could not start.";return}
+   scene.startRound();
+ };
+ start?.addEventListener("click",launch);
+}
 window.addEventListener("hashchange",()=>{if(location.hash==="#game")boot()});if(location.hash==="#game")boot();})();

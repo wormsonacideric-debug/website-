@@ -425,3 +425,220 @@ footer small{font-size:16px;color:#9ba99e}
 @media(max-width:800px){
   .panel,.card,.character,.world-grid article,.community-card,.reading{box-shadow:6px 7px 0 rgba(0,0,0,.5)}
 }
+
+
+/* ============================================================
+   WOA PHYSICAL MATERIALS PASS
+   Use the supplied WOA artwork as the material itself.
+   CSS supplies layout; the PNGs supply the physical object.
+   ============================================================ */
+
+.panel,
+.card,
+.character,
+.world-grid article,
+.community-card,
+.reading {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  border: 0;
+  clip-path: none;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+/* Large written/archival sheets */
+.panel,
+.reading {
+  background-image: url("./assets/TextCard.png");
+}
+
+/* Smaller battered cards */
+.card,
+.character,
+.world-grid article,
+.community-card {
+  background-image: url("./assets/Card.png");
+}
+
+/* Acid-green notices */
+.community-card:nth-child(2),
+.paper-note {
+  background-image: url("./assets/Greentextcard.png");
+  background-color: transparent;
+}
+
+/* The supplied material already contains its own edge treatment. */
+.panel:before,
+.panel:after,
+.card:before,
+.card:after,
+.character:before,
+.character:after,
+.world-grid article:before,
+.world-grid article:after,
+.community-card:before,
+.community-card:after,
+.reading:before,
+.reading:after {
+  display: none;
+}
+
+/* Give the physical sheets their own depth rather than a generic card shadow. */
+.panel,
+.reading {
+  filter: drop-shadow(7px 9px 0 rgba(0,0,0,.55));
+}
+
+.card,
+.character,
+.world-grid article,
+.community-card {
+  filter: drop-shadow(5px 7px 0 rgba(0,0,0,.50));
+}
+
+/* Content is inset from the illustrated edge of the supplied artwork. */
+.panel {
+  padding: 58px 62px 62px;
+}
+
+.reading {
+  padding: 72px 62px;
+}
+
+.card {
+  padding: 18px 18px 24px;
+}
+
+.character {
+  padding: 20px;
+}
+
+.world-grid article {
+  padding: 15px;
+}
+
+.community-card {
+  padding: 38px 32px 42px;
+}
+
+/* Tape becomes a real collage element, not another pseudo-card. */
+.paper-note {
+  position: relative;
+  border: 0;
+  box-shadow: none;
+  filter: drop-shadow(5px 7px 0 rgba(0,0,0,.45));
+}
+
+.paper-note:before {
+  display: block;
+  z-index: 4;
+  width: 76px;
+  height: 20px;
+  background: rgba(205,190,145,.92);
+  top: -7px;
+  left: 50%;
+  transform: translateX(-50%) rotate(-3deg);
+  opacity: .9;
+}
+
+/* Make the old CSS card rotations feel like loose physical artefacts. */
+.card:nth-child(odd) { transform: rotate(-1.2deg) translateY(1px); }
+.card:nth-child(even) { transform: rotate(1deg) translateY(-1px); }
+
+.character:nth-child(1) { transform: rotate(-.7deg); }
+.character:nth-child(2) { transform: rotate(.9deg) translateY(3px); }
+.character:nth-child(3) { transform: rotate(-1deg) translateY(-2px); }
+.character:nth-child(4) { transform: rotate(.7deg); }
+
+.world-grid article:nth-child(odd) { transform: rotate(-1.1deg); }
+.world-grid article:nth-child(even) { transform: rotate(1.2deg); }
+
+.community-card:first-child { transform: rotate(-1deg); }
+.community-card:nth-child(2) { transform: rotate(1.1deg); }
+
+/* Previous chapters should feel like loose paper slips, not UI pills. */
+.previous span {
+  background-image: url("./assets/Card.png");
+  background-size: 100% 100%;
+  background-color: transparent;
+  border: 0;
+  box-shadow: 3px 4px 0 rgba(0,0,0,.38);
+  padding: 12px 18px;
+  filter: drop-shadow(2px 3px 0 rgba(0,0,0,.28));
+}
+
+.previous span:nth-child(3n) { transform: rotate(1.8deg); }
+.previous span:nth-child(3n+1) { transform: rotate(-1.3deg); }
+
+/* Orange action blocks remain deliberately loud, but get the same found-object treatment. */
+.button {
+  border: 0;
+  background-image: url("./assets/Button.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 15px 24px 18px;
+  filter: drop-shadow(4px 5px 0 rgba(0,0,0,.55));
+}
+
+/* Story image sits on the paper like a pasted photograph. */
+.story-art {
+  background: #171914;
+  padding: 18px;
+  transform: rotate(-.35deg);
+  box-shadow: inset 0 0 0 2px rgba(0,0,0,.28);
+}
+
+.story-art img {
+  border: 4px solid #191b16;
+  box-shadow: 5px 6px 0 rgba(0,0,0,.45);
+}
+
+/* Mobile: preserve the material boundary; only change the content flow. */
+@media (max-width:800px) {
+  .panel {
+    padding: 48px 36px 50px;
+  }
+
+  .reading {
+    padding: 58px 34px 64px;
+  }
+
+  .card {
+    padding: 15px 15px 22px;
+  }
+
+  .character {
+    padding: 18px;
+  }
+
+  .community-card {
+    padding: 32px 26px 36px;
+  }
+
+  .previous {
+    padding: 0 4px;
+  }
+
+  .previous span {
+    padding: 11px 15px;
+  }
+}
+
+@media (max-width:480px) {
+  .panel {
+    padding: 42px 28px 46px;
+  }
+
+  .reading {
+    padding: 52px 28px 58px;
+  }
+
+  .previous span {
+    padding: 10px 13px;
+  }
+}

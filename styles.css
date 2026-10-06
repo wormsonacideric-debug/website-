@@ -127,3 +127,25 @@
   .home-about p{font-size:18px;}
   .home-note{justify-self:end;width:155px;}
 }
+
+
+/* HERO 3 HEADER REWORK — scoped to the Home header only */
+.home-mockup{width:min(calc(100% - 20px),920px);margin:14px auto 0;}
+.home-scene{aspect-ratio:1.72/1;min-height:520px;border:2px solid #111;box-shadow:0 8px 22px rgba(0,0,0,.45);}
+.home-scene>img{object-fit:cover;object-position:center 48%;}
+.home-scene:after{background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.42) 34%,rgba(0,0,0,.08) 66%,rgba(0,0,0,.18) 100%),linear-gradient(0deg,rgba(0,0,0,.38),transparent 48%);}
+.home-copy{left:30px;top:30px;width:34%;}
+.home-copy h1{font-size:78px;letter-spacing:2px;color:#fffaf0;}
+.home-copy p{font-size:22px;line-height:1.02;}
+.home-button{margin-top:10px;padding:12px 19px;font-size:19px;}
+.home-quote{right:4.5%;top:9%;width:215px;padding:18px 16px;font-size:20px;}
+@media(max-width:800px){
+ .home-mockup{width:calc(100% - 20px);}
+ .home-scene{height:450px;aspect-ratio:auto;}
+ .home-scene>img{object-position:58% center;}
+ .home-scene:after{background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.12) 34%,rgba(0,0,0,.84) 76%,rgba(0,0,0,.96));}
+ .home-copy{left:18px;bottom:18px;top:auto;width:58%;}
+ .home-copy h1{font-size:60px;}
+ .home-copy p{font-size:19px;}
+ .home-quote{right:10px;top:18px;width:178px;font-size:16px;}
+}

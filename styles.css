@@ -32,3 +32,98 @@
  .home-about p{font-size:18px;}
  .home-note{width:180px;justify-self:end;font-size:21px;}
 }
+
+
+/* ============================================================
+   HOME — MOCKUP-FAITHFUL PASS
+   The supplied WOA mockup is the visual reference.
+   Keep this deliberately small; do not style the rest of the site.
+   ============================================================ */
+.home-mockup{width:min(calc(100% - 20px),760px);margin:14px auto 0;background:#101713;}
+.home-scene{
+  position:relative;overflow:hidden;aspect-ratio:1.56/1;
+  border:2px solid #17211c;background:#111;
+}
+.home-scene>img{object-position:center;}
+.home-scene:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.86) 0%,rgba(0,0,0,.52) 39%,rgba(0,0,0,.08) 72%);
+}
+.home-copy{left:24px;top:24px;width:38%;z-index:2;}
+.home-copy h1{
+  margin:0 0 7px;
+  color:#f5f1e7;
+  font-size:70px;
+  line-height:.85;
+  text-shadow:3px 3px 0 #111;
+}
+.home-copy p{
+  color:#f5f1e7;
+  font-size:21px;
+  line-height:1.02;
+  text-shadow:2px 2px 0 #111;
+}
+.home-copy p:nth-of-type(2){margin-top:7px;}
+.home-button{
+  margin-top:7px;
+  padding:11px 18px;
+  background:#ffc52a;
+  color:#17130c;
+  border:2px solid #111;
+  box-shadow:3px 4px 0 #000;
+  font-size:18px;
+}
+.home-quote{
+  right:5%;top:10%;width:205px;
+  padding:17px 15px;
+  background:#ead8a8;color:#292218;
+  font-size:20px;line-height:1.02;
+  box-shadow:4px 5px 0 #0008;
+  transform:rotate(-3deg);
+}
+.home-quote small{font-size:18px;margin-top:9px;}
+.home-about{
+  grid-template-columns:1fr 155px;
+  gap:20px;
+  padding:21px 24px 23px;
+  background:#111915;
+  border:2px solid #202b25;
+  border-top:0;
+}
+.home-about h2{
+  color:#f5f1e7;
+  font-size:36px;
+  line-height:.9;
+  margin:0 0 10px;
+  text-shadow:2px 2px 0 #080c0a;
+}
+.home-about p{
+  color:#eee9dc;
+  font-size:17px;
+  line-height:1.12;
+  margin:6px 0;
+}
+.home-note{
+  width:145px;
+  padding:18px 12px;
+  font-size:21px;
+  box-shadow:4px 5px 0 #0008;
+}
+@media(max-width:800px){
+  .home-mockup{width:calc(100% - 20px);margin-top:12px;}
+  .home-scene{aspect-ratio:auto;height:430px;}
+  .home-scene>img{object-position:58% center;}
+  .home-scene:after{
+    background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.14) 34%,rgba(0,0,0,.88) 78%,rgba(0,0,0,.96));
+  }
+  .home-copy{left:18px;bottom:18px;top:auto;width:57%;}
+  .home-copy h1{font-size:58px;}
+  .home-copy p{font-size:19px;}
+  .home-button{font-size:16px;padding:10px 13px;}
+  .home-quote{right:10px;top:18px;width:176px;font-size:16px;padding:14px 12px;}
+  .home-quote small{font-size:16px;}
+  .home-about{grid-template-columns:1fr;gap:7px;padding:20px 17px 21px;}
+  .home-about h2{font-size:35px;}
+  .home-about p{font-size:18px;}
+  .home-note{justify-self:end;width:155px;}
+}

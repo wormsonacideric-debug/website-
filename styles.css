@@ -642,3 +642,257 @@ footer small{font-size:16px;color:#9ba99e}
     padding: 10px 13px;
   }
 }
+
+
+/* ============================================================
+   WOA COLLAGE COMPOSITION PASS
+   Preserve the v2 bones. Stop treating every section as a grid
+   of identical UI cards. These are found objects arranged on
+   a surface.
+   ============================================================ */
+
+.panel,
+.reading,
+.card,
+.character,
+.world-grid article,
+.community-card {
+  isolation: isolate;
+}
+
+/* A little physical chaos: sections sit on the page, rather than
+   snapping to one uniform card system. */
+.intro.panel {
+  transform: rotate(-.45deg);
+}
+.intro.panel .paper-note {
+  transform: rotate(4deg) translateY(7px);
+}
+
+.story-feature {
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+  gap: 0;
+  align-items: stretch;
+}
+.story-art {
+  position: relative;
+  z-index: 2;
+  margin: 8px -18px 8px 0;
+  transform: rotate(-1.2deg);
+  filter: drop-shadow(6px 8px 0 rgba(0,0,0,.5));
+}
+.story-info {
+  position: relative;
+  z-index: 1;
+  margin: 18px 0 2px -8px;
+  padding: 48px 34px 38px 46px;
+  background-image: url("./assets/TextCard.png");
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+  transform: rotate(.8deg);
+  filter: drop-shadow(6px 8px 0 rgba(0,0,0,.48));
+}
+.story-info h3,
+.story-info > p,
+.story-info dl,
+.story-info .button {
+  position: relative;
+  z-index: 2;
+}
+
+/* Loose chapter slips. */
+.previous {
+  position: relative;
+  z-index: 5;
+  margin: -4px 0 0 18px;
+}
+
+/* Games become four different found objects rather than four
+   identical product cards. */
+.games {
+  display:grid;
+  grid-template-columns: 1.12fr .88fr;
+  gap: 28px 24px;
+  align-items:start;
+}
+.games .card {
+  overflow: visible;
+  min-height: 0;
+}
+.games .card:nth-child(1) {
+  grid-row: span 2;
+  transform: rotate(-1.6deg) translateY(5px);
+  background-image: url("./assets/TextCard.png");
+  padding: 25px 25px 30px;
+}
+.games .card:nth-child(1) .card-art {
+  height: 310px;
+  transform: rotate(.5deg);
+}
+.games .card:nth-child(2) {
+  transform: rotate(1.7deg) translateY(-5px);
+  background-image: url("./assets/Card.png");
+}
+.games .card:nth-child(3) {
+  transform: rotate(-1deg);
+  background-image: url("./assets/Greentextcard.png");
+}
+.games .card:nth-child(4) {
+  transform: rotate(1.2deg) translateY(4px);
+  background-image: url("./assets/Card.png");
+}
+.games .card:nth-child(3) .card-art {
+  transform: rotate(-.7deg);
+}
+.games .card:nth-child(4) .card-art {
+  transform: rotate(1deg);
+}
+
+/* Physical tape tabs. */
+.games .card:before,
+.characters .character:before,
+.world-grid article:before,
+.community-card:before {
+  display:block;
+  content:"";
+  position:absolute;
+  z-index:8;
+  width:76px;
+  height:19px;
+  top:-8px;
+  left:22%;
+  background:rgba(205,190,145,.88);
+  box-shadow:0 1px 1px rgba(0,0,0,.12);
+  transform:rotate(-3deg);
+  opacity:.9;
+  clip-path:polygon(1% 8%,18% 0,37% 6%,55% 1%,76% 5%,99% 2%,97% 92%,78% 98%,59% 93%,38% 99%,19% 94%,0 98%);
+}
+.games .card:nth-child(2):before { left:auto; right:18%; transform:rotate(4deg); }
+.games .card:nth-child(3):before { left:58%; transform:rotate(-5deg); }
+.games .card:nth-child(4):before { left:16%; transform:rotate(2deg); }
+
+/* Character dossiers: not a repeated component grid. */
+.characters {
+  grid-template-columns: 1.12fr .88fr;
+  gap: 24px 22px;
+  align-items:start;
+}
+.characters .character {
+  min-height: 225px;
+}
+.characters .character:nth-child(1) {
+  grid-row: span 2;
+  grid-template-columns: 205px 1fr;
+  transform:rotate(-1deg) translateY(4px);
+  background-image:url("./assets/TextCard.png");
+}
+.characters .character:nth-child(1) img { height:225px; }
+.characters .character:nth-child(2) {
+  transform:rotate(1.4deg);
+}
+.characters .character:nth-child(3) {
+  transform:rotate(-1.2deg) translateX(6px);
+}
+.characters .character:nth-child(4) {
+  transform:rotate(1deg) translateY(3px);
+  background-image:url("./assets/Greentextcard.png");
+}
+
+/* World becomes an evidence board. */
+.world-grid {
+  grid-template-columns: 1.15fr .85fr 1fr;
+  grid-template-areas:
+    "scrap festival manchester"
+    "scrap festival mystery";
+  gap: 25px 20px;
+  align-items:start;
+}
+.world-grid article:nth-child(1){grid-area:scrap; transform:rotate(-1.1deg) translateY(4px);}
+.world-grid article:nth-child(2){grid-area:festival; transform:rotate(1.2deg) translateY(-5px);}
+.world-grid article:nth-child(3){grid-area:manchester; transform:rotate(-.7deg);}
+.world-grid article:nth-child(4){grid-area:mystery; transform:rotate(1.5deg) translateY(5px);}
+.world-grid article:nth-child(1) img,
+.world-grid article:nth-child(2) img {height:230px;}
+.world-grid article:nth-child(3) .placeholder,
+.world-grid article:nth-child(4) .placeholder {height:125px;}
+
+/* Community: one notice, one green dispatch. */
+.community-grid {
+  gap: 28px;
+  align-items:start;
+}
+.community-card:first-child {
+  transform:rotate(-1.2deg) translateY(4px);
+  padding:44px 34px 48px;
+  background-image:url("./assets/TextCard.png");
+}
+.community-card:nth-child(2) {
+  transform:rotate(1.7deg) translateY(-3px);
+}
+
+/* The horizon is pinned scraps, not a row of identical tiles. */
+.horizon > div {
+  display:flex;
+  flex-wrap:wrap;
+  align-items:start;
+  gap:15px;
+}
+.horizon span {
+  flex:1 1 150px;
+  min-width:145px;
+  background-image:url("./assets/Card.png");
+  background-size:100% 100%;
+  background-color:transparent;
+  border:0;
+  box-shadow:none;
+  filter:drop-shadow(4px 5px 0 rgba(0,0,0,.4));
+  padding:20px 14px;
+}
+.horizon span:nth-child(2n){transform:rotate(2deg) translateY(7px);}
+.horizon span:nth-child(3n){transform:rotate(-1.5deg) translateY(-3px);}
+.horizon span:last-child{background-image:url("./assets/Greentextcard.png");}
+
+/* Home field note feels pasted onto the photograph. */
+.quote {
+  background-image:url("./assets/Card.png");
+  background-size:100% 100%;
+  background-color:transparent;
+  box-shadow:none;
+  filter:drop-shadow(5px 7px 0 rgba(0,0,0,.48));
+  padding:30px 25px 25px;
+}
+.quote:before {
+  background:rgba(205,190,145,.9);
+  clip-path:polygon(0 8%,17% 0,36% 7%,55% 1%,76% 6%,100% 2%,98% 92%,78% 100%,59% 94%,38% 99%,18% 93%,1% 98%);
+}
+
+/* Mobile keeps the same composition but stacks the objects. */
+@media (max-width:800px) {
+  .story-feature { display:grid; grid-template-columns:1fr; }
+  .story-art { margin:8px 4px -12px 0; min-height:260px; }
+  .story-info { margin:0 0 4px 8px; padding:44px 30px 38px 34px; }
+  .games { grid-template-columns:1fr; gap:24px; }
+  .games .card:nth-child(1) { grid-row:auto; }
+  .games .card:nth-child(1) .card-art { height:250px; }
+  .characters { grid-template-columns:1fr; }
+  .characters .character:nth-child(1) { grid-row:auto; grid-template-columns:120px 1fr; }
+  .characters .character:nth-child(1) img { height:145px; }
+  .world-grid {
+    grid-template-columns:1fr;
+    grid-template-areas:"scrap" "festival" "manchester" "mystery";
+  }
+  .world-grid article:nth-child(1) img,
+  .world-grid article:nth-child(2) img { height:190px; }
+  .community-grid { gap:22px; }
+  .horizon > div { gap:12px; }
+  .horizon span { flex:1 1 calc(50% - 12px); min-width:0; }
+}
+@media (max-width:480px) {
+  .story-info { margin-left:4px; padding:40px 24px 34px 28px; }
+  .games .card:nth-child(1) .card-art { height:220px; }
+  .characters .character:nth-child(1) { grid-template-columns:100px 1fr; }
+  .characters .character:nth-child(1) img { height:125px; }
+  .horizon span { flex-basis:calc(50% - 8px); }
+}

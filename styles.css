@@ -1,1 +1,155 @@
 @import url('https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&display=swap');:root{--ink:#07100d;--paper:#ead8a8;--acid:#caff3d;--orange:#ffb51b;--cream:#fff5d5;--line:#33423a;--max:1180px}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:radial-gradient(circle at 30% 0,#17221d,#050807 60%);color:var(--cream);font-family:"Patrick Hand",cursive;font-size:19px;line-height:1.25}a{color:inherit;text-decoration:none}img{max-width:100%;display:block}.site-nav{position:sticky;top:0;z-index:50;height:74px;padding:10px 24px;display:flex;align-items:center;gap:28px;background:rgba(4,8,7,.97);border-bottom:2px solid #26352c}.brand{font-family:Bangers;font-size:34px;color:var(--acid);white-space:nowrap}.brand em,footer em{color:var(--orange);font-style:normal}.site-nav nav{display:flex;gap:24px;font-family:Bangers;font-size:20px}.site-nav nav a:hover,.site-nav nav a.active{color:var(--orange)}.social{margin-left:auto;display:flex;gap:15px;font-family:Bangers;font-size:23px}.menu{display:none;background:none;border:0;color:#fff;font-size:27px}.hero,.panel,.section{width:min(calc(100% - 32px),var(--max));margin:18px auto}.hero{min-height:610px;position:relative;overflow:hidden;border:1px solid #405149;background:#111;isolation:isolate}.hero-image{position:absolute;inset:0;z-index:-2}.hero-image img{width:100%;height:100%;object-fit:cover;object-position:center}.hero:after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(3,7,6,.91),rgba(3,7,6,.58) 38%,rgba(3,7,6,.08) 70%)}.hero-copy{width:47%;padding:54px 36px;position:relative;z-index:2}.eyebrow{font-family:Bangers;font-size:18px;color:var(--acid);letter-spacing:1px}h1,h2,h3{font-family:Bangers;line-height:.95;margin:0}h1{font-size:92px;margin:12px 0}.hero-copy p{font-size:27px;line-height:1.02;margin:0 0 10px}.hero-copy .remark{font-size:24px}.button{display:inline-block;margin-top:20px;padding:13px 21px;background:#ffc62a;color:#10150f;border:2px solid #151b13;box-shadow:3px 4px 0 #0008;font-family:Bangers;font-size:21px}.quote{position:absolute;right:28px;bottom:25px;width:245px;padding:22px 20px;background:var(--paper);color:#242018;transform:rotate(-2deg);box-shadow:4px 6px 12px #0009;font-size:23px;z-index:3}.quote small{display:block;text-align:right;margin-top:10px}.panel{display:grid;grid-template-columns:1fr 260px;gap:28px;padding:34px;background:#0c1512;border:1px solid #34453b}.panel h2,.section-title h2{font-size:48px;color:var(--acid);margin:4px 0 10px}.panel p{max-width:760px;margin:7px 0}.paper-note{align-self:center;padding:30px 22px;text-align:center;background:var(--paper);color:#272116;transform:rotate(2deg);font-size:27px;line-height:1.05;box-shadow:4px 5px 8px #0008}.paper-note span{display:block;margin-top:10px}.section{padding:20px 0}.section-title{display:flex;justify-content:space-between;align-items:end;margin-bottom:18px;padding:0 6px}.section-title p{margin:5px 0}.live{background:#ef302b;padding:5px 10px;font-family:Bangers}.story-feature{display:grid;grid-template-columns:1.6fr 1fr;background:#0b1210;border:1px solid #405149}.story-art{min-height:380px}.story-art img{width:100%;height:100%;object-fit:cover}.story-info{padding:30px}.story-info h3{font-size:37px}.story-info dl{margin:28px 0}.story-info dl div{display:flex;gap:12px;margin:15px 0}.story-info dt{font-family:Bangers;color:var(--orange);font-size:24px;width:25px}.story-info dd{margin:0}.previous{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px;font-size:16px}.previous span{padding:8px 12px;background:#101916;border:1px solid #39483f}.reading{max-width:850px;padding:55px 20px}.reading h2{font-size:64px;margin:5px 0 25px}.reading p{font-size:23px}.lead-reading{font-size:28px!important;color:var(--paper)}.story-rule{margin:30px 0;padding:18px;border-left:5px solid var(--acid);background:#111b16;font-size:23px}.cards{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}.card{padding:12px;background:linear-gradient(145deg,#ead8a8,#cdb477);color:#211c14;border:2px solid #5b4930;box-shadow:4px 5px 0 #0008}.card-art{height:210px;position:relative;overflow:hidden;border:2px solid #392e21}.card-art>img:first-child{width:100%;height:100%;object-fit:cover}.card-character{position:absolute!important;width:38%!important;height:auto!important;bottom:-5px;left:50%;transform:translateX(-50%);object-fit:contain!important}.new{position:absolute;top:10px;right:10px;background:#7cf24b;padding:5px 10px;font-family:Bangers}.card h3{font-size:31px;margin:10px 2px 3px}.card p{margin:3px 2px;font-size:19px}.small{font-size:18px;margin:10px 2px 3px;padding:9px 15px}.characters{grid-template-columns:repeat(2,1fr)}.character{display:grid;grid-template-columns:180px 1fr;gap:16px;align-items:center;padding:15px;background:var(--paper);color:#201b13;border:2px solid #5b4930}.character img{height:180px;width:100%;object-fit:contain}.character h3{font-size:38px}.world-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.world-grid article{background:var(--paper);color:#201b13;padding:8px;border:2px solid #5b4930}.world-grid img,.placeholder{height:145px;width:100%;object-fit:cover}.placeholder{display:grid;place-items:center;background:linear-gradient(#4c5870,#162538);font-family:Bangers;font-size:32px;color:white}.placeholder.dark{background:#050708;color:#ccc}.world-grid h3{font-size:26px;margin:8px 3px}.world-grid p{font-size:17px;margin:4px}.community-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}.community-card{padding:25px;background:var(--paper);color:#211c14;border:2px solid #5b4930}.community-card h3{font-size:34px}.horizon{margin-top:20px}.horizon h3{font-size:30px}.horizon>div{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}.horizon span{min-height:100px;padding:12px;background:#d8c48f;color:#211c14;text-align:center;border:2px solid #5b4930;font-size:35px}.horizon b{display:block;font-family:"Patrick Hand";font-size:17px}.horizon span:last-child{font-family:Bangers;background:#18221e;color:#ddd;font-size:50px}footer{margin-top:40px;padding:35px 20px;text-align:center;border-top:1px solid #33433a;background:#050907}footer b{display:block;font-family:Bangers;font-size:35px;color:var(--acid)}footer small{font-size:16px;color:#9ba99e}@media(max-width:800px){body{font-size:18px}.site-nav{height:64px;padding:8px 14px}.brand{font-size:27px}.site-nav nav,.social{display:none}.menu{display:block;margin-left:auto}.site-nav.open nav{display:grid;position:absolute;top:64px;left:0;right:0;padding:15px;background:#07100d;border-bottom:2px solid #39483f;gap:12px}.site-nav.open .social{display:flex;position:absolute;top:18px;right:58px}.hero,.panel,.section{width:calc(100% - 20px)}.hero{min-height:650px}.hero:after{background:linear-gradient(180deg,rgba(3,7,6,.25),rgba(3,7,6,.76) 55%,rgba(3,7,6,.95))}.hero-copy{width:100%;padding:28px 22px}.hero-copy p{font-size:23px}h1{font-size:70px}.quote{width:205px;right:14px;bottom:18px;font-size:18px;padding:15px}.panel{grid-template-columns:1fr;padding:24px 20px}.paper-note{max-width:220px;justify-self:end}.panel h2,.section-title h2{font-size:40px}.story-feature{grid-template-columns:1fr}.story-art{min-height:260px}.story-info{padding:20px}.reading h2{font-size:48px}.reading p{font-size:21px}.cards,.characters,.community-grid{grid-template-columns:1fr}.character{grid-template-columns:120px 1fr}.character img{height:130px}.character h3{font-size:31px}.world-grid{grid-template-columns:1fr 1fr}.world-grid img,.placeholder{height:120px}.horizon>div{grid-template-columns:repeat(3,1fr)}}@media(max-width:480px){.hero-image img{object-position:58% center}.world-grid{grid-template-columns:1fr}.horizon>div{grid-template-columns:repeat(2,1fr)}.horizon span:nth-child(n+3){display:none}}
+
+/* ============================================================
+   WOA HOME — ART-DIRECTION PASS
+   Based on the supplied WOA mockup:
+   one dense illustrated/photo composition, not a stack of UI cards.
+   ============================================================ */
+
+/* Home reads as one piece of WOA artwork. */
+#home {
+  margin-bottom: 0;
+  border-color: #3e5147;
+  box-shadow: 0 0 0 2px #07100d, 0 8px 0 rgba(0,0,0,.35);
+}
+#home + .intro {
+  margin-top: 0;
+  border-top: 0;
+  box-shadow: 0 8px 0 rgba(0,0,0,.35);
+}
+
+/* The mockup is compact and image-led rather than a giant generic hero. */
+.hero {
+  min-height: 0;
+  aspect-ratio: 1.72 / 1;
+  background:#080d0b;
+}
+.hero-image img {
+  object-position:center;
+}
+.hero:after {
+  background:
+    linear-gradient(90deg,rgba(2,5,4,.86) 0%,rgba(2,5,4,.62) 31%,rgba(2,5,4,.10) 62%,rgba(2,5,4,.04) 100%),
+    linear-gradient(0deg,rgba(2,5,4,.35),transparent 45%);
+}
+.hero-copy {
+  width:43%;
+  padding:46px 30px 34px;
+}
+.hero-copy .eyebrow {
+  display:none;
+}
+.hero-copy h1 {
+  font-size:86px;
+  color:#f5f2e7;
+  text-shadow:3px 3px 0 #07100d;
+  margin:0 0 4px;
+}
+.hero-copy p {
+  font-size:24px;
+  line-height:.98;
+  text-shadow:2px 2px 0 #07100d;
+}
+.hero-copy .remark {
+  font-size:21px;
+  margin-top:8px;
+}
+.hero-copy .button {
+  margin-top:12px;
+}
+.quote {
+  right:24px;
+  bottom:20px;
+  width:220px;
+  padding:18px 17px;
+  font-size:21px;
+  border:1px solid rgba(70,50,25,.5);
+  transform:rotate(-2.5deg);
+}
+
+/* The explanatory section is part of the same dark visual world.
+   The little note remains an actual note, rather than a whole-page
+   parchment background. */
+.intro.panel {
+  position:relative;
+  overflow:hidden;
+  padding:28px 30px;
+  grid-template-columns:1fr 220px;
+  background:
+    linear-gradient(90deg,rgba(7,15,12,.9),rgba(8,17,14,.68)),
+    url("./assets/Hero2.png") center 63% / cover;
+}
+.intro.panel:before {
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  background:radial-gradient(circle at 70% 45%,rgba(202,255,61,.06),transparent 35%);
+}
+.intro.panel > * { position:relative; z-index:1; }
+.intro.panel h2 {
+  font-size:39px;
+  text-shadow:2px 2px 0 #07100d;
+}
+.intro.panel p {
+  max-width:700px;
+  font-size:18px;
+  text-shadow:1px 1px 0 #07100d;
+}
+.intro .paper-note {
+  font-size:23px;
+  padding:24px 18px;
+  max-width:205px;
+  justify-self:end;
+}
+
+/* Make the two small physical notes look deliberately pasted on,
+   rather than like generic floating UI. */
+.paper-note {
+  border:1px solid rgba(70,50,25,.55);
+}
+@media(max-width:800px) {
+  .hero {
+    aspect-ratio:auto;
+    min-height:0;
+    height:470px;
+  }
+  .hero:after {
+    background:
+      linear-gradient(180deg,rgba(2,5,4,.08),rgba(2,5,4,.18) 30%,rgba(2,5,4,.88) 79%,rgba(2,5,4,.97) 100%);
+  }
+  .hero-copy {
+    width:100%;
+    padding:25px 20px;
+    position:absolute;
+    left:0;
+    bottom:0;
+  }
+  .hero-copy h1 { font-size:68px; }
+  .hero-copy p { font-size:22px; }
+  .quote {
+    top:18px;
+    bottom:auto;
+    right:12px;
+    width:190px;
+    font-size:17px;
+    padding:14px;
+  }
+  .intro.panel {
+    grid-template-columns:1fr;
+    padding:24px 19px;
+    background-position:63% center;
+  }
+  .intro.panel h2 { font-size:37px; }
+  .intro.panel p { font-size:18px; }
+  .intro .paper-note {
+    max-width:190px;
+    margin-top:4px;
+  }
+}
+@media(max-width:480px) {
+  .hero { height:455px; }
+  .hero-copy h1 { font-size:63px; }
+  .hero-copy p { font-size:21px; }
+  .quote { width:175px; font-size:16px; }
+}

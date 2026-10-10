@@ -1,0 +1,346 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Patrick+Hand:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Roboto+Slab:wght@500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Bangers&family=Patrick+Hand&display=swap");
+
+:root {
+  --acid: #c5ff38;
+  --ink: #24180e;
+  --yellow: #ffc629;
+}
+* { box-sizing: border-box; }
+html { min-height: 100%; background: #080b09; }
+body {
+  margin: 0;
+  min-height: 100vh;
+  color: #f6f0e3;
+  background: radial-gradient(ellipse at top, #1d3024 0, #080b09 72%);
+  font-family: "Trebuchet MS", Arial, sans-serif;
+  line-height: 1.4;
+}
+.page { width: min(100% - 28px, 760px); margin: 0 auto; padding: 24px 0 48px; }
+.eyebrow { color: var(--acid); font-size: .72rem; letter-spacing: .13em; font-weight: 900; margin: 0 0 8px; }
+h1 { margin: 0 0 8px; font-size: clamp(2rem, 7vw, 3rem); line-height: 1; text-transform: uppercase; }
+.intro { margin: 0 0 24px; max-width: 55ch; color: #d4d7cb; }
+.character-card {
+  width: min(100%, 470px);
+  min-height: 0;
+  margin: 0 auto;
+  padding: 20px 28px 18px;
+  display: flex;
+  flex-direction: column;
+  color: var(--ink);
+  background-color: #e8c98f;
+  background-image: url("../assets/TextCard.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
+  filter: drop-shadow(0 8px 10px #0009);
+}
+.card-top {
+  display: grid;
+  grid-template-columns: 1fr .95fr;
+  gap: 12px;
+  align-items: center;
+  min-height: 112px;
+}
+.character-art { height: 112px; min-width: 0; display: flex; align-items: center; justify-content: center; }
+.character-art img { display: block; max-width: 100%; width: 100%; height: 100%; object-fit: contain; }
+.card-top h2 {
+  margin: 0;
+  font-size: clamp(2.1rem, 8vw, 2.65rem);
+  line-height: .95;
+  color: #17120d;
+  overflow-wrap: anywhere;
+}
+.description {
+  margin: 5px 2px 10px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1.15rem;
+  line-height: 1.4;
+}
+.card-button {
+  align-self: center;
+  margin-top: 0;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 11px 20px;
+  max-width: 100%;
+  color: #21170d;
+  background: var(--yellow);
+  border: 2px solid #80510f;
+  border-radius: 12px;
+  box-shadow: inset 0 1px 0 #ffe68c, 0 3px 0 #8b5b19;
+  text-decoration: none;
+  font-family: Bangers, "Trebuchet MS", sans-serif;
+  font-size: 1.12rem;
+  font-weight: 400;
+  line-height: 1.1;
+}
+.card-button span { font-size: 1.15em; }
+.card-button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+.note { color: #aeb8ae; text-align: center; font-size: .8rem; margin: 22px 0 0; }
+@media (max-width: 420px) {
+  .page { width: calc(100% - 20px); padding-top: 20px; }
+  .intro { font-size: .95rem; margin-bottom: 18px; }
+  .character-card { min-height: 0; padding: 19px 20px 17px; }
+  .card-top { min-height: 100px; gap: 8px; }
+  .character-art { height: 100px; }
+  .card-top h2 { font-size: clamp(1.8rem, 8vw, 2.3rem); }
+  .description { font-size: 1rem; line-height: 1.32; margin: 5px 2px 10px; }
+  .card-button { padding: 9px 17px; }
+}
+
+/* v2: reference card has content-flow height, not a button pinned to the bottom */
+.character-card { min-height: 0 !important; }
+.card-button { margin-top: 0 !important; }
+.description { margin-bottom: 10px; }
+
+/* v3: closer to the supplied card typography and horizontal balance */
+.character-card { width: min(100%, 470px); }
+.card-top { grid-template-columns: 1.05fr .95fr; }
+.card-top h2 { font-family: "Patrick Hand", cursive; font-weight: 700; font-size: clamp(2.2rem, 8vw, 2.7rem); }
+.description { font-family: "Patrick Hand", cursive; font-size: 1.12rem; line-height: 1.22; }
+.card-button { font-family: Arial, sans-serif; font-size: 1.05rem; font-weight: 800; letter-spacing: 0; }
+@media (max-width: 420px) {
+ .character-card { padding-left: 25px; padding-right: 25px; }
+ .description { font-size: 1.14rem; line-height: 1.18; }
+}
+
+/* v4: ensure the real WOA fonts load in the isolated preview */
+.card-top h2 { font-family: "Patrick Hand", cursive !important; font-weight: 700; }
+.description { font-family: "Patrick Hand", cursive !important; font-size: 1.12rem; line-height: 1.22; }
+.card-button { font-family: Arial, sans-serif !important; font-size: 1.05rem; font-weight: 800 !important; }
+@media (max-width: 420px) {
+ .card-top { grid-template-columns: 1fr .95fr; gap: 5px; }
+ .character-art { height: 105px; }
+ .description { font-size: 1.08rem; }
+}
+
+/* v5: increase character presence and give the name a hand-lettered treatment */
+.card-top { grid-template-columns: 1.15fr .85fr !important; gap: 4px !important; }
+.character-art { height: 128px !important; }
+.character-art img { transform: scale(1.12); transform-origin: center; }
+.card-top h2 {
+  font-family: "Bangers", "Patrick Hand", cursive !important;
+  font-size: clamp(2.25rem, 8.5vw, 2.85rem) !important;
+  font-weight: 400 !important;
+  letter-spacing: .015em;
+  transform: rotate(-2deg);
+}
+.description { margin-top: 4px !important; }
+@media (max-width: 420px) {
+ .character-card { padding-left: 22px !important; padding-right: 22px !important; }
+ .card-top { grid-template-columns: 1.15fr .85fr !important; min-height: 118px !important; }
+ .character-art { height: 118px !important; }
+ .card-top h2 { font-size: clamp(2.1rem, 8.4vw, 2.55rem) !important; }
+ .description { font-size: 1.08rem !important; line-height: 1.18 !important; }
+}
+
+
+
+/* v12: visible title and button correction; keep approved description unchanged */
+.card-top h2 {
+  font-family: "Kalam", "Patrick Hand", cursive !important;
+  font-weight: 700 !important;
+  font-size: clamp(2.25rem, 8.4vw, 2.7rem) !important;
+  text-transform: uppercase !important;
+  letter-spacing: .02em !important;
+  -webkit-text-stroke: .35px currentColor;
+  text-shadow: .35px .35px .45px currentColor;
+  transform: rotate(-1deg);
+}
+.description {
+  font-family: "Patrick Hand", cursive !important;
+  font-weight: 700 !important;
+  font-size: 1.16rem !important;
+  line-height: 1.22 !important;
+  letter-spacing: -.015em;
+  -webkit-text-stroke: .16px currentColor;
+  text-shadow: .3px .3px .4px currentColor;
+}
+.card-button {
+  font-family: "Arial Black", Arial, Helvetica, sans-serif !important;
+  font-size: 1.08rem !important;
+  font-weight: 900 !important;
+  letter-spacing: -.025em !important;
+  -webkit-text-stroke: .35px currentColor;
+  text-shadow: .25px .25px .35px currentColor;
+}
+@media (max-width: 420px) {
+  .card-top h2 { font-size: clamp(2.05rem, 8vw, 2.45rem) !important; }
+  .description { font-size: 1.1rem !important; line-height: 1.23 !important; }
+  .card-button { font-size: 1.02rem !important; }
+}
+
+/* v13: narrow the description measure, preserving its approved type */
+.description {
+  max-width: 88% !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+@media (max-width: 420px) {
+  .description { max-width: 88% !important; }
+}
+
+/* v14: center the description block and add vertical breathing room */
+.description {
+  max-width: 78% !important;
+  margin: 16px auto 24px !important;
+}
+.character-card {
+  padding-top: 30px !important;
+  padding-bottom: 32px !important;
+}
+@media (max-width: 420px) {
+  .description {
+    max-width: 78% !important;
+    margin: 16px auto 24px !important;
+  }
+  .character-card {
+    padding-top: 26px !important;
+    padding-bottom: 28px !important;
+  }
+}
+
+/* v15: more breathing room and less cramped text measure */
+.character-card {
+  padding-top: 38px !important;
+  padding-bottom: 42px !important;
+}
+.description {
+  max-width: 72% !important;
+  margin: 22px auto 32px !important;
+  line-height: 1.28 !important;
+  letter-spacing: -.025em !important;
+}
+.card-button {
+  margin-top: 4px !important;
+}
+@media (max-width: 420px) {
+  .character-card { padding-top: 32px !important; padding-bottom: 36px !important; }
+  .description {
+    max-width: 72% !important;
+    margin: 20px auto 28px !important;
+    line-height: 1.28 !important;
+  }
+}
+
+
+/* v16: restore a wider, centered text block while preserving the approved font */
+.character-card {
+  padding-top: 42px !important;
+  padding-bottom: 46px !important;
+}
+.description {
+  width: 88% !important;
+  max-width: 88% !important;
+  margin: 24px auto 34px !important;
+  text-align: left !important;
+  line-height: 1.24 !important;
+  letter-spacing: -.02em !important;
+}
+.card-button {
+  margin-top: 2px !important;
+}
+@media (max-width: 420px) {
+  .character-card {
+    padding-top: 34px !important;
+    padding-bottom: 38px !important;
+  }
+  .description {
+    width: 88% !important;
+    max-width: 88% !important;
+    margin: 22px auto 30px !important;
+    line-height: 1.24 !important;
+  }
+}
+
+/* v17: center the description container precisely in the parchment */
+.character-card .description {
+  box-sizing: border-box !important;
+  width: 88% !important;
+  max-width: 88% !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  align-self: center !important;
+  text-align: left !important;
+}
+@media (max-width: 420px) {
+  .character-card .description {
+    width: 88% !important;
+    max-width: 88% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+}
+
+/* v18: flex centering avoids asymmetric margins from inherited card rules */
+.character-card .description {
+  display: block !important;
+  width: 82% !important;
+  max-width: 82% !important;
+  margin: 24px auto 34px !important;
+  padding: 0 !important;
+  position: relative !important;
+  left: 0 !important;
+  right: 0 !important;
+  transform: none !important;
+  align-self: center !important;
+  text-align: left !important;
+}
+@media (max-width: 420px) {
+  .character-card .description {
+    width: 82% !important;
+    max-width: 82% !important;
+    margin: 22px auto 30px !important;
+  }
+}
+
+/* v19: optical centering against the visibly skewed parchment artwork */
+.character-card .description {
+  transform: translateX(4%) !important;
+}
+@media (max-width: 420px) {
+  .character-card .description {
+    transform: translateX(3%) !important;
+  }
+}
+
+/* v20: bring the character/name group closer to the description */
+.character-card .card-top {
+  margin-bottom: 18px !important;
+  transform: translateY(18px);
+}
+.character-card .description {
+  margin-top: 8px !important;
+}
+@media (max-width: 420px) {
+  .character-card .card-top {
+    margin-bottom: 14px !important;
+    transform: translateY(14px);
+  }
+  .character-card .description {
+    margin-top: 6px !important;
+  }
+}
+
+/* v21: move the character/name group closer to the description and add a little top breathing room */
+.character-card {
+  padding-top: 46px !important;
+}
+.character-card .card-top {
+  transform: translateY(24px) !important;
+  margin-bottom: 12px !important;
+}
+@media (max-width: 420px) {
+  .character-card {
+    padding-top: 38px !important;
+  }
+  .character-card .card-top {
+    transform: translateY(19px) !important;
+    margin-bottom: 9px !important;
+  }
+}

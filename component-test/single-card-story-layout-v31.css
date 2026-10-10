@@ -27,8 +27,11 @@ h1 { margin:0 0 8px; font-size:clamp(2rem,7vw,3rem); line-height:1; text-transfo
 }
 .story-card__header { text-align:center; padding:0 8px 14px; }
 .story-card__header h2 {
-  margin:0; color:#17120d; font-family:"Kalam","Patrick Hand",cursive;
-  font-weight:700; font-size:clamp(1.8rem,7vw,2.45rem);
+  margin:0; color:#17120d;
+  /* Keep the chapter heading upright; the card tilt is controlled separately. */
+  font-family:"Trebuchet MS",Arial,sans-serif; font-style:normal;
+  font-weight:900; letter-spacing:.015em;
+  font-size:clamp(1.55rem,6vw,2.05rem);
   line-height:1.05; text-transform:uppercase; overflow-wrap:anywhere;
 }
 .story-card__image {
@@ -57,7 +60,7 @@ h1 { margin:0 0 8px; font-size:clamp(2rem,7vw,3rem); line-height:1; text-transfo
   .intro { font-size:.95rem; margin-bottom:18px; }
   .story-card { padding:24px 20px 22px; }
   .story-card__header { padding-bottom:11px; }
-  .story-card__header h2 { font-size:clamp(1.55rem,7vw,2rem); }
+  .story-card__header h2 { font-size:clamp(1.4rem,6vw,1.8rem); }
   .story-card__image { aspect-ratio:4 / 3; }
   .story-card__text { width:90%; margin:15px auto 17px; font-size:1.05rem; line-height:1.2; }
   .story-card__button { padding:9px 17px; }

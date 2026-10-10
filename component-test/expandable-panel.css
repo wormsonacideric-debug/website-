@@ -72,7 +72,8 @@ h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.02; te
 }
 .woa-panel__kicker { margin: 0 0 .6rem; font-size: .78rem; letter-spacing: .13em; font-weight: 900; color: var(--woa-acid); }
 .woa-panel__intro h2 { font-size: clamp(2.8rem, 7vw, 6.3rem); font-weight: 1000; font-style: italic; line-height: .9; margin: 0 0 .75rem; }
-.woa-panel__intro p { font-size: clamp(.95rem, 1.8vw, 1.35rem); line-height: 1.42; margin: 0 0 .8rem; }
+.woa-panel__intro p { font-size: clamp(.95rem, 1.8vw, 1.35rem); line-height: 1.42; margin: 0 0 .8rem; overflow-wrap: anywhere; }
+.woa-panel__story-lines { max-width: 100%; }
 .woa-button {
   display: inline-flex;
   align-items: center;
@@ -134,11 +135,13 @@ h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.02; te
 .footnote { color: #aeb8ae; font-size: .85rem; margin-top: 36px; }
 @media (max-width: 680px) {
   .test-shell { width: min(100% - 16px, 560px); padding-top: 22px; }
-  .woa-panel__scene { aspect-ratio: 1283 / 930; min-height: 470px; }
+  .woa-panel__scene { aspect-ratio: auto; height: 440px; min-height: 0; }
   .woa-panel__scene-art { object-position: 57% center; }
-  .woa-panel__intro { top: 9%; left: 8%; width: 53%; }
-  .woa-panel__intro h2 { font-size: clamp(2.8rem, 13vw, 4.6rem); }
-  .woa-panel__intro p { font-size: clamp(.92rem, 3.7vw, 1.1rem); }
+  .woa-panel__intro { top: 8%; left: 7%; width: 66%; max-width: 390px; }
+  .woa-panel__intro h2 { font-size: clamp(2.5rem, 11vw, 3.8rem); }
+  .woa-panel__intro p { font-size: clamp(.88rem, 3.4vw, 1rem); line-height: 1.38; }
+  .woa-panel__kicker { font-size: .68rem; letter-spacing: .09em; }
+  .woa-button { padding: .62rem .75rem; gap: .5rem; font-size: .76rem; }
   .woa-panel__frame-top { background-size: auto 790px; background-size: auto 100%; }
   .woa-panel__paper { background-size: auto 100%; }
   .woa-panel__paper-inner { padding: 28px 8% 38px; }

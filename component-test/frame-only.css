@@ -55,7 +55,7 @@ h1 {
 }
 .woa-card__title {
   position: absolute;
-  z-index: 2;
+  z-index: 6;
   top: 5.3%;
   left: 8%;
   width: 84%;
@@ -86,7 +86,7 @@ h1 {
 }
 .woa-card__story {
   position: absolute;
-  z-index: 2;
+  z-index: 6;
   top: 66.3%;
   left: 7%;
   width: 86%;
@@ -97,7 +97,7 @@ h1 {
 }
 .woa-card__next {
   position: absolute;
-  z-index: 2;
+  z-index: 6;
   top: 81%;
   left: 50%;
   transform: translateX(-50%);

@@ -159,3 +159,27 @@ h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.02; te
   .woa-panel__paper-inner { padding-top: 16px !important; }
   .woa-panel__paper h3 { margin-top: 0 !important; }
 }
+
+
+/* Typography matched to the approved single-card prototype */
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand:wght@400;700&display=swap');
+.woa-panel__intro h2,
+.woa-panel__paper h3 {
+  font-family: "Patrick Hand", cursive;
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.woa-panel__intro p,
+.woa-panel__paper p,
+.woa-quote {
+  font-family: "Patrick Hand", cursive;
+  font-weight: 400;
+}
+.woa-button {
+  font-family: "Arial", sans-serif;
+  font-weight: 800;
+  text-transform: none;
+  letter-spacing: 0;
+}

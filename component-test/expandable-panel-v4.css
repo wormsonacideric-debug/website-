@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand:wght@400;700&display=swap');
 :root {
   color-scheme: dark;
   --woa-ink: #17130f;
@@ -162,7 +163,6 @@ h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.02; te
 
 
 /* Typography matched to the approved single-card prototype */
-@import url('https://fonts.googleapis.com/css2?family=Patrick+Hand:wght@400;700&display=swap');
 .woa-panel__intro h2,
 .woa-panel__paper h3 {
   font-family: "Patrick Hand", cursive;

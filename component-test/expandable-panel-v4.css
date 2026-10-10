@@ -183,3 +183,34 @@ h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.02; te
   text-transform: none;
   letter-spacing: 0;
 }
+
+
+/* Typography pass: match the approved handwritten character-card lettering. */
+.woa-panel__intro h2,
+.woa-panel__intro p,
+.woa-panel__paper h3,
+.woa-panel__paper p,
+.woa-quote,
+.woa-quote span,
+.woa-button {
+  font-family: "Patrick Hand", "Comic Sans MS", cursive;
+}
+.woa-panel__intro h2 {
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+.woa-panel__intro p {
+  font-weight: 400;
+}
+.woa-panel__paper h3 {
+  font-style: normal;
+  font-weight: 700;
+}
+.woa-panel__paper p {
+  font-size: clamp(1.1rem, 1.6vw, 1.3rem);
+}
+.woa-button {
+  font-weight: 700;
+  text-transform: uppercase;
+}

@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WOA — Expandable Panel Test</title>
+  <link rel="stylesheet" href="expandable-panel.css">
+</head>
+<body>
+  <main class="test-shell">
+    <p class="eyebrow">WORMS ON ACID · COMPONENT TEST</p>
+    <h1>Expandable story panel</h1>
+    <p class="intro">An isolated test using the repository's existing artwork. Nothing on the live homepage is changed.</p>
+
+    <section class="woa-panel" aria-labelledby="eric-title">
+      <div class="woa-panel__scene">
+        <img class="woa-panel__scene-art" src="../assets/Ericsawakening.png" alt="" aria-hidden="true">
+        <div class="woa-panel__scene-shade"></div>
+        <div class="woa-panel__frame-top" aria-hidden="true"></div>
+        <div class="woa-panel__intro">
+          <p class="woa-panel__kicker">THE MORNING AFTER</p>
+          <h2 id="eric-title">ERIC</h2>
+          <p>He woke up in a scrapyard.<br>
+             He doesn't know where he is.<br>
+             He doesn't know where Nigel is.<br>
+             He doesn't remember what happened last night.</p>
+          <p>He's taking it remarkably well.</p>
+          <a class="woa-button" href="../index.html#story">
+            <span>START ERIC'S STORY</span><span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="woa-panel__paper">
+        <div class="woa-panel__paper-inner">
+          <h3>WHAT IS WORMS ON ACID?</h3>
+          <p>They're worms. Something happened to them. They don't know what. They travel around, encounter increasingly improbable situations, and occasionally discover things about themselves that they'd probably have been happier not knowing.</p>
+          <p>There are festivals. There are hallucinations. There is a shark who thinks he's a dog. And somewhere out there is Nigel's scrapyard.</p>
+          <aside class="woa-quote">“Places have a way of introducing themselves when they're ready.” <span>— Eric</span></aside>
+        </div>
+      </div>
+    </section>
+
+    <section class="woa-panel woa-panel--expanded" aria-labelledby="expanded-title">
+      <div class="woa-panel__scene">
+        <img class="woa-panel__scene-art" src="../assets/Ericsawakening.png" alt="" aria-hidden="true">
+        <div class="woa-panel__scene-shade"></div>
+        <div class="woa-panel__frame-top" aria-hidden="true"></div>
+        <div class="woa-panel__intro">
+          <p class="woa-panel__kicker">SAME FRAME · MORE CONTENT</p>
+          <h2 id="expanded-title">ERIC</h2>
+          <p>The upper scene stays the same height. Only the parchment section grows when it needs to hold more text.</p>
+        </div>
+      </div>
+      <div class="woa-panel__paper">
+        <div class="woa-panel__paper-inner">
+          <h3>EXPANDED CONTENT</h3>
+          <p>This second example contains more content to demonstrate a taller panel. The frame sides keep their width, the upper scene remains fixed, and the parchment area grows with the content.</p>
+          <p>The page uses real HTML text and a real link, not text baked into an image. That keeps the story selectable, accessible, and straightforward to update.</p>
+          <p>Additional story paragraphs can be added here. On a phone, the text reflows naturally and the panel remains within the viewport width.</p>
+          <p>Nothing in this experiment changes the live homepage or the canonical character artwork.</p>
+          <a class="woa-button" href="../index.html#story"><span>READ THE STORY</span><span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+    </section>
+    <p class="footnote">Prototype only · Check asset fit and typography before integrating into the main site.</p>
+  </main>
+</body>
+</html>

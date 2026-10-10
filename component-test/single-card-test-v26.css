@@ -460,3 +460,14 @@ h1 { margin: 0 0 8px; font-size: clamp(2rem, 7vw, 3rem); line-height: 1; text-tr
     transform: translate(-13px, 6px) rotate(-1deg) !important;
   }
 }
+
+
+/* v29: tighten the remaining visual gap between Eric and his name */
+.character-card .card-top h2 {
+  transform: translate(-29px, 7px) rotate(-1deg) !important;
+}
+@media (max-width: 420px) {
+  .character-card .card-top h2 {
+    transform: translate(-23px, 6px) rotate(-1deg) !important;
+  }
+}

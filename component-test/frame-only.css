@@ -167,7 +167,7 @@ h1 {
 
 /* v3: header is sized around the title; image and lower content move with it. */
 .woa-card {
-  aspect-ratio: auto;
+  aspect-ratio: 1283 / 1350;
   min-height: 0;
   padding-bottom: 0;
 }

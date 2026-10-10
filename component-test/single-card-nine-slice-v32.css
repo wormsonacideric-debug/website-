@@ -39,9 +39,10 @@ h1 { margin:0 0 8px; font-size:clamp(2rem,7vw,3rem); line-height:1; text-transfo
 
 .story-card__header { text-align:center; padding:0 4px 12px; }
 .story-card__header h2 {
-  margin:0; color:#17120d; font-family:"Trebuchet MS",Arial,sans-serif;
-  font-style:normal; font-weight:900; letter-spacing:.015em;
-  font-size:clamp(1.35rem,5.8vw,2rem); line-height:1.05;
+  /* Match the handwritten character-name lettering from the character cards. */
+  margin:0; color:#17120d; font-family:"Kalam",cursive;
+  font-style:italic; font-weight:700; letter-spacing:0;
+  font-size:clamp(1.45rem,6vw,2.1rem); line-height:1.05;
   text-transform:uppercase; overflow-wrap:anywhere;
 }
 .story-card__image {

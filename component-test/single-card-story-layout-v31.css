@@ -14,7 +14,11 @@ h1 { margin:0 0 8px; font-size:clamp(2rem,7vw,3rem); line-height:1; text-transfo
 .intro { margin:0 0 24px; max-width:55ch; color:#d4d7cb; }
 
 .story-card {
+  /* Default: restrained tilt. Modifier classes below allow square/left/right variants. */
+  --card-rotation: -1deg;
   width:min(100%,470px); margin:0 auto; padding:28px 24px 24px;
+  transform:rotate(var(--card-rotation));
+  transform-origin:center center;
   display:flex; flex-direction:column; align-items:stretch; gap:0;
   color:var(--ink); background-color:#e8c98f;
   background-image:url("../assets/TextCard.png"); background-repeat:no-repeat;
@@ -58,3 +62,8 @@ h1 { margin:0 0 8px; font-size:clamp(2rem,7vw,3rem); line-height:1; text-transfo
   .story-card__text { width:90%; margin:15px auto 17px; font-size:1.05rem; line-height:1.2; }
   .story-card__button { padding:9px 17px; }
 }
+
+/* Orientation variants: apply one modifier class alongside .story-card. */
+.story-card--square { --card-rotation: 0deg; }
+.story-card--tilt-left { --card-rotation: -1deg; }
+.story-card--tilt-right { --card-rotation: 1deg; }

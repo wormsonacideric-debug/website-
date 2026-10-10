@@ -436,3 +436,16 @@ h1 { margin: 0 0 8px; font-size: clamp(2rem, 7vw, 3rem); line-height: 1; text-tr
     line-height: 1.2 !important;
   }
 }
+
+
+/* v27: approved name placement — slightly smaller, shifted right of Eric and a touch lower */
+.character-card .card-top h2 {
+  font-size: clamp(2.05rem, 7.8vw, 2.45rem) !important;
+  transform: translate(-5px, 7px) rotate(-1deg) !important;
+}
+@media (max-width: 420px) {
+  .character-card .card-top h2 {
+    font-size: clamp(1.95rem, 7.6vw, 2.3rem) !important;
+    transform: translate(-4px, 6px) rotate(-1deg) !important;
+  }
+}

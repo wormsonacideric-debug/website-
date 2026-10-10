@@ -1,0 +1,147 @@
+:root {
+  color-scheme: dark;
+  --woa-ink: #17130f;
+  --woa-paper-ink: #33251a;
+  --woa-acid: #c5ff38;
+  --woa-yellow: #ffc629;
+  --woa-frame: url("../assets/Card.png");
+  --woa-paper: url("../assets/TextCard.png");
+}
+* { box-sizing: border-box; }
+html { background: #080c0a; }
+body {
+  margin: 0;
+  color: #f5f0e5;
+  background: radial-gradient(ellipse at 50% 0, #20352b 0, #0a100d 62%);
+  font-family: "Trebuchet MS", "Arial Rounded MT Bold", system-ui, sans-serif;
+  line-height: 1.55;
+}
+.test-shell { width: min(1120px, calc(100% - 28px)); margin: 0 auto; padding: 32px 0 64px; }
+.eyebrow { color: var(--woa-acid); font-weight: 900; letter-spacing: .13em; font-size: .76rem; }
+h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.02; text-transform: uppercase; }
+.intro { max-width: 64ch; color: #d4d5c8; margin: 0 0 28px; }
+.woa-panel {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  margin: 28px auto;
+  width: 100%;
+  background: #d8b77a;
+  color: var(--woa-paper-ink);
+  border-radius: 9px;
+  box-shadow: 0 14px 35px #0008;
+}
+/* Fixed-height top scene. The frame image is used as an overlay so its transparent window reveals the scene. */
+.woa-panel__scene {
+  position: relative;
+  aspect-ratio: 1283 / 790;
+  min-height: 320px;
+  overflow: hidden;
+  background: #182720;
+}
+.woa-panel__scene-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 43%;
+}
+.woa-panel__scene-shade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #000b 0%, #0007 35%, transparent 78%), linear-gradient(0deg, #0007, transparent 55%);
+}
+.woa-panel__frame-top {
+  position: absolute;
+  inset: 0;
+  background-image: var(--woa-frame);
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  background-position: top center;
+  pointer-events: none;
+}
+.woa-panel__intro {
+  position: absolute;
+  z-index: 1;
+  top: 12%;
+  left: clamp(26px, 6.5%, 78px);
+  width: min(43%, 440px);
+  color: #fff9ec;
+  text-shadow: 0 2px 5px #000b;
+}
+.woa-panel__kicker { margin: 0 0 .6rem; font-size: .78rem; letter-spacing: .13em; font-weight: 900; color: var(--woa-acid); }
+.woa-panel__intro h2 { font-size: clamp(2.8rem, 7vw, 6.3rem); font-weight: 1000; font-style: italic; line-height: .9; margin: 0 0 .75rem; }
+.woa-panel__intro p { font-size: clamp(.95rem, 1.8vw, 1.35rem); line-height: 1.42; margin: 0 0 .8rem; }
+.woa-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .9rem;
+  margin-top: .5rem;
+  padding: .7rem 1rem;
+  max-width: 100%;
+  color: #17110a;
+  background: var(--woa-yellow);
+  border: 3px solid #1a1208;
+  box-shadow: 3px 4px 0 #0008;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-weight: 1000;
+  font-size: clamp(.8rem, 1.4vw, 1.05rem);
+  line-height: 1.2;
+}
+.woa-button:hover { filter: brightness(1.08); transform: translateY(-1px); }
+.woa-button:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+/* The paper grows with content; its background texture is independent from the fixed upper frame. */
+.woa-panel__paper {
+  position: relative;
+  background-color: #e7c78d;
+  background-image: var(--woa-paper);
+  background-repeat: repeat;
+  background-size: 100% auto;
+  border-top: 0;
+  min-height: 330px;
+}
+.woa-panel__paper-inner {
+  position: relative;
+  padding: clamp(30px, 5vw, 64px) clamp(28px, 6.5%, 78px) clamp(38px, 5vw, 64px);
+}
+.woa-panel__paper h3 {
+  margin: 0 0 14px;
+  font-size: clamp(1.5rem, 3.4vw, 2.8rem);
+  line-height: 1.04;
+  font-weight: 1000;
+  font-style: italic;
+  text-transform: uppercase;
+  color: #273b19;
+  text-shadow: 1px 1px 0 #f3dc9e;
+}
+.woa-panel__paper p { max-width: 76ch; margin: 0 0 1rem; font-family: Georgia, serif; font-size: clamp(1rem, 1.4vw, 1.15rem); line-height: 1.65; }
+.woa-quote {
+  max-width: 390px;
+  margin: 24px 0 0 auto;
+  padding: 20px 22px;
+  color: #322418;
+  background: #f0dba8;
+  border: 1px solid #9b7844;
+  box-shadow: 3px 5px 0 #5c3c1c55;
+  font-size: 1.05rem;
+  transform: rotate(1deg);
+}
+.woa-quote span { display: block; text-align: right; font-weight: 800; margin-top: 8px; }
+.woa-panel--expanded .woa-panel__paper { min-height: 490px; }
+.footnote { color: #aeb8ae; font-size: .85rem; margin-top: 36px; }
+@media (max-width: 680px) {
+  .test-shell { width: min(100% - 16px, 560px); padding-top: 22px; }
+  .woa-panel__scene { aspect-ratio: 1283 / 930; min-height: 470px; }
+  .woa-panel__scene-art { object-position: 57% center; }
+  .woa-panel__intro { top: 9%; left: 8%; width: 53%; }
+  .woa-panel__intro h2 { font-size: clamp(2.8rem, 13vw, 4.6rem); }
+  .woa-panel__intro p { font-size: clamp(.92rem, 3.7vw, 1.1rem); }
+  .woa-panel__frame-top { background-size: auto 790px; background-size: auto 100%; }
+  .woa-panel__paper { background-size: auto 100%; }
+  .woa-panel__paper-inner { padding: 28px 8% 38px; }
+  .woa-quote { max-width: 88%; }
+}
+@media (prefers-reduced-motion: reduce) { .woa-button { transition: none; } }

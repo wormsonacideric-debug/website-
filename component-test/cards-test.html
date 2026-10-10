@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>WOA — Card Layout Prototype</title>
+  <link rel="stylesheet" href="cards-test.css">
+</head>
+<body>
+  <main class="page">
+    <header class="page-heading">
+      <p class="eyebrow">WORMS ON ACID · CARD LAYOUT TEST</p>
+      <h1>The characters &amp; the world</h1>
+      <p>Prototype based on the supplied card-layout reference. Test only — the live website is unchanged.</p>
+    </header>
+
+    <div class="section-grid">
+      <section class="section-board" aria-labelledby="characters-heading">
+        <header class="board-heading">
+          <h2 id="characters-heading">THE CHARACTERS</h2>
+          <p>A few worms, a skerk, and other interesting types...</p>
+        </header>
+        <div class="card-grid">
+          <article class="paper-card character-card">
+            <div class="character-top">
+              <div class="character-image"><img src="../assets/eric.png" alt="Eric"></div>
+              <h3>Eric</h3>
+            </div>
+            <p class="card-copy">Curious. Friendly. Generally optimistic. Takes most things remarkably well.</p>
+            <a class="card-button" href="#eric">View Eric <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="paper-card character-card">
+            <div class="character-top">
+              <div class="character-image"><img src="../assets/nigel.png" alt="Nigel"></div>
+              <h3>Nigel</h3>
+            </div>
+            <p class="card-copy">Owner of The High Scrapparal. Practical, genial. Usually involved in something.</p>
+            <a class="card-button" href="#nigel">View Nigel <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="paper-card character-card">
+            <div class="character-top">
+              <div class="character-image"><img src="../assets/rufus.png" alt="Rufus"></div>
+              <h3>Rufus</h3>
+            </div>
+            <p class="card-copy">A shark. Believes he is a dog. Loyal. Hungry. Complicated.</p>
+            <a class="card-button" href="#rufus">View Rufus <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="paper-card character-card">
+            <div class="character-top">
+              <div class="character-image"><img src="../assets/manni.png" alt="Manni"></div>
+              <h3>Manni</h3>
+            </div>
+            <p class="card-copy">Chilled. Mysterious. Usually knows more than she says.</p>
+            <a class="card-button" href="#manni">View Manni <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </section>
+
+      <section class="section-board" aria-labelledby="world-heading">
+        <header class="board-heading">
+          <h2 id="world-heading">THE WORLD</h2>
+          <p>Strange places. Unexplained things. A few hints...</p>
+        </header>
+        <div class="card-grid">
+          <article class="paper-card world-card">
+            <h3>THE HIGH SCRAPPARAL</h3>
+            <div class="world-image"><img src="../assets/Highscrapparal.png" alt="The High Scrapparal"></div>
+            <p class="card-copy">Nigel's scrapyard and home. Usually empty. Full of interesting things. Exact location unknown.</p>
+            <a class="card-button" href="#scrapparal">View Now <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="paper-card world-card">
+            <h3>THE FESTIVALS</h3>
+            <div class="world-image festival-art" aria-label="Festival artwork"><span>FESTIVALS</span></div>
+            <p class="card-copy">Music. Lights. Friends. Things get weird. Memories are unreliable.</p>
+            <a class="card-button" href="#festivals">Explore <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="paper-card world-card">
+            <h3>MANCHESTERS</h3>
+            <div class="world-image manchester-art" aria-label="Manchester skyline artwork"><span>MANCHESTERS</span></div>
+            <p class="card-copy">Something important happened here. Eric remembers bits.</p>
+            <a class="card-button" href="#manchesters">Explore <span aria-hidden="true">→</span></a>
+          </article>
+          <article class="paper-card world-card mystery-card">
+            <h3>THE THING WE DON'T TALK ABOUT</h3>
+            <div class="world-image mystery-art" aria-label="Mysterious dark artwork"><span>?</span></div>
+            <p class="card-copy">Don't ask. Not yet anyway.</p>
+            <a class="card-button" href="#mystery">Explore <span aria-hidden="true">→</span></a>
+          </article>
+        </div>
+      </section>
+    </div>
+    <p class="footnote">Layout prototype · Existing character and panel assets reused where available · No live files changed</p>
+  </main>
+</body>
+</html>

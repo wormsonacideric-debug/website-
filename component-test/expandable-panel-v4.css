@@ -320,3 +320,43 @@ h1 { margin: 0 0 8px; font-size: clamp(2rem, 5vw, 3.7rem); line-height: 1.02; te
   .woa-story-card__copy p { font-size: 1.15rem; line-height: 1.28; }
   .woa-button--illustrated { padding: 10px 18px; font-size: 1.08rem; }
 }
+
+
+/* v9: nine-slice card frame. Corners retain their proportions; edge strips extend
+   independently as the HTML story content grows. The central parchment stays live HTML. */
+.woa-story-card {
+  padding: 0;
+  border: 0 solid transparent;
+  border-width: 36px 28px 42px;
+  border-image-source: var(--woa-frame);
+  border-image-slice: 8% 6% 8% 6%;
+  border-image-width: 36px 28px 42px;
+  border-image-repeat: stretch;
+  border-radius: 0;
+  background-color: #e7c78d;
+  background-image: var(--woa-paper);
+  background-repeat: repeat-y;
+  background-size: 100% auto;
+  box-shadow: 0 14px 35px #0008;
+}
+.woa-story-card::before { content: none; }
+.woa-story-card__heading { padding: 0 8px 16px; }
+.woa-story-card__image {
+  border: 4px solid #21170f;
+  border-radius: 3px;
+  box-shadow: 2px 3px 0 #5c3c1c88;
+  aspect-ratio: 16 / 9;
+}
+.woa-story-card__copy {
+  padding: 22px clamp(8px, 2.5vw, 24px) 12px;
+}
+.woa-story-card__copy p { max-width: 40ch; }
+@media (max-width: 680px) {
+  .woa-story-card {
+    border-width: 26px 20px 30px;
+    border-image-width: 26px 20px 30px;
+  }
+  .woa-story-card__heading { padding: 0 2px 12px; }
+  .woa-story-card__image { aspect-ratio: 4 / 3; }
+  .woa-story-card__copy { padding: 16px 4px 8px; }
+}

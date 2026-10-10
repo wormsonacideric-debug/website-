@@ -163,3 +163,60 @@ h1 {
     height: 59.2%;
   }
 }
+
+
+/* v3: header is sized around the title; image and lower content move with it. */
+.woa-card {
+  aspect-ratio: auto;
+  min-height: 0;
+  padding-bottom: 0;
+}
+.woa-card__art {
+  height: 100%;
+  object-fit: fill;
+}
+.woa-card__title {
+  top: 3.2%;
+  left: 7%;
+  width: 86%;
+  font-size: clamp(1.45rem, 4vw, 2.7rem);
+  line-height: 1.05;
+}
+.woa-card__scene {
+  top: 10.5%;
+  height: auto;
+  aspect-ratio: 16 / 9;
+}
+.woa-card__story {
+  top: auto;
+  bottom: 13.5%;
+  left: 7%;
+  width: 86%;
+  font-size: clamp(1rem, 1.8vw, 1.35rem);
+}
+.woa-card__next {
+  top: auto;
+  bottom: 4.8%;
+}
+@media (max-width: 560px) {
+  .woa-card__title {
+    top: 3.1%;
+    font-size: clamp(1.35rem, 6vw, 2rem);
+    line-height: 1.02;
+  }
+  .woa-card__scene {
+    top: 10.2%;
+    left: 4.1%;
+    width: 91.8%;
+    aspect-ratio: 4 / 3;
+    height: auto;
+  }
+  .woa-card__story {
+    bottom: 13.4%;
+    font-size: clamp(.9rem, 3.4vw, 1.05rem);
+    line-height: 1.12;
+  }
+  .woa-card__next {
+    bottom: 4.5%;
+  }
+}

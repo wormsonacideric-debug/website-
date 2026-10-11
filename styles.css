@@ -243,3 +243,14 @@
  .home-copy p{font-size:19px;}
  .home-quote{right:10px;top:18px;width:178px;font-size:16px;}
 }
+
+
+/* Header logo containment fix: prevent intrinsic image dimensions escaping the nav. */
+header.site-nav > a.brand { flex: 0 1 auto; width: min(330px, 42vw); min-width: 0; max-width: calc(100% - 70px); overflow: hidden; }
+header.site-nav > a.brand > img { display: block; width: 100% !important; max-width: 100% !important; height: auto !important; max-height: 54px !important; object-fit: contain; object-position: left center; }
+@media (max-width: 800px) {
+  header.site-nav { gap: 8px; padding: 8px 14px; }
+  header.site-nav > a.brand { width: min(230px, calc(100vw - 100px)); max-width: calc(100% - 58px); }
+  header.site-nav > a.brand > img { max-height: 44px !important; }
+  header.site-nav > .menu { flex: 0 0 auto; margin-left: auto; }
+}

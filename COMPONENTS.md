@@ -11,7 +11,7 @@
 | Character card | [single-card-preview-v30.html](component-test/single-card-preview-v30.html) | [single-card-preview-v30.css](component-test/single-card-preview-v30.css) | [Reusable character card](https://trello.com/c/Eb73pKnJ/11-reusable-character-card-component-canonical-baseline) |
 | Story card | [single-card-nine-slice-v32.html](component-test/single-card-nine-slice-v32.html) | [single-card-nine-slice-v32-typography.css](component-test/single-card-nine-slice-v32-typography.css) | [Reusable story card](https://trello.com/c/HP2GVZAW/12-reusable-story-card-component-nine-slice-parchment) |
 | Game card — Early Birds | [single-card-game-early-birds-v33.html](component-test/single-card-game-early-birds-v33.html) | [single-card-game-early-birds-v33.css](component-test/single-card-game-early-birds-v33.css) | [Reusable Early Birds game card](https://trello.com/c/GIrMaTGA/13-reusable-game-card-component-early-birds) |
-| List card — feature-list example | [single-card-game-features-v1.html](component-test/single-card-game-features-v1.html) | [single-card-game-features-v1.css](component-test/single-card-game-features-v1.css) | Trello card to be created/linked |
+| List card — feature-list example | [single-card-game-features-v1.html](component-test/single-card-game-features-v1.html) | [single-card-game-features-v1.css](component-test/single-card-game-features-v1.css) | [Reusable list card](https://trello.com/c/4CpvXEQp/14-reusable-list-card-component-nine-slice-parchment) |
 
 ## Shared design rules
 
@@ -26,4 +26,4 @@
 
 ## Current status (2026-10-11)
 
-All four standalone HTML/CSS prototypes are present on this branch. The components have not yet been fully integrated and verified in `site-v2`. Asset transfer and final integration validation remain separate tasks.
+All four standalone HTML/CSS prototypes are present on this branch. The matching Trello records are linked above. The components have not yet been fully integrated and verified in `site-v2`. Asset transfer and final integration validation remain separate tasks.

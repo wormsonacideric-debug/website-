@@ -73,3 +73,7 @@
   .game-card { border-width: 28px; border-image-width: 28px; padding: 7px 5px 6px; }
   .game-card__text { font-size: 17px; }
 }
+
+/* Shared game-card sizing in the Games grid */
+.cards.games > .game-card { box-sizing: border-box; }
+.cards.games .game-card__art img { object-fit: cover; }

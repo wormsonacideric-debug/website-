@@ -91,3 +91,155 @@
 .character-card__button:focus-visible{outline:3px solid white;outline-offset:4px}
 @media(max-width:800px){.cards.characters.character-cards{grid-template-columns:minmax(0,1fr);gap:14px}.character-card{padding:28px 24px 24px}.character-card__top{min-height:112px}.character-card__art{height:112px}.character-card__top h3{font-size:clamp(27px,7vw,34px)}.character-card__description{font-size:18px}}
 @media(max-width:420px){.character-card{padding:26px 21px 23px}.character-card__top{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:4px;min-height:105px}.character-card__art{height:105px}.character-card__top h3{font-size:clamp(25px,7.4vw,31px)}.character-card__description{width:88%;font-size:17px;margin:8px auto 18px}.character-card__button{padding:8px 15px}}
+
+
+/* Ported from main: scoped home-page composition; card systems remain unchanged. */
+/* HOME MOCKUP — deliberately small and scoped. The supplied mockup is the visual target. */
+.home-mockup{width:min(calc(100% - 32px),1180px);margin:18px auto 0;background:#08100d;}
+.home-scene{position:relative;overflow:hidden;aspect-ratio:1.78/1;border:1px solid #26372f;background:#111;}
+.home-scene>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;}
+.home-scene:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(0,0,0,.82) 0%,rgba(0,0,0,.55) 34%,rgba(0,0,0,.05) 67%),linear-gradient(0deg,rgba(0,0,0,.38),transparent 42%);pointer-events:none;}
+.home-copy{position:absolute;z-index:2;left:30px;top:28px;width:36%;color:#fff5e8;}
+.home-copy h1{font-size:86px;margin:0 0 5px;color:#fff5e8;text-shadow:4px 4px 0 #111;letter-spacing:1px;}
+.home-copy p{font-family:"Patrick Hand",cursive;font-size:23px;line-height:.99;margin:0 0 10px;text-shadow:2px 2px 0 #111;}
+.home-copy p:nth-of-type(2){margin-top:6px;}
+.home-button{display:inline-block;margin-top:8px;padding:14px 23px;background:#ffc62a;color:#111;border:3px solid #111;box-shadow:4px 5px 0 #000;font-family:Bangers,sans-serif;font-size:21px;}
+.home-quote{position:absolute;z-index:3;right:6%;top:12%;width:240px;padding:20px 18px;background:#ead8a8;color:#292218;font-family:"Patrick Hand",cursive;font-size:22px;line-height:1.05;box-shadow:5px 7px 0 rgba(0,0,0,.45);transform:rotate(-2deg);}
+.home-quote small{display:block;text-align:right;margin-top:12px;font-size:20px;}
+.home-about{display:grid;grid-template-columns:minmax(0,1fr) 210px;gap:30px;padding:25px 30px 28px;background:#101714;border:1px solid #26372f;border-top:0;}
+.home-about h2{font-size:43px;color:#c9ff3d;margin:0 0 12px;text-shadow:2px 2px 0 #07100d;}
+.home-about p{max-width:760px;margin:7px 0;color:#f3eee0;font-family:"Patrick Hand",cursive;font-size:19px;line-height:1.15;}
+.home-note{align-self:center;justify-self:end;width:190px;padding:24px 16px;background:#ead8a8;color:#292218;text-align:center;font-family:"Patrick Hand",cursive;font-size:24px;line-height:1.02;box-shadow:5px 6px 0 rgba(0,0,0,.4);transform:rotate(3deg);}
+@media(max-width:800px){
+ .home-mockup{width:calc(100% - 20px);margin-top:12px;}
+ .home-scene{aspect-ratio:auto;height:455px;}
+ .home-scene>img{object-position:58% center;}
+ .home-scene:after{background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.18) 32%,rgba(0,0,0,.86) 78%,rgba(0,0,0,.96));}
+ .home-copy{left:20px;top:auto;bottom:22px;width:62%;}
+ .home-copy h1{font-size:66px;}
+ .home-copy p{font-size:21px;}
+ .home-button{font-size:18px;padding:12px 17px;}
+ .home-quote{right:12px;top:20px;width:185px;padding:15px 13px;font-size:17px;}
+ .home-quote small{font-size:17px;margin-top:8px;}
+ .home-about{grid-template-columns:1fr;gap:12px;padding:22px 18px 25px;}
+ .home-about h2{font-size:38px;}
+ .home-about p{font-size:18px;}
+ .home-note{width:180px;justify-self:end;font-size:21px;}
+}
+
+
+/* ============================================================
+   HOME — MOCKUP-FAITHFUL PASS
+   The supplied WOA mockup is the visual reference.
+   Keep this deliberately small; do not style the rest of the site.
+   ============================================================ */
+.home-mockup{width:min(calc(100% - 20px),760px);margin:14px auto 0;background:#101713;}
+.home-scene{
+  position:relative;overflow:hidden;aspect-ratio:1.56/1;
+  border:2px solid #17211c;background:#111;
+}
+.home-scene>img{object-position:center;}
+.home-scene:after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(90deg,rgba(0,0,0,.86) 0%,rgba(0,0,0,.52) 39%,rgba(0,0,0,.08) 72%);
+}
+.home-copy{left:24px;top:24px;width:38%;z-index:2;}
+.home-copy h1{
+  margin:0 0 7px;
+  color:#f5f1e7;
+  font-size:70px;
+  line-height:.85;
+  text-shadow:3px 3px 0 #111;
+}
+.home-copy p{
+  color:#f5f1e7;
+  font-size:21px;
+  line-height:1.02;
+  text-shadow:2px 2px 0 #111;
+}
+.home-copy p:nth-of-type(2){margin-top:7px;}
+.home-button{
+  margin-top:7px;
+  padding:11px 18px;
+  background:#ffc52a;
+  color:#17130c;
+  border:2px solid #111;
+  box-shadow:3px 4px 0 #000;
+  font-size:18px;
+}
+.home-quote{
+  right:5%;top:10%;width:205px;
+  padding:17px 15px;
+  background:#ead8a8;color:#292218;
+  font-size:20px;line-height:1.02;
+  box-shadow:4px 5px 0 #0008;
+  transform:rotate(-3deg);
+}
+.home-quote small{font-size:18px;margin-top:9px;}
+.home-about{
+  grid-template-columns:1fr 155px;
+  gap:20px;
+  padding:21px 24px 23px;
+  background:#111915;
+  border:2px solid #202b25;
+  border-top:0;
+}
+.home-about h2{
+  color:#f5f1e7;
+  font-size:36px;
+  line-height:.9;
+  margin:0 0 10px;
+  text-shadow:2px 2px 0 #080c0a;
+}
+.home-about p{
+  color:#eee9dc;
+  font-size:17px;
+  line-height:1.12;
+  margin:6px 0;
+}
+.home-note{
+  width:145px;
+  padding:18px 12px;
+  font-size:21px;
+  box-shadow:4px 5px 0 #0008;
+}
+@media(max-width:800px){
+  .home-mockup{width:calc(100% - 20px);margin-top:12px;}
+  .home-scene{aspect-ratio:auto;height:430px;}
+  .home-scene>img{object-position:58% center;}
+  .home-scene:after{
+    background:linear-gradient(180deg,rgba(0,0,0,.05),rgba(0,0,0,.14) 34%,rgba(0,0,0,.88) 78%,rgba(0,0,0,.96));
+  }
+  .home-copy{left:18px;bottom:18px;top:auto;width:57%;}
+  .home-copy h1{font-size:58px;}
+  .home-copy p{font-size:19px;}
+  .home-button{font-size:16px;padding:10px 13px;}
+  .home-quote{right:10px;top:18px;width:176px;font-size:16px;padding:14px 12px;}
+  .home-quote small{font-size:16px;}
+  .home-about{grid-template-columns:1fr;gap:7px;padding:20px 17px 21px;}
+  .home-about h2{font-size:35px;}
+  .home-about p{font-size:18px;}
+  .home-note{justify-self:end;width:155px;}
+}
+
+
+/* HERO 3 HEADER REWORK — scoped to the Home header only */
+.home-mockup{width:min(calc(100% - 20px),920px);margin:14px auto 0;}
+.home-scene{aspect-ratio:1.72/1;min-height:520px;border:2px solid #111;box-shadow:0 8px 22px rgba(0,0,0,.45);}
+.home-scene>img{object-fit:cover;object-position:center 48%;}
+.home-scene:after{background:linear-gradient(90deg,rgba(0,0,0,.78) 0%,rgba(0,0,0,.42) 34%,rgba(0,0,0,.08) 66%,rgba(0,0,0,.18) 100%),linear-gradient(0deg,rgba(0,0,0,.38),transparent 48%);}
+.home-copy{left:30px;top:30px;width:34%;}
+.home-copy h1{font-size:78px;letter-spacing:2px;color:#fffaf0;}
+.home-copy p{font-size:22px;line-height:1.02;}
+.home-button{margin-top:10px;padding:12px 19px;font-size:19px;}
+.home-quote{right:4.5%;top:9%;width:215px;padding:18px 16px;font-size:20px;}
+@media(max-width:800px){
+ .home-mockup{width:calc(100% - 20px);}
+ .home-scene{height:450px;aspect-ratio:auto;}
+ .home-scene>img{object-position:58% center;}
+ .home-scene:after{background:linear-gradient(180deg,rgba(0,0,0,.04),rgba(0,0,0,.12) 34%,rgba(0,0,0,.84) 76%,rgba(0,0,0,.96));}
+ .home-copy{left:18px;bottom:18px;top:auto;width:58%;}
+ .home-copy h1{font-size:60px;}
+ .home-copy p{font-size:19px;}
+ .home-quote{right:10px;top:18px;width:178px;font-size:16px;}
+}

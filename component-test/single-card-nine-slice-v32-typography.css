@@ -13,7 +13,7 @@ body {
 h1 { margin:0 0 8px; font-size:clamp(2rem,7vw,3rem); line-height:1; text-transform:uppercase; }
 .intro { margin:0 0 24px; max-width:55ch; color:#d4d7cb; }
 
-/* Nine-slice parchment: 100px source slices preserve corner details and pins.
+/* Nine-slice parchment: 65px source slices preserve corner details and pins.
    border-image-repeat:stretch stretches only edge strips along their length;
    the centre texture fills the content area. */
 .story-card {
@@ -22,7 +22,7 @@ h1 { margin:0 0 8px; font-size:clamp(2rem,7vw,3rem); line-height:1; text-transfo
   margin:0 auto;
   border:34px solid transparent;
   border-image-source:url("../assets/parchment-1000w-transparent.webp");
-  border-image-slice:100 fill;
+  border-image-slice:65 fill;
   border-image-width:34px;
   border-image-outset:0;
   border-image-repeat:stretch;

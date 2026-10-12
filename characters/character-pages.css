@@ -1,0 +1,31 @@
+/* WORMS ON ACID — individual character pages */
+.character-page { min-height:100vh; }
+.character-page .site-nav { justify-content:space-between; }
+.character-nav-back { color:#f5eddb; text-decoration:none; font-family:"Kalam",cursive; font-weight:700; }
+.character-profile { width:min(100% - 28px,980px); margin:28px auto 56px; color:#eee8d8; }
+.character-profile > .eyebrow { display:inline-block; margin-bottom:12px; color:#ffc629; text-decoration:none; }
+.character-profile__hero { display:grid; grid-template-columns:minmax(220px, .8fr) 1.2fr; gap:clamp(22px,5vw,54px); align-items:center; padding:clamp(18px,4vw,36px); background:#111915; border:2px solid #2b392f; box-shadow:7px 8px 0 #0007; }
+.character-profile__portrait { display:flex; align-items:center; justify-content:center; min-height:280px; padding:12px; background:#0a100d; border:2px solid #303b32; }
+.character-profile__portrait img { display:block; width:100%; max-height:370px; object-fit:contain; }
+.character-profile__hero h1 { margin:4px 0 12px; color:#fff8e8; font-size:clamp(3rem,8vw,5.8rem); line-height:.9; letter-spacing:2px; }
+.character-profile__hero p { line-height:1.5; }
+.character-profile__hero .eyebrow { color:#ffc629; font-size:.85rem; letter-spacing:.12em; font-weight:700; }
+.character-profile__tagline { font-size:clamp(1.15rem,3vw,1.55rem); color:#f4d58b; font-family:"Kalam",cursive; }
+.character-facts { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:24px 0; }
+.character-facts article { padding:24px 25px; background:#eee2c2; color:#2b2418; border:2px solid #a38b5e; box-shadow:4px 5px 0 #0006; }
+.character-facts h2 { margin:0 0 12px; font-family:"Kalam",cursive; font-size:1.45rem; line-height:1.05; }
+.character-facts p,.character-facts li { font-size:1.04rem; line-height:1.45; }
+.character-facts ul { padding-left:20px; }
+.character-profile__cta { display:table; margin:28px auto; padding:13px 20px; background:#ffc629; border:2px solid #80510f; border-radius:10px; box-shadow:0 4px 0 #8b5b19; color:#21170d; text-decoration:none; font-family:"Kalam",cursive; font-weight:700; text-align:center; }
+.character-profile__next { display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-top:32px; padding-top:18px; border-top:1px solid #39453b; }
+.character-profile__next a { color:#f4d58b; text-decoration:none; font-weight:700; }
+.character-page footer { margin-top:36px; padding:24px; }
+@media(max-width:680px) {
+ .character-profile { width:calc(100% - 20px); margin-top:18px; }
+ .character-profile__hero { grid-template-columns:1fr; gap:18px; padding:15px; }
+ .character-profile__portrait { min-height:180px; max-height:280px; }
+ .character-profile__portrait img { max-height:250px; }
+ .character-facts { grid-template-columns:1fr; gap:12px; }
+ .character-facts article { padding:20px; }
+ .character-profile__next { flex-direction:column; }
+}

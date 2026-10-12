@@ -486,3 +486,19 @@ header.site-nav > a.brand > img { display: block; width: 100% !important; max-wi
 @media(max-width:380px) {
   .home-about-copy > .home-note.quote-card { width:132px; }
 }
+
+
+/* Live X timeline embed and current footer brand asset. */
+.community-card--x { min-width:0; }
+.x-timeline-wrap { min-width:0; }
+.x-timeline-wrap .twitter-timeline { display:block; width:100%; }
+.x-timeline-wrap .x-fallback { margin:12px 0 0; font-size:.9em; }
+.x-timeline-wrap .x-fallback a { font-weight:700; }
+footer { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:14px; }
+footer .footer-brand { display:block; width:min(360px,78vw); line-height:0; }
+footer .footer-brand img { display:block; width:100%; height:auto; max-height:110px; object-fit:contain; }
+footer small { display:block; text-align:center; }
+@media(max-width:800px) {
+  .x-timeline-wrap .twitter-timeline { max-width:100%; }
+  footer .footer-brand { width:min(300px,78vw); }
+}

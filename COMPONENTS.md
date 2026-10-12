@@ -12,6 +12,7 @@
 | Story card | [single-card-nine-slice-v32.html](component-test/single-card-nine-slice-v32.html) | [single-card-nine-slice-v32-typography.css](component-test/single-card-nine-slice-v32-typography.css) | [Reusable story card](https://trello.com/c/HP2GVZAW/12-reusable-story-card-component-nine-slice-parchment) |
 | Game card — Early Birds | [single-card-game-early-birds-v33.html](component-test/single-card-game-early-birds-v33.html) | [single-card-game-early-birds-v33.css](component-test/single-card-game-early-birds-v33.css) | [Reusable Early Birds game card](https://trello.com/c/GIrMaTGA/13-reusable-game-card-component-early-birds) |
 | List card — feature-list example | [single-card-game-features-v1.html](component-test/single-card-game-features-v1.html) | [single-card-game-features-v1.css](component-test/single-card-game-features-v1.css) | [Reusable list card](https://trello.com/c/4CpvXEQp/14-reusable-list-card-component-nine-slice-parchment) |
+| Quote card — sticky and torn paper | [single-quote-card-variants-v1.html](component-test/single-quote-card-variants-v1.html) | [single-quote-card-variants-v1.css](component-test/single-quote-card-variants-v1.css) | Prototype test; Trello record to be added |
 
 ## Shared design rules
 
@@ -24,6 +25,13 @@
 - The list card is a generic heading-plus-list panel. “Game features” is one example, not the component's category.
 - Keep component prototypes distinct from integration. Verify mobile and desktop behaviour before integrating into `site-v2`; do not change the live site without explicit approval.
 
-## Current status (2026-10-11)
+## Quote card component
 
-All four standalone HTML/CSS prototypes are present on this branch. The matching Trello records are linked above. The components have not yet been fully integrated and verified in `site-v2`. Asset transfer and final integration validation remain separate tasks.
+- Variants: sticky layered paper with tape; standalone torn paper.
+- Uses CSS `border-image` nine-slice so quote text remains editable HTML and the paper edge treatment adapts to different content lengths.
+- Test page includes short, attributed, and long-quote cases. Page typography is isolated from quote-card typography; quote text and attribution explicitly use Kalam.
+- The paper assets are stored in the website `assets` directory; ensure those files are present on the integration branch before wiring this component into production pages.
+
+## Current status (2026-10-12)
+
+All four original standalone HTML/CSS prototypes and the quote-card variants test are present on this branch. The matching Trello records are linked above. The components have not yet been fully integrated and verified in `site-v2`. Asset transfer and final integration validation remain separate tasks.

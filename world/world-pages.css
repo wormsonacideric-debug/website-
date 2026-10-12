@@ -1,0 +1,31 @@
+/* WORMS ON ACID — individual world/location pages */
+.world-page { min-height:100vh; }
+.world-page .site-nav { justify-content:space-between; }
+.world-nav-back { color:#f5eddb; text-decoration:none; font-family:"Kalam",cursive; font-weight:700; }
+.world-profile { width:min(100% - 28px,980px); margin:28px auto 56px; color:#eee8d8; }
+.world-profile > .eyebrow { display:inline-block; margin-bottom:12px; color:#ffc629; text-decoration:none; }
+.world-profile > h1 { margin:4px 0 12px; color:#fff8e8; font-size:clamp(2.5rem,7vw,5rem); line-height:.95; letter-spacing:1px; }
+.world-profile__tagline { margin:0 0 24px; color:#f4d58b; font-family:"Kalam",cursive; font-size:clamp(1.15rem,3vw,1.6rem); }
+.world-profile__hero { margin:0 0 24px; padding:14px; background:#111915; border:2px solid #2b392f; box-shadow:7px 8px 0 #0007; }
+.world-profile__hero img { display:block; width:100%; max-height:540px; object-fit:cover; object-position:center; }
+.world-profile__hero figcaption { padding:12px 6px 2px; color:#f0e6d0; font-family:"Kalam",cursive; font-size:1.05rem; }
+.world-notes { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; margin:24px 0; }
+.world-notes article { padding:24px 25px; background:#eee2c2; color:#2b2418; border:2px solid #a38b5e; box-shadow:4px 5px 0 #0006; }
+.world-notes h2 { margin:0 0 12px; font-family:"Kalam",cursive; font-size:1.45rem; line-height:1.05; }
+.world-notes p { font-size:1.04rem; line-height:1.5; }
+.world-notes .world-note-mystery { background:#d7c7a1; }
+.world-profile__next { display:flex; justify-content:space-between; flex-wrap:wrap; gap:14px; margin-top:32px; padding-top:18px; border-top:1px solid #39453b; }
+.world-profile__next a { color:#f4d58b; text-decoration:none; font-weight:700; }
+.world-profile__dark-hero { min-height:280px; display:flex; align-items:center; justify-content:center; margin:0 0 24px; border:2px solid #33312a; background:radial-gradient(ellipse at center,#272721 0%,#11120f 52%,#050605 100%); box-shadow:inset 0 0 80px #000,7px 8px 0 #0007; }
+.world-profile__dark-hero span { color:#b5a98d; font-family:"Kalam",cursive; font-size:clamp(1.3rem,4vw,2rem); letter-spacing:.22em; transform:rotate(-3deg); }
+.world-page--secret .world-profile > h1 { color:#d8d0be; }
+.world-page--secret .world-profile__tagline { color:#b6a991; }
+.world-page footer { margin-top:36px; padding:24px; }
+@media(max-width:680px) {
+ .world-profile { width:calc(100% - 20px); margin-top:18px; }
+ .world-notes { grid-template-columns:1fr; gap:12px; }
+ .world-notes article { padding:20px; }
+ .world-profile__hero { padding:9px; }
+ .world-profile__dark-hero { min-height:210px; }
+ .world-profile__next { flex-direction:column; }
+}

@@ -10,7 +10,7 @@
  const canvas=document.createElement("canvas");canvas.width=960;canvas.height=540;canvas.setAttribute("aria-label","Tap Peter before he reaches Eric");canvas.style.cssText="display:block;width:100%;height:100%;touch-action:manipulation";
  host.replaceChildren(canvas);const ctx=canvas.getContext("2d");
  if(!ctx){msg("CANVAS NOT AVAILABLE","This browser cannot start the game. Try refreshing or another browser.");return}
- const sources={yard:"../../assets/Highscrapparal.png",eric:"../../assets/eric.webp",rufus:"../../assets/rufus.webp",attack:"../../assets/rufus-attack.svg",watch:"./peter-watching.png",launch:"./peter-launching.png",swoop:"./peter-swooping.png",bank:"./peter-banking.png"};
+ const sources={yard:"../../assets/Highscrapparal.png",eric:"../../assets/eric.webp",rufus:"https://raw.githubusercontent.com/wormsonacideric-debug/website-/main/assets/rufus.webp",attack:"../../assets/rufus-attack.svg",watch:"./peter-watching.png",launch:"./peter-launching.png",swoop:"./peter-swooping.png",bank:"./peter-banking.png"};
  const assets={};let running=false;
  Object.entries(sources).forEach(([k,src])=>{const im=new Image();im.onload=()=>{if(!running)drawScene()};im.onerror=()=>{if(k.startsWith("peter")||["watch","launch","swoop","bank"].includes(k))setStatus("PETER ARTWORK FAILED TO LOAD")};im.src=src;assets[k]=im});
  let score=0,combo=1,started=0,last=0,nextSpawn=0,difficulty=0,birds=[],raf=0;

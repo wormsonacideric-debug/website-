@@ -37,7 +37,7 @@
  function finishRufus(now){
   const idx=targets.findIndex(t=>t.id===rufus.targetId);if(idx>=0)targets.splice(idx,1);
   if(rufus.kind==="donut"){rufus.state="clogged";rufus.until=now+clogDuration;setStatus("DONUT MOUTH! RUFUS IS OUT FOR 2 SECONDS")}
-  else{rufus.state="idle";setStatus("RUFUS LANDS — READY FOR YOUR NEXT CLICK")}
+  else{score+=combo;combo=Math.min(6,combo+1);if(scoreEl)scoreEl.textContent=score;if(comboEl)comboEl.textContent="COMBO ×"+combo;rufus.state="idle";setStatus("RUFUS LANDS — READY FOR YOUR NEXT CLICK")}
   rufus.targetId=null;rufus.kind=null;
  }
  function drawRufus(now){
@@ -47,7 +47,7 @@
    const x=rufus.fromX+(rufus.targetX-rufus.fromX)*Math.min(1,t*1.45),y=435-Math.sin(Math.PI*t)*155;
    if(elapsed>300&&rufus.state==="leap")rufus.state=rufus.kind==="donut"?"donut":"attack";
    if(elapsed>=total){finishRufus(now);drawFit(rufusPose(),760,455,165,76);return}
-   const pose=elapsed<300?assets.rufusLeap:(rufus.kind==="donut"?assets.rufusDonut:assets.rufusAttack);drawFit(pose,x,y,155,145);return;
+   const pose=elapsed<300?assets.rufusLeap:(rufus.kind==="donut"?assets.rufusDonut:assets.rufusAttack);drawFit(pose,x,y,205,155);return;
   }
   drawFit(rufusPose(),760,455,rufus.state==="clogged"?190:165,rufus.state==="clogged"?120:76);
  }
@@ -79,15 +79,16 @@
   if(!running)return;ev.preventDefault();const r=canvas.getBoundingClientRect(),x=(ev.clientX-r.left)*960/r.width,y=(ev.clientY-r.top)*540/r.height;
   let index=-1,dist=Infinity;targets.forEach((b,i)=>{if(b.clicked)return;const d=Math.hypot(x-b.x,y-b.y);if(d<(b.hitRadius||70)&&d<dist){index=i;dist=d}});
   if(index<0)return;const target=targets[index];const now=performance.now();
-  if(target.kind==="bird"){
-   // Clicking a bird is both the player's successful hit and the command for Rufus to attack it.
-   targets.splice(index,1);score+=combo;combo=Math.min(6,combo+1);if(scoreEl)scoreEl.textContent=score;if(comboEl)comboEl.textContent="COMBO ×"+combo;
-   if(rufus.state==="idle")beginRufusAttack({...target,kind:"bird"},now);
-   else setStatus(rufus.state==="clogged"?"RUFUS HAS A MOUTH FULL OF DONUT — YOU'RE ON YOUR OWN!":"RUFUS IS BUSY — NICE SHOT!");
+  if(rufus.state!=="idle"){
+   setStatus(rufus.state==="clogged"?"RUFUS HAS A MOUTH FULL OF DONUT — WAIT 2 SECONDS":"RUFUS IS ALREADY ATTACKING!");
    return;
   }
-  // Clicking a donut explicitly sends Rufus after it, if he's available.
-  if(rufus.state==="idle"){beginRufusAttack(target,now)}else{setStatus(rufus.state==="clogged"?"RUFUS CAN'T ATTACK WITH A FULL MOUTH":"RUFUS IS BUSY — ERIC MAY GET THIS DONUT")}
+  if(target.kind==="bird"){
+   // Keep bird in place during Rufus's jump; remove it only when attack completes.
+   beginRufusAttack(target,now);
+   return;
+  }
+  beginRufusAttack(target,now);
  }
  window.startEarlyBirdsGame=()=>{startRound();return false};
  start.onclick=ev=>{if(ev){ev.preventDefault();ev.stopPropagation()}startRound();return false};

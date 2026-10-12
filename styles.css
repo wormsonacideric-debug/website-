@@ -312,3 +312,11 @@ header.site-nav > a.brand > img { display: block; width: 100% !important; max-wi
     top: auto;
   }
 }
+
+
+/* MOBILE ANCHOR LANDING — keep the story heading clear when the hero CTA is tapped. */
+@media (max-width: 800px) {
+  #story {
+    scroll-margin-top: 18px;
+  }
+}

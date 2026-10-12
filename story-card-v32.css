@@ -56,19 +56,37 @@
 .story-card__button:focus-visible { outline:3px solid white; outline-offset:4px; }
 
 
-/* Integration adapter only: preserve the registered Story Card v32 component
-   styles while fitting the cards into the existing World section grid. */
-.world-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:20px; align-items:stretch; }
-.world-grid .story-card { width:100%; margin:0; }
-.world-grid .story-card__image { aspect-ratio:16 / 10; }
-.world-grid .story-card__image img { object-fit:cover; }
-.world-grid .story-card__header { text-align:center; }
-.world-grid .story-card__header h2 { font-size:clamp(1.3rem,2.3vw,2rem); }
-.world-grid .story-card__text { font-size:clamp(1rem,1.5vw,1.1rem); }
+/* Integration adapter: only layout changes; the canonical v32 card styles above remain intact. */
+.world-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:22px; align-items:stretch; }
+.world-grid > .story-card {
+  box-sizing:border-box; width:100%; min-width:0; max-width:500px; margin:0 auto;
+  background:transparent; padding:9px 8px 8px; border:34px solid transparent;
+  border-image-source:url("./assets/parchment-1000w-transparent.webp");
+  border-image-slice:65 fill; border-image-width:34px; border-image-repeat:stretch;
+}
+.world-grid > .story-card .story-card__header { text-align:center; padding:0 4px 12px; }
+.world-grid > .story-card .story-card__header h2 {
+  margin:0; color:#17120d; font-family:"Bangers",cursive; font-weight:400;
+  letter-spacing:.025em; text-transform:uppercase; line-height:1.05;
+  font-size:clamp(1.3rem,2.3vw,2rem); overflow-wrap:anywhere;
+}
+.world-grid > .story-card .story-card__image {
+  width:100%; height:auto; aspect-ratio:16/10; overflow:hidden;
+  border:2px solid #24180e; background:#182720;
+}
+.world-grid > .story-card .story-card__image img,
+.world-grid > .story-card .story-card__image .placeholder {
+  display:block; width:100%; height:100%; object-fit:cover;
+}
+.world-grid > .story-card .story-card__text {
+  width:94%; margin:15px auto 17px; color:#24180e;
+  font-family:"Kalam",cursive; font-size:clamp(1rem,1.5vw,1.1rem);
+  font-weight:400; line-height:1.2; text-align:left;
+}
 @media(max-width:800px) {
- .world-grid { grid-template-columns:minmax(0,1fr); gap:20px; }
- .world-grid .story-card { width:min(100%,500px); margin:0 auto; }
- .world-grid .story-card__header h2 { font-size:clamp(1.45rem,6vw,2.1rem); }
- .world-grid .story-card__image { aspect-ratio:16 / 10; }
- .world-grid .story-card__text { font-size:1.08rem; }
+  .world-grid { grid-template-columns:minmax(0,1fr); gap:20px; }
+  .world-grid > .story-card { width:min(100%,500px); }
+  .world-grid > .story-card .story-card__header h2 { font-size:clamp(1.45rem,6vw,2.1rem); }
+  .world-grid > .story-card .story-card__image { aspect-ratio:16/10; }
+  .world-grid > .story-card .story-card__text { font-size:1.08rem; }
 }

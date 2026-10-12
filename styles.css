@@ -301,3 +301,14 @@ header.site-nav > a.brand > img { display: block; width: 100% !important; max-wi
 .home-scene-picture{position:absolute;inset:0;display:block;width:100%;height:100%;}
 .home-scene-picture img{display:block;width:100%;height:100%;object-fit:cover;object-position:center 48%;}
 @media(max-width:800px){.home-scene-picture img{object-position:center center;}}
+
+
+/* MOBILE STICKY-HEADER OVERLAP FIX
+   Let the header scroll away on small screens so section headings and content
+   are not hidden underneath it. Desktop navigation remains sticky. */
+@media (max-width: 800px) {
+  header.site-nav {
+    position: relative;
+    top: auto;
+  }
+}

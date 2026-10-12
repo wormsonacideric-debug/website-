@@ -1,46 +1,28 @@
-/* Early Birds runs only on its own page. */
+/* Early Birds: standalone canvas implementation; no external game engine required. */
 (()=> {
-  const host=document.getElementById("early-birds-canvas"),overlay=document.getElementById("game-overlay"),start=document.getElementById("start-game");
-  const scoreEl=document.getElementById("score"),timeEl=document.getElementById("time"),comboEl=document.getElementById("combo"),bestEl=document.getElementById("best"),statusEl=document.getElementById("status");
-  if(!host||!overlay||!start)return;
-  const setStatus=t=>{if(statusEl)statusEl.textContent=t};
-  const message=(title,body)=>{const h=overlay.querySelector("h2"),p=overlay.querySelector("p:not(.eyebrow)");if(h)h.textContent=title;if(p)p.textContent=body;overlay.style.display="grid";};
-  const fmt=ms=>{let s=Math.floor(ms/1000),m=Math.floor(s/60);s%=60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")};
-  let best=0;try{best=Number(localStorage.getItem("woaEarlyBirdsBest")||0)}catch(e){}if(bestEl)bestEl.textContent="BEST "+best;
-  let game=null,sceneReady=false,starting=false;
-  class EarlyBirds extends Phaser.Scene{
-    constructor(){super("EarlyBirds");this.running=false;this.score=0;this.combo=1;this.birds=[];this.nextSpawn=0;this.difficulty=0}
-    preload(){this.load.image("yard","../../assets/Highscrapparal.png");this.load.image("eric","../../assets/eric.webp");this.load.image("rufus","../../assets/rufus-watch.svg");this.load.image("rufusAttack","../../assets/rufus-attack.svg")}
-    create(){this.add.image(480,270,"yard").setDisplaySize(960,540);this.eric=this.add.image(315,390,"eric").setScale(.34);this.rufus=this.add.image(760,430,"rufus").setScale(.34);this.rufusAttack=this.add.image(760,430,"rufusAttack").setScale(.34).setVisible(false);this.input.on("pointerdown",p=>this.catchAt(p.x,p.y));sceneReady=true;setStatus("RUFUS IS WATCHING");}
-    startRound(){this.clearBirds();this.running=true;this.score=0;this.combo=1;this.difficulty=0;this.startedAt=performance.now();this.nextSpawn=0;this.spawnBird(true);if(scoreEl)scoreEl.textContent="0";if(comboEl)comboEl.textContent="COMBO ×1";if(timeEl)timeEl.textContent="00:00";overlay.style.display="none";start.textContent="START GAME →";setStatus("RUFUS IS WATCHING");this.rufus.setVisible(true);this.rufusAttack.setVisible(false);}
-    update(time,delta){if(!this.running)return;const elapsed=(performance.now()-this.startedAt)/1000;this.difficulty=Math.min(1,elapsed/90);if(timeEl)timeEl.textContent=fmt(performance.now()-this.startedAt);if(time>=this.nextSpawn){this.spawnBird();this.nextSpawn=time+Math.max(1050,1900-this.difficulty*650);}for(const b of this.birds.slice()){if(!b.active)continue;b.y+=b.speed*delta/1000;b.rotation=Math.sin((time+b.seed)/350)*.06;if(b.y>555)this.missBird(b);}}
-    spawnBird(first=false){if(!this.running)return;const eagle=Math.random()<(.08+this.difficulty*.10),g=this.add.graphics(),x=90+Math.random()*780;g.x=x;g.y=first?95:-50;g.speed=105+this.difficulty*45+Math.random()*12;g.seed=Math.random()*9999;g.value=eagle?5:1;g.eagle=eagle;g.setInteractive(new Phaser.Geom.Circle(0,0,42),Phaser.Geom.Circle.Contains);g.caught=false;this.drawBird(g,eagle);this.birds.push(g);}
-    drawBird(g,eagle){g.clear();g.fillStyle(eagle?0x232820:0x46545c,1);g.beginPath();g.moveTo(-45,8);g.quadraticCurveTo(-22,-27,4,-8);g.quadraticCurveTo(18,-38,48,-26);g.quadraticCurveTo(25,-4,10,2);g.quadraticCurveTo(33,12,47,31);g.quadraticCurveTo(18,27,0,14);g.quadraticCurveTo(-22,33,-44,30);g.quadraticCurveTo(-26,17,-18,7);g.quadraticCurveTo(-31,14,-45,8);g.closePath();g.fillPath();g.fillStyle(0x171510,1);g.fillTriangle(43,-25,66,-29,49,-10);g.fillStyle(0xf6edcf,1);g.fillCircle(31,-17,4);g.fillStyle(0x171510,1);g.fillCircle(32,-17,1.7);if(eagle){g.lineStyle(4,0xffad22,1);g.strokeCircle(31,-17,6);}}
-    catchAt(x,y){if(!this.running)return;const hit=this.birds.find(b=>b.active&&Phaser.Math.Distance.Between(x,y,b.x,b.y)<52);if(hit)this.catchBird(hit);}
-    catchBird(b){if(!b.active||b.caught||!this.running)return;b.caught=true;this.score+=b.value*this.combo;this.combo=Math.min(6,this.combo+1);if(scoreEl)scoreEl.textContent=this.score;if(comboEl)comboEl.textContent="COMBO ×"+this.combo;setStatus(b.eagle?"RUFUS HAS SPOTTED THE EAGLE":"RUFUS IS GOING FOR IT");this.rufus.setVisible(false);this.rufusAttack.setVisible(true);this.tweens.add({targets:this.rufusAttack,x:b.x,y:b.y,duration:320,ease:"Cubic.easeOut",onComplete:()=>{if(!b.active)return;this.tweens.add({targets:b,scale:.05,alpha:0,duration:130,onComplete:()=>b.destroy()});setStatus("CHOMP. NICE ONE, RUFUS.");this.time.delayedCall(180,()=>{if(this.running){this.rufusAttack.x=760;this.rufusAttack.y=430;this.rufusAttack.setVisible(false);this.rufus.setVisible(true);}});}});}
-    missBird(b){if(!b.active)return;b.destroy();this.combo=1;if(comboEl)comboEl.textContent="COMBO ×1";setStatus("TOO CLOSE...");this.tweens.add({targets:this.eric,angle:{from:-4,to:4},duration:70,yoyo:true,repeat:3});this.endRound();}
-    endRound(){if(!this.running)return;this.running=false;this.clearBirds();if(timeEl)timeEl.textContent=fmt(performance.now()-this.startedAt);const newBest=this.score>best;if(newBest){best=this.score;try{localStorage.setItem("woaEarlyBirdsBest",String(best))}catch(e){}if(bestEl)bestEl.textContent="BEST "+best;}overlay.style.display="grid";overlay.querySelector("h2").textContent="ERIC SURVIVED";overlay.querySelector("p:not(.eyebrow)").innerHTML="Score: <b>"+this.score+"</b><br>"+(newBest?"New best.":"Rufus remains convinced this was a team effort.");start.textContent="PLAY AGAIN →";setStatus("SAFE... FOR NOW");this.rufus.setVisible(true);this.rufusAttack.setVisible(false);this.rufus.x=760;this.rufus.y=430;}
-    clearBirds(){this.birds.forEach(b=>b.destroy());this.birds=[];}
-  }
-  function launch(){
-    if(starting)return;
-    if(!window.Phaser||!window.WOA?.Game){message("GAME ENGINE DIDN’T LOAD","The game library could not load. Check your connection and refresh.");setStatus("ENGINE NOT AVAILABLE");return;}
-    starting=true;
-    start.disabled=true;start.textContent="LOADING GAME…";
-    try{
-      if(!game){
-        game=window.WOA.Game.boot({parent:"early-birds-canvas",width:960,height:540,background:"#11160e",scene:EarlyBirds});
-        game.events.once("ready",()=>{sceneReady=true;beginRound();});
-        setTimeout(()=>{if(starting&&!sceneReady){starting=false;start.disabled=false;start.textContent="TRY AGAIN →";message("GAME DIDN’T START","The game engine didn't finish loading. Check your connection and tap Try Again.");setStatus("STARTUP TIMEOUT");}},7000);
-      }else beginRound();
-    }catch(e){starting=false;start.disabled=false;start.textContent="TRY AGAIN →";message("GAME ERROR","The game couldn't start. Refresh and try again.");setStatus("STARTUP ERROR");}
-  }
-  function beginRound(){
-    const scene=game&&game.scene.getScene("EarlyBirds");
-    if(!scene||!scene.sys.isActive()){starting=false;start.disabled=false;start.textContent="TRY AGAIN →";message("GAME IS STILL LOADING","Tap Try Again in a moment.");return;}
-    sceneReady=true;starting=false;start.disabled=false;scene.startRound();
-  }
-  start.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();launch();});
-  start.addEventListener("pointerup",e=>{if(e.pointerType==="touch"){e.preventDefault();launch();}});
-  if(!window.Phaser||!window.WOA?.Game)setStatus("GAME ENGINE LOADING");
+ const host=document.getElementById("early-birds-canvas"),overlay=document.getElementById("game-overlay"),start=document.getElementById("start-game");
+ const scoreEl=document.getElementById("score"),timeEl=document.getElementById("time"),comboEl=document.getElementById("combo"),bestEl=document.getElementById("best"),statusEl=document.getElementById("status");
+ if(!host||!overlay||!start)return;
+ const setStatus=t=>{if(statusEl)statusEl.textContent=t};
+ const fmt=ms=>{let s=Math.floor(ms/1000),m=Math.floor(s/60);s%=60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")};
+ const msg=(title,body)=>{overlay.querySelector("h2").textContent=title;overlay.querySelector("p:not(.eyebrow)").textContent=body;overlay.style.display="grid"};
+ let best=0;try{best=Number(localStorage.getItem("woaEarlyBirdsBest")||0)}catch(e){} if(bestEl)bestEl.textContent="BEST "+best;
+ const canvas=document.createElement("canvas");canvas.width=960;canvas.height=540;canvas.setAttribute("aria-label","Tap falling birds to catch them");canvas.style.cssText="display:block;width:100%;height:100%;touch-action:manipulation";
+ host.replaceChildren(canvas);const ctx=canvas.getContext("2d");
+ if(!ctx){msg("CANVAS NOT AVAILABLE","This browser cannot start the game. Try refreshing or another browser.");return}
+ const assets={yard:"../../assets/Highscrapparal.png",eric:"../../assets/eric.webp",rufus:"../../assets/rufus-watch.svg",attack:"../../assets/rufus-attack.svg"};
+ Object.keys(assets).forEach(k=>{const im=new Image();im.src=assets[k];assets[k]=im;});
+ let running=false,score=0,combo=1,started=0,last=0,nextSpawn=0,difficulty=0,birds=[],raf=0;
+ function drawImageFit(im,x,y,w,h){if(im&&im.complete&&im.naturalWidth){ctx.drawImage(im,x-w/2,y-h/2,w,h)}}
+ function drawBird(b){ctx.save();ctx.translate(b.x,b.y);ctx.rotate(Math.sin(performance.now()/350+b.seed)*.06);ctx.fillStyle=b.eagle?"#232820":"#46545c";ctx.beginPath();ctx.moveTo(-45,8);ctx.quadraticCurveTo(-22,-27,4,-8);ctx.quadraticCurveTo(18,-38,48,-26);ctx.quadraticCurveTo(25,-4,10,2);ctx.quadraticCurveTo(33,12,47,31);ctx.quadraticCurveTo(18,27,0,14);ctx.quadraticCurveTo(-22,33,-44,30);ctx.quadraticCurveTo(-26,17,-18,7);ctx.closePath();ctx.fill();ctx.fillStyle="#171510";ctx.beginPath();ctx.moveTo(43,-25);ctx.lineTo(66,-29);ctx.lineTo(49,-10);ctx.fill();ctx.fillStyle="#f6edcf";ctx.beginPath();ctx.arc(31,-17,4,0,Math.PI*2);ctx.fill();ctx.fillStyle="#171510";ctx.beginPath();ctx.arc(32,-17,1.7,0,Math.PI*2);ctx.fill();if(b.eagle){ctx.strokeStyle="#ffad22";ctx.lineWidth=4;ctx.beginPath();ctx.arc(31,-17,6,0,Math.PI*2);ctx.stroke()}ctx.restore()}
+ function render(){ctx.clearRect(0,0,960,540);drawImageFit(assets.yard,480,270,960,540);drawImageFit(assets.eric,315,390,230,250);drawImageFit(assets.rufus,760,430,150,150);birds.forEach(drawBird);if(!running)return;const now=performance.now(),elapsed=now-started;difficulty=Math.min(1,elapsed/90000);if(timeEl)timeEl.textContent=fmt(elapsed);if(now>=nextSpawn){spawn();nextSpawn=now+Math.max(1050,1900-difficulty*650)}for(const b of birds){b.y+=b.speed*(now-last)/1000}last=now;const missed=birds.find(b=>b.y>555);if(missed){endRound();return}raf=requestAnimationFrame(render)}
+ function spawn(first=false){birds.push({x:90+Math.random()*780,y:first?95:-45,speed:105+difficulty*45+Math.random()*12,seed:Math.random()*9999,value:Math.random()<(.08+difficulty*.1)?5:1,caught:false})}
+ function startRound(){cancelAnimationFrame(raf);running=true;score=0;combo=1;started=performance.now();last=started;nextSpawn=0;difficulty=0;birds=[];spawn(true);if(scoreEl)scoreEl.textContent="0";if(timeEl)timeEl.textContent="00:00";if(comboEl)comboEl.textContent="COMBO ×1";overlay.style.display="none";start.textContent="START GAME →";setStatus("RUFUS IS WATCHING");render()}
+ function endRound(){running=false;cancelAnimationFrame(raf);if(timeEl)timeEl.textContent=fmt(performance.now()-started);const isBest=score>best;if(isBest){best=score;try{localStorage.setItem("woaEarlyBirdsBest",String(best))}catch(e){}if(bestEl)bestEl.textContent="BEST "+best}birds=[];ctx.clearRect(0,0,960,540);drawImageFit(assets.yard,480,270,960,540);drawImageFit(assets.eric,315,390,230,250);drawImageFit(assets.rufus,760,430,150,150);msg("ERIC SURVIVED","Score: "+score+". "+(isBest?"New best!":"Rufus remains convinced this was a team effort."));start.textContent="PLAY AGAIN →";setStatus("SAFE... FOR NOW")}
+ function hit(ev){if(!running)return;ev.preventDefault();const r=canvas.getBoundingClientRect(),x=(ev.clientX-r.left)*960/r.width,y=(ev.clientY-r.top)*540/r.height;let index=-1,bestDist=Infinity;birds.forEach((b,i)=>{const d=Math.hypot(x-b.x,y-b.y);if(d<58&&d<bestDist){index=i;bestDist=d}});if(index<0)return;const b=birds.splice(index,1)[0];score+=b.value*combo;combo=Math.min(6,combo+1);if(scoreEl)scoreEl.textContent=score;if(comboEl)comboEl.textContent="COMBO ×"+combo;setStatus(b.value===5?"RUFUS HAS SPOTTED THE EAGLE":"CHOMP. NICE ONE, RUFUS.");}
+ start.addEventListener("click",ev=>{ev.preventDefault();startRound()});
+ canvas.addEventListener("pointerdown",hit,{passive:false});
+ // Draw a usable game preview immediately; no engine startup or network dependency.
+ ctx.fillStyle="#11160e";ctx.fillRect(0,0,960,540);drawImageFit(assets.yard,480,270,960,540);drawImageFit(assets.eric,315,390,230,250);drawImageFit(assets.rufus,760,430,150,150);
+ setStatus("RUFUS IS WATCHING");
 })();

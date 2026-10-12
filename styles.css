@@ -455,3 +455,24 @@ header.site-nav > a.brand > img { display: block; width: 100% !important; max-wi
   .story-card__text { width: 96%; margin: 13px auto 15px; font-size: 1rem; line-height: 1.22; }
   .story-card__button { padding: 8px 15px; }
 }
+
+
+/* Home introduction: let copy wrap around the reusable torn-paper note. */
+.home-about { display:block; }
+.home-about-copy { display:flow-root; min-width:0; }
+.home-about-copy .home-note.quote-card {
+  float:right; display:block; align-self:auto; justify-self:auto;
+  width:190px; max-width:45%; margin:6px 0 16px 22px;
+  clear:none; transform:rotate(2deg);
+}
+.home-about-copy h2 { margin-top:0; }
+@media(max-width:800px) {
+  .home-about { display:block; }
+  .home-about-copy .home-note.quote-card {
+    float:right; width:155px; max-width:44%;
+    margin:5px 0 12px 16px;
+  }
+}
+@media(max-width:380px) {
+  .home-about-copy .home-note.quote-card { width:132px; }
+}

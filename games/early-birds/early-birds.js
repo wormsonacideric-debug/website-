@@ -36,7 +36,7 @@
    if(elapsed>360&&rufus.state==="leap")rufus.state=rufus.kind==="donut"?"donut":"attack";
    if(elapsed>=total){
     if(rufus.targetId!==null){const i=targets.findIndex(o=>o.id===rufus.targetId);if(i>=0)targets.splice(i,1)}
-    if(rufus.kind==="donut"){rufus.state="clogged";rufus.until=now+clogDuration;setStatus("RU FUS ATE THE DONUT — ICING-CLOGGED!")}
+    if(rufus.kind==="donut"){rufus.state="clogged";rufus.until=now+clogDuration;setStatus("RUFUS ATE THE DONUT — ICING-CLOGGED!")}
     else{rufus.state="idle";setStatus("RUFUS INTERCEPTED A BIRD! TAP THE NEXT ONE")}
     rufus.targetId=null;rufus.kind=null;rufus.x=760;rufus.y=435;
     drawFit(rufusImage(),760,455,155,75);return;
@@ -96,7 +96,7 @@
   if(!running)return;ev.preventDefault();const r=canvas.getBoundingClientRect(),x=(ev.clientX-r.left)*960/r.width,y=(ev.clientY-r.top)*540/r.height;
   let index=-1,bestDist=Infinity;targets.forEach((b,i)=>{const d=Math.hypot(x-b.x,y-b.y);if(d<(b.hitRadius||70)&&d<bestDist){index=i;bestDist=d}});
   if(index<0)return;const target=targets[index];
-  if(target.kind==="donut"){targets.splice(index,1);setStatus("DONUT IGNORED — RUFUS IS STILL WATCHING");return}
+  if(target.kind==="donut"){setStatus("DONUT ALERT — RUFUS HAS HIS EYE ON IT");return}
   targets.splice(index,1);score+=combo;combo=Math.min(6,combo+1);if(scoreEl)scoreEl.textContent=score;if(comboEl)comboEl.textContent="COMBO ×"+combo;setStatus(combo>=4?"PETER'S BEEN SENT CIRCLING!":"NICE SHOT — KEEP PETER OFF ERIC")
  }
  window.startEarlyBirdsGame=()=>{startRound();return false};

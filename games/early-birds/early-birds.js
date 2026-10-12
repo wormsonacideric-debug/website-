@@ -23,14 +23,24 @@
     clearBirds(){this.birds.forEach(b=>b.destroy());this.birds=[];}
   }
   function launch(){
-    if(starting)return;starting=true;
-    if(!window.Phaser||!window.WOA?.Game){starting=false;message("GAME ENGINE DIDN’T LOAD","The game library could not load. Check your connection and refresh.");setStatus("ENGINE NOT AVAILABLE");return;}
+    if(starting)return;
+    if(!window.Phaser||!window.WOA?.Game){message("GAME ENGINE DIDN’T LOAD","The game library could not load. Check your connection and refresh.");setStatus("ENGINE NOT AVAILABLE");return;}
+    starting=true;
+    start.disabled=true;start.textContent="LOADING GAME…";
     try{
-      if(!game){game=window.WOA.Game.boot({parent:"early-birds-canvas",width:960,height:540,background:"#11160e",scene:EarlyBirds});}
-      const begin=()=>{const scene=game.scene.getScene("EarlyBirds");if(scene&&sceneReady){scene.startRound();starting=false;}else{starting=false;message("GAME IS STARTING","Please tap Start Game again in a moment.");}};
-      if(sceneReady)begin();else{const started=()=>{game.events.off("ready",started);begin();};game.events.once("ready",started);setTimeout(()=>{if(starting){starting=false;message("GAME DIDN’T START","The game engine took too long to start. Refresh and try again.");}},5000);}
-    }catch(e){starting=false;message("GAME ERROR","The game could not start. Refresh and try again.");setStatus("STARTUP ERROR");}
+      if(!game){
+        game=window.WOA.Game.boot({parent:"early-birds-canvas",width:960,height:540,background:"#11160e",scene:EarlyBirds});
+        game.events.once("ready",()=>{sceneReady=true;beginRound();});
+        setTimeout(()=>{if(starting&&!sceneReady){starting=false;start.disabled=false;start.textContent="TRY AGAIN →";message("GAME DIDN’T START","The game engine didn't finish loading. Check your connection and tap Try Again.");setStatus("STARTUP TIMEOUT");}},7000);
+      }else beginRound();
+    }catch(e){starting=false;start.disabled=false;start.textContent="TRY AGAIN →";message("GAME ERROR","The game couldn't start. Refresh and try again.");setStatus("STARTUP ERROR");}
+  }
+  function beginRound(){
+    const scene=game&&game.scene.getScene("EarlyBirds");
+    if(!scene||!scene.sys.isActive()){starting=false;start.disabled=false;start.textContent="TRY AGAIN →";message("GAME IS STILL LOADING","Tap Try Again in a moment.");return;}
+    sceneReady=true;starting=false;start.disabled=false;scene.startRound();
   }
   start.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();launch();});
+  start.addEventListener("pointerup",e=>{if(e.pointerType==="touch"){e.preventDefault();launch();}});
   if(!window.Phaser||!window.WOA?.Game)setStatus("GAME ENGINE LOADING");
 })();

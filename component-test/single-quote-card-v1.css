@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Kalam:wght@400;700&family=Bangers&display=swap');
+:root{color-scheme:dark;--acid:#c9ff3d;--paper-ink:#30251a;--page:#07100d}
+*{box-sizing:border-box}
+body{margin:0;background:var(--page);color:#f5edcf;font-family:Kalam,cursive}
+.page{width:min(100% - 32px,980px);margin:28px auto 64px}
+.eyebrow{color:var(--acid);font:18px Bangers,sans-serif;letter-spacing:.08em}
+h1{font:clamp(32px,6vw,52px) Bangers,sans-serif;margin:.2em 0}
+.intro{font-size:18px;max-width:700px;line-height:1.45}
+.test-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;margin-top:30px}
+.test-case{min-width:0}
+.test-case h2{font:22px Bangers,sans-serif;color:var(--acid)}
+/* Nine-slice: keep the outer 20% of the illustration at the corners and edges;
+   the centre can expand as quote content changes. */
+.quote-card{position:relative;isolation:isolate;margin:18px auto;padding:clamp(34px,5vw,54px);width:100%;max-width:440px;min-height:230px;color:var(--paper-ink);display:flex;flex-direction:column;justify-content:center;filter:drop-shadow(5px 8px 2px #0008);font-family:Kalam,cursive;font-size:clamp(18px,2.5vw,24px);line-height:1.28;border-style:solid;border-width:44px;border-image-slice:20% fill;border-image-repeat:stretch;transform:rotate(-1.5deg)}
+.quote-card p{margin:0}
+.quote-card cite{display:block;margin-top:10px;text-align:right;font-style:normal}
+.quote-card--sticky{border-image-source:url('../assets/sticky-quote-paper-layered-500w.webp')}
+.quote-card--torn{border-image-source:url('../assets/torn-quote-paper-500w.webp');transform:rotate(1deg)}
+.test-case code{display:inline-block;color:#d9d9d9;background:#17211c;padding:6px 9px;border-radius:5px;font-size:12px}
+.test-case--long{grid-column:1/-1}
+.test-case--long .quote-card{max-width:620px;min-height:200px}
+.note{margin-top:40px;color:#a7b1a9;font:14px sans-serif}
+@media(max-width:640px){.page{width:calc(100% - 24px);margin-top:18px}.test-grid{grid-template-columns:1fr;gap:14px}.quote-card{max-width:100%;border-width:36px;padding:28px 25px;font-size:20px;min-height:190px}.test-case--long{grid-column:auto}}

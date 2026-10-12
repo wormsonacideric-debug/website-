@@ -322,53 +322,44 @@ header.site-nav > a.brand > img { display: block; width: 100% !important; max-wi
 }
 
 
-/* COMMUNITY PARCHMENT PANELS — reusable large-paper treatment.
-   Applied to community cards and the horizon tiles; content remains normal HTML. */
+/* COMMUNITY PARCHMENT PANELS — render the complete parchment artwork.
+   Use the full transparent paper image instead of nine-slicing it; the latter
+   was flattening the visible edge detail on mobile. */
 .community-card,
 .horizon > div > span {
   box-sizing: border-box;
-  border: 24px solid transparent;
-  border-image-source: url("./assets/parchment-1000w-transparent.webp");
-  border-image-slice: 18% fill;
-  border-image-repeat: stretch;
-  background: transparent;
+  border: 0;
+  background-color: transparent;
+  background-image: url("./assets/parchment-1000w-transparent.webp");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 100% 100%;
   color: #292218;
   filter: drop-shadow(4px 6px 2px rgba(0,0,0,.32));
 }
 .community-card {
   min-width: 0;
-  padding: 14px 14px 18px;
+  padding: 38px 38px 42px;
 }
-.community-card h3 {
-  color: #292218;
-}
+.community-card h3 { color: #292218; }
 .community-card p,
-.community-card a:not(.button) {
-  color: #292218;
-}
-.community-card .button {
-  display: inline-block;
-}
+.community-card a:not(.button) { color: #292218; }
+.community-card .button { display: inline-block; }
 .horizon > div > span {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   gap: 8px;
-  min-height: 105px;
-  padding: 8px 6px;
+  min-height: 130px;
+  padding: 24px 20px;
   text-align: center;
 }
-.horizon > div > span b {
-  color: #292218;
-}
+.horizon > div > span b { color: #292218; }
 @media (max-width: 800px) {
-  .community-card {
-    border-width: 22px;
-    padding: 10px 8px 12px;
-  }
+  .community-card { padding: 30px 26px 34px; }
   .horizon > div > span {
-    border-width: 18px;
-    min-height: 95px;
+    min-height: 115px;
+    padding: 20px 14px;
   }
 }

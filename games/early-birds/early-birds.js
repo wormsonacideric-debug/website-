@@ -1,28 +1,36 @@
-/* Early Birds is intentionally self-contained. It does not load on the main WOA page. */
+/* Early Birds runs only on its own page. */
 (()=> {
-  const host=document.getElementById("early-birds-canvas");
-  const overlay=document.getElementById("game-overlay");
-  const start=document.getElementById("start-game");
+  const host=document.getElementById("early-birds-canvas"),overlay=document.getElementById("game-overlay"),start=document.getElementById("start-game");
   const scoreEl=document.getElementById("score"),timeEl=document.getElementById("time"),comboEl=document.getElementById("combo"),bestEl=document.getElementById("best"),statusEl=document.getElementById("status");
   if(!host||!overlay||!start)return;
   const setStatus=t=>{if(statusEl)statusEl.textContent=t};
+  const message=(title,body)=>{const h=overlay.querySelector("h2"),p=overlay.querySelector("p:not(.eyebrow)");if(h)h.textContent=title;if(p)p.textContent=body;overlay.style.display="grid";};
   const fmt=ms=>{let s=Math.floor(ms/1000),m=Math.floor(s/60);s%=60;return String(m).padStart(2,"0")+":"+String(s).padStart(2,"0")};
   let best=0;try{best=Number(localStorage.getItem("woaEarlyBirdsBest")||0)}catch(e){}if(bestEl)bestEl.textContent="BEST "+best;
-  if(!window.Phaser||!window.WOA?.Game){start.addEventListener("click",()=>{overlay.style.display="grid";overlay.querySelector("h2").textContent="GAME ENGINE DIDN’T LOAD";overlay.querySelector("p:not(.eyebrow)").textContent="Check your connection, refresh, and try again.";});return;}
+  let game=null,sceneReady=false,starting=false;
   class EarlyBirds extends Phaser.Scene{
     constructor(){super("EarlyBirds");this.running=false;this.score=0;this.combo=1;this.birds=[];this.nextSpawn=0;this.difficulty=0}
     preload(){this.load.image("yard","../../assets/Highscrapparal.png");this.load.image("eric","../../assets/eric.webp");this.load.image("rufus","../../assets/rufus-watch.svg");this.load.image("rufusAttack","../../assets/rufus-attack.svg")}
-    create(){this.add.image(480,270,"yard").setDisplaySize(960,540);this.eric=this.add.image(315,390,"eric").setScale(.34);this.rufus=this.add.image(760,430,"rufus").setScale(.34);this.rufusAttack=this.add.image(760,430,"rufusAttack").setScale(.34).setVisible(false);this.input.on("pointerdown",p=>this.catchAt(p.x,p.y));setStatus("RUFUS IS WATCHING");}
-    startRound(){this.clearBirds();this.running=true;this.score=0;this.combo=1;this.difficulty=0;this.startedAt=performance.now();this.nextSpawn=0;this.spawnBird(true);if(scoreEl)scoreEl.textContent="0";if(comboEl)comboEl.textContent="COMBO ×1";if(timeEl)timeEl.textContent="00:00";overlay.style.display="none";setStatus("RUFUS IS WATCHING");this.rufus.setVisible(true);this.rufusAttack.setVisible(false);}
+    create(){this.add.image(480,270,"yard").setDisplaySize(960,540);this.eric=this.add.image(315,390,"eric").setScale(.34);this.rufus=this.add.image(760,430,"rufus").setScale(.34);this.rufusAttack=this.add.image(760,430,"rufusAttack").setScale(.34).setVisible(false);this.input.on("pointerdown",p=>this.catchAt(p.x,p.y));sceneReady=true;setStatus("RUFUS IS WATCHING");}
+    startRound(){this.clearBirds();this.running=true;this.score=0;this.combo=1;this.difficulty=0;this.startedAt=performance.now();this.nextSpawn=0;this.spawnBird(true);if(scoreEl)scoreEl.textContent="0";if(comboEl)comboEl.textContent="COMBO ×1";if(timeEl)timeEl.textContent="00:00";overlay.style.display="none";start.textContent="START GAME →";setStatus("RUFUS IS WATCHING");this.rufus.setVisible(true);this.rufusAttack.setVisible(false);}
     update(time,delta){if(!this.running)return;const elapsed=(performance.now()-this.startedAt)/1000;this.difficulty=Math.min(1,elapsed/90);if(timeEl)timeEl.textContent=fmt(performance.now()-this.startedAt);if(time>=this.nextSpawn){this.spawnBird();this.nextSpawn=time+Math.max(1050,1900-this.difficulty*650);}for(const b of this.birds.slice()){if(!b.active)continue;b.y+=b.speed*delta/1000;b.rotation=Math.sin((time+b.seed)/350)*.06;if(b.y>555)this.missBird(b);}}
     spawnBird(first=false){if(!this.running)return;const eagle=Math.random()<(.08+this.difficulty*.10),g=this.add.graphics(),x=90+Math.random()*780;g.x=x;g.y=first?95:-50;g.speed=105+this.difficulty*45+Math.random()*12;g.seed=Math.random()*9999;g.value=eagle?5:1;g.eagle=eagle;g.setInteractive(new Phaser.Geom.Circle(0,0,42),Phaser.Geom.Circle.Contains);g.caught=false;this.drawBird(g,eagle);this.birds.push(g);}
     drawBird(g,eagle){g.clear();g.fillStyle(eagle?0x232820:0x46545c,1);g.beginPath();g.moveTo(-45,8);g.quadraticCurveTo(-22,-27,4,-8);g.quadraticCurveTo(18,-38,48,-26);g.quadraticCurveTo(25,-4,10,2);g.quadraticCurveTo(33,12,47,31);g.quadraticCurveTo(18,27,0,14);g.quadraticCurveTo(-22,33,-44,30);g.quadraticCurveTo(-26,17,-18,7);g.quadraticCurveTo(-31,14,-45,8);g.closePath();g.fillPath();g.fillStyle(0x171510,1);g.fillTriangle(43,-25,66,-29,49,-10);g.fillStyle(0xf6edcf,1);g.fillCircle(31,-17,4);g.fillStyle(0x171510,1);g.fillCircle(32,-17,1.7);if(eagle){g.lineStyle(4,0xffad22,1);g.strokeCircle(31,-17,6);}}
     catchAt(x,y){if(!this.running)return;const hit=this.birds.find(b=>b.active&&Phaser.Math.Distance.Between(x,y,b.x,b.y)<52);if(hit)this.catchBird(hit);}
     catchBird(b){if(!b.active||b.caught||!this.running)return;b.caught=true;this.score+=b.value*this.combo;this.combo=Math.min(6,this.combo+1);if(scoreEl)scoreEl.textContent=this.score;if(comboEl)comboEl.textContent="COMBO ×"+this.combo;setStatus(b.eagle?"RUFUS HAS SPOTTED THE EAGLE":"RUFUS IS GOING FOR IT");this.rufus.setVisible(false);this.rufusAttack.setVisible(true);this.tweens.add({targets:this.rufusAttack,x:b.x,y:b.y,duration:320,ease:"Cubic.easeOut",onComplete:()=>{if(!b.active)return;this.tweens.add({targets:b,scale:.05,alpha:0,duration:130,onComplete:()=>b.destroy()});setStatus("CHOMP. NICE ONE, RUFUS.");this.time.delayedCall(180,()=>{if(this.running){this.rufusAttack.x=760;this.rufusAttack.y=430;this.rufusAttack.setVisible(false);this.rufus.setVisible(true);}});}});}
     missBird(b){if(!b.active)return;b.destroy();this.combo=1;if(comboEl)comboEl.textContent="COMBO ×1";setStatus("TOO CLOSE...");this.tweens.add({targets:this.eric,angle:{from:-4,to:4},duration:70,yoyo:true,repeat:3});this.endRound();}
-    endRound(){if(!this.running)return;this.running=false;this.clearBirds();const elapsed=performance.now()-this.startedAt;if(timeEl)timeEl.textContent=fmt(elapsed);const newBest=this.score>best;if(newBest){best=this.score;try{localStorage.setItem("woaEarlyBirdsBest",String(best))}catch(e){}if(bestEl)bestEl.textContent="BEST "+best;}overlay.style.display="grid";overlay.querySelector("h2").textContent="ERIC SURVIVED";overlay.querySelector("p:not(.eyebrow)").innerHTML="Score: <b>"+this.score+"</b><br>"+(newBest?"New best.":"Rufus remains convinced this was a team effort.");start.textContent="PLAY AGAIN →";setStatus("SAFE... FOR NOW");this.rufus.setVisible(true);this.rufusAttack.setVisible(false);this.rufus.x=760;this.rufus.y=430;}
+    endRound(){if(!this.running)return;this.running=false;this.clearBirds();if(timeEl)timeEl.textContent=fmt(performance.now()-this.startedAt);const newBest=this.score>best;if(newBest){best=this.score;try{localStorage.setItem("woaEarlyBirdsBest",String(best))}catch(e){}if(bestEl)bestEl.textContent="BEST "+best;}overlay.style.display="grid";overlay.querySelector("h2").textContent="ERIC SURVIVED";overlay.querySelector("p:not(.eyebrow)").innerHTML="Score: <b>"+this.score+"</b><br>"+(newBest?"New best.":"Rufus remains convinced this was a team effort.");start.textContent="PLAY AGAIN →";setStatus("SAFE... FOR NOW");this.rufus.setVisible(true);this.rufusAttack.setVisible(false);this.rufus.x=760;this.rufus.y=430;}
     clearBirds(){this.birds.forEach(b=>b.destroy());this.birds=[];}
   }
-  const game=window.WOA.Game.boot({parent:"early-birds-canvas",width:960,height:540,background:"#11160e",scene:EarlyBirds});
-  start.addEventListener("click",()=>{const scene=game.scene.getScene("EarlyBirds");if(scene)scene.startRound();});
+  function launch(){
+    if(starting)return;starting=true;
+    if(!window.Phaser||!window.WOA?.Game){starting=false;message("GAME ENGINE DIDN’T LOAD","The game library could not load. Check your connection and refresh.");setStatus("ENGINE NOT AVAILABLE");return;}
+    try{
+      if(!game){game=window.WOA.Game.boot({parent:"early-birds-canvas",width:960,height:540,background:"#11160e",scene:EarlyBirds});}
+      const begin=()=>{const scene=game.scene.getScene("EarlyBirds");if(scene&&sceneReady){scene.startRound();starting=false;}else{starting=false;message("GAME IS STARTING","Please tap Start Game again in a moment.");}};
+      if(sceneReady)begin();else{const started=()=>{game.events.off("ready",started);begin();};game.events.once("ready",started);setTimeout(()=>{if(starting){starting=false;message("GAME DIDN’T START","The game engine took too long to start. Refresh and try again.");}},5000);}
+    }catch(e){starting=false;message("GAME ERROR","The game could not start. Refresh and try again.");setStatus("STARTUP ERROR");}
+  }
+  start.addEventListener("click",e=>{e.preventDefault();e.stopPropagation();launch();});
+  if(!window.Phaser||!window.WOA?.Game)setStatus("GAME ENGINE LOADING");
 })();

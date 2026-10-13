@@ -9,7 +9,7 @@
  let best=0;try{best=Number(localStorage.getItem("woaEarlyBirdsBest")||0)}catch(e){}if(bestEl)bestEl.textContent="BEST "+best;
  const canvas=document.createElement("canvas");canvas.width=960;canvas.height=540;canvas.setAttribute("aria-label","Tap a bird or donut to send Rufus after it. Eric eats donuts that reach the ground.");canvas.style.cssText="display:block;width:100%;height:100%;touch-action:manipulation";
  host.replaceChildren(canvas);const ctx=canvas.getContext("2d");if(!ctx){msg("CANVAS NOT AVAILABLE","Try refreshing or another browser.");return}
- const sources={yard:"../../assets/Highscrapparal.png",eric:"../../assets/eric.webp",peterWatch:"./peter-watching.png",peterLaunch:"./peter-launching.png",peterSwoop:"./peter-swooping.png",peterBank:"./peter-banking.png",rufusIdle:"./rufus-ground-idle.png",rufusLeap:"./rufus-leaping.png",rufusAttack:"./rufus-midair-attack.png",rufusDonut:"./rufus-donut-bite.png",rufusClogged:"./rufus-icing-clogged.png",donut:"./donut-game.png"};
+ const sources={yard:"../../assets/high-scraparral-canonical.jpg",eric:"../../assets/eric.webp",peterWatch:"./peter-watching.png",peterLaunch:"./peter-launching.png",peterSwoop:"./peter-swooping.png",peterBank:"./peter-banking.png",rufusIdle:"./rufus-ground-idle.png",rufusLeap:"./rufus-leaping.png",rufusAttack:"./rufus-midair-attack.png",rufusDonut:"./rufus-donut-bite.png",rufusClogged:"./rufus-icing-clogged.png",donut:"./donut-game.png"};
  const assets={};let running=false;
  Object.entries(sources).forEach(([k,src])=>{const im=new Image();im.onload=()=>{if(!running)paintIdle()};im.onerror=()=>setStatus("ARTWORK FAILED TO LOAD: "+k.toUpperCase());im.src=src;assets[k]=im});
  let score=0,combo=1,started=0,last=0,nextSpawn=0,difficulty=0,targets=[],raf=0,nextId=1;

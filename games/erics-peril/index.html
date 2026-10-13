@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#090b09">
+  <meta name="description" content="Play Eric's Peril, a WORMS ON ACID arcade game. Share your score on X and challenge your friends.">
+  <title>Eric's Peril — WORMS ON ACID</title>
+  <link rel="stylesheet" href="../early-birds/game.css?v=20261012-6">
+  <style>
+    .game-shell{max-width:1080px}
+    .peril-frame{border:2px solid #55523d;border-radius:12px;overflow:hidden;background:#120c1f;box-shadow:0 18px 40px #0008}
+    .peril-frame iframe{display:block;width:100%;height:min(68vh,760px);min-height:430px;border:0;background:#120c1f}
+    .share-panel{margin-top:20px;padding:clamp(18px,4vw,28px);background:#e8c98e;color:#211d14;border:3px solid #33281a;box-shadow:6px 6px 0 #0008}
+    .share-panel .eyebrow{color:#6d3d13}
+    .share-panel h2{margin:0 0 8px;font-size:clamp(1.5rem,4vw,2.2rem);font-weight:1000;font-style:italic;line-height:1}
+    .share-panel p{line-height:1.5;margin:8px 0 14px}
+    .score-row{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+    .score-row input{min-width:0;width:140px;max-width:100%;padding:12px;border:2px solid #33281a;border-radius:0;background:#fff8e8;color:#211d14;font:inherit;font-weight:850}
+    .score-row button{border:3px solid #1c1a14;background:#ffc928;color:#17150f;font-weight:950;font-size:1rem;padding:12px 18px;box-shadow:4px 4px 0 #3a2b15;cursor:pointer}
+    .score-row button:active{transform:translate(2px,2px);box-shadow:2px 2px 0 #3a2b15}
+    .share-note{font-size:.82rem;color:#4b3d28}
+    @media(max-width:520px){.peril-frame iframe{height:64vh;min-height:390px}.score-row input{flex:1}.score-row button{width:100%}}
+  </style>
+</head>
+<body>
+  <header class="game-header">
+    <a class="back-link" href="../../index.html#games">← BACK TO WORMS ON ACID</a>
+    <span class="game-mark">WORMS ON ACID</span>
+  </header>
+  <main class="game-shell">
+    <p class="eyebrow">A FLIGHT THROUGH TROUBLE</p>
+    <h1>ERIC'S PERIL</h1>
+    <p class="intro">Eric is airborne and everything wants to ruin his day. Play for the highest score you can manage — then put it on X and challenge your friends.</p>
+    <div class="peril-frame">
+      <iframe src="../erics-peril.html?v=20261013-woa-page" title="Eric's Peril game" allow="fullscreen" loading="eager"></iframe>
+    </div>
+    <section class="share-panel" aria-labelledby="share-title">
+      <p class="eyebrow">BRAGGING RIGHTS</p>
+      <h2 id="share-title">HOW FAR DID ERIC GET?</h2>
+      <p>When your run ends, enter the score shown in the game and share it on X. Your post will include a link so people can try to beat you.</p>
+      <form id="share-form">
+        <div class="score-row">
+          <label for="score" class="sr-only" style="position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0">Your score</label>
+          <input id="score" name="score" type="number" inputmode="numeric" min="0" step="1" placeholder="Your score" required>
+          <button type="submit">POST SCORE TO X ↗</button>
+        </div>
+      </form>
+      <p class="share-note">This opens X with your post pre-filled. You can edit it before publishing.</p>
+    </section>
+    <p class="mobile-tip" style="margin-top:16px">Playing on a phone? Use landscape if you prefer a wider view.</p>
+  </main>
+  <footer><a href="../../index.html#games">← Back to the games</a><span>A story being discovered as it happens.</span></footer>
+  <script>
+    document.getElementById('share-form').addEventListener('submit', function (event) {
+      event.preventDefault();
+      const score = document.getElementById('score').value;
+      if (!/^\d+$/.test(score)) return;
+      const gameUrl = window.location.href.split('?')[0];
+      const text = "I scored " + score + " in Eric's Peril on WORMS ON ACID! Can you beat me?";
+      const intent = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(gameUrl);
+      window.open(intent, "_blank", "noopener,noreferrer");
+    });
+  </script>
+</body>
+</html>

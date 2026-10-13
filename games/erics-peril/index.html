@@ -85,7 +85,7 @@
     document.getElementById('share-form').addEventListener('submit', async function (event) {
       event.preventDefault();
       const score = scoreInput.value;
-      if (!/^\\d+$/.test(score)) return;
+      if (!/^\d+$/.test(score)) return;
       const gameUrl = window.location.href.split('?')[0];
       const text = "I scored " + score + " in Peter's Peril on WORMS ON ACID! Can you beat me?";
       if (finalImage && navigator.share && navigator.canShare && window.File) {

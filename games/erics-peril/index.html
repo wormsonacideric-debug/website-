@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#090b09">
-  <meta name="description" content="Play Eric's Peril, a WORMS ON ACID arcade game. Share your score on X and challenge your friends.">
-  <title>Eric's Peril — WORMS ON ACID</title>
+  <meta name="description" content="Play Peter's Peril, a WORMS ON ACID arcade game. Share your score on X and challenge your friends.">
+  <title>Peter's Peril — WORMS ON ACID</title>
   <link rel="stylesheet" href="../early-birds/game.css?v=20261012-6">
   <style>
     .game-shell{max-width:1080px}
@@ -30,14 +30,14 @@
   </header>
   <main class="game-shell">
     <p class="eyebrow">A FLIGHT THROUGH TROUBLE</p>
-    <h1>ERIC'S PERIL</h1>
-    <p class="intro">Eric is airborne and everything wants to ruin his day. Play for the highest score you can manage — then put it on X and challenge your friends.</p>
+    <h1>PETER'S PERIL</h1>
+    <p class="intro">Peter is on the attack. Help Eric survive the swoops, chase your best score, then challenge your friends on X.</p>
     <div class="peril-frame">
-      <iframe src="../erics-peril.html?v=20261013-woa-page" title="Eric's Peril game" allow="fullscreen" loading="eager"></iframe>
+      <iframe src="../erics-peril.html?v=20261013-woa-page" title="Peter's Peril game" allow="fullscreen" loading="eager"></iframe>
     </div>
     <section class="share-panel" aria-labelledby="share-title">
       <p class="eyebrow">BRAGGING RIGHTS</p>
-      <h2 id="share-title">HOW FAR DID ERIC GET?</h2>
+      <h2 id="share-title">HOW LONG DID YOU SURVIVE?</h2>
       <p>When your run ends, enter the score shown in the game and share it on X. Your post will include a link so people can try to beat you.</p>
       <form id="share-form">
         <div class="score-row">
@@ -57,7 +57,7 @@
       const score = document.getElementById('score').value;
       if (!/^\d+$/.test(score)) return;
       const gameUrl = window.location.href.split('?')[0];
-      const text = "I scored " + score + " in Eric's Peril on WORMS ON ACID! Can you beat me?";
+      const text = "I scored " + score + " in Peter's Peril on WORMS ON ACID! Can you beat me?";
       const intent = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(gameUrl);
       window.open(intent, "_blank", "noopener,noreferrer");
     });

@@ -98,7 +98,10 @@
             return;
           }
         } catch (err) {
-          if (err && err.name === 'AbortError') return;
+          if (err && err.name === 'AbortError') {
+            document.getElementById('result-help').textContent = 'Share cancelled. You can try again, or download the screenshot below.';
+            return;
+          }
         }
       }
       if (finalImage) {
@@ -110,7 +113,9 @@
         a.remove();
       }
       const intent = "https://twitter.com/intent/tweet?text=" + encodeURIComponent(text) + "&url=" + encodeURIComponent(gameUrl);
-      window.open(intent, "_blank", "noopener,noreferrer");
+      document.getElementById('result-help').textContent = 'Screenshot download started. Opening X with your score — attach the downloaded image before posting.';
+      // Same-tab navigation avoids mobile popup blockers after asynchronous share attempts.
+      window.location.href = intent;
     });
   </script>
 </body>

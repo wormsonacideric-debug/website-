@@ -16,10 +16,23 @@
     .about-hero p{font-size:clamp(22px,3vw,30px);max-width:690px;margin:0}
     .about-intro{font-size:clamp(22px,3vw,28px);line-height:1.3;max-width:820px;margin:30px auto}
     .about-stack{display:grid;gap:24px;margin-top:26px}
-    .about-sheet{padding:clamp(26px,5vw,52px);background:transparent;color:#211c14;border:28px solid transparent;border-image-source:url("./assets/parchment-1000w-transparent.webp");border-image-slice:65 fill;border-image-width:28px;border-image-outset:0;border-image-repeat:stretch;filter:drop-shadow(0 5px 5px #0008)}
-    .about-sheet h2{font-size:clamp(32px,5vw,48px);margin:0 0 18px}
-    .about-sheet h3{font-size:clamp(24px,3vw,30px);margin:24px 0 10px}
-    .about-sheet p,.about-sheet li{font-size:clamp(19px,2.3vw,23px);line-height:1.38}
+    .about-sheet{padding:clamp(24px,4vw,40px);background:#111b16;color:var(--cream);border:1px solid #35463b;border-left:4px solid var(--acid);box-shadow:0 8px 24px #0003}
+    .about-sheet h2{font-size:clamp(28px,4.5vw,42px);margin:0 0 16px}
+    .about-sheet h3{font-size:clamp(22px,3vw,28px);margin:24px 0 10px}
+    .about-sheet p,.about-sheet li{font-size:clamp(17px,2vw,20px);line-height:1.55}
+    .sketchbook{margin:34px 0 38px;padding:clamp(18px,4vw,32px) 0;border-top:1px solid #344238;border-bottom:1px solid #344238}
+    .sketchbook-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:8px}
+    .sketchbook h2{font-size:clamp(30px,5vw,44px);margin:0}
+    .sketchbook-intro{max-width:680px;color:#c8cec7;line-height:1.55;margin:8px 0 20px}
+    .sketchbook-controls{display:flex;gap:8px;flex-shrink:0}
+    .sketchbook-controls button{width:42px;height:42px;border:1px solid #536456;background:#111b16;color:var(--cream);font-size:22px;cursor:pointer}
+    .sketchbook-track{display:grid;grid-auto-columns:minmax(76%,1fr);grid-auto-flow:column;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:2px 2px 14px;scrollbar-color:var(--acid) #18231c}
+    .sketchbook-item{scroll-snap-align:start;min-width:0;background:#0b100d;border:1px solid #35463b}
+    .sketchbook-item img{display:block;width:100%;height:290px;object-fit:contain;background:#f4f0e8}
+    .sketchbook-caption{padding:14px 16px 17px}
+    .sketchbook-caption strong{display:block;font-size:19px;margin-bottom:5px;color:var(--acid)}
+    .sketchbook-caption span{display:block;font-size:15px;line-height:1.45;color:#d1d8d0}
+    .sketchbook-footnote{font-size:13px;color:#aab5ab;margin-top:8px}
     .about-sheet p{margin:0 0 16px}
     .about-sheet ul{padding-left:24px;margin:8px 0 20px}
     .about-note{margin-top:22px;padding:20px 22px;background:#111b16;color:var(--cream);border-left:5px solid var(--acid)}
@@ -33,7 +46,8 @@
     .about-actions .button--quiet{background:var(--paper);color:#211c14}
     .about-footer-links{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;border-top:1px solid var(--line);padding-top:20px;margin-top:28px;font-family:Bangers;font-size:21px}
     .about-footer-links a:hover{color:var(--orange)}
-    @media(max-width:650px){.about-hero{min-height:300px}.about-columns{grid-template-columns:1fr}.about-sheet{border-width:22px;border-image-width:22px;padding:22px}.about-footer-links{font-size:19px}}
+    @media(min-width:700px){.sketchbook-track{grid-auto-columns:minmax(340px,46%)}}
+    @media(max-width:650px){.about-hero{min-height:300px}.about-columns{grid-template-columns:1fr}.about-sheet{padding:22px}.about-footer-links{font-size:19px}.sketchbook-heading{align-items:center}.sketchbook-item img{height:250px}}
   </style>
 </head>
 <body>
@@ -63,6 +77,47 @@
   </section>
 
   <p class="about-intro">WORMS ON ACID is an original illustrated universe, an unfolding story and an experiment in what happens when AI characters are given more than a single line to say.</p>
+
+  <section class="sketchbook" aria-labelledby="sketchbook-title">
+    <div class="sketchbook-heading">
+      <div>
+        <span class="eyebrow">THE ORIGINAL ARTWORK</span>
+        <h2 id="sketchbook-title">FROM THE SKETCHBOOK</h2>
+      </div>
+      <div class="sketchbook-controls" aria-label="Sketchbook carousel controls">
+        <button type="button" class="sketchbook-prev" aria-label="Previous artwork">‹</button>
+        <button type="button" class="sketchbook-next" aria-label="Next artwork">›</button>
+      </div>
+    </div>
+    <p class="sketchbook-intro">Before the stories, games and AI experiment, there were drawings. These glimpses of the characters and their world show the creative roots of WORMS ON ACID, from early ideas to artwork that helped bring the cast to life.</p>
+    <div class="sketchbook-track" tabindex="0" aria-label="Original WORMS ON ACID artwork. Swipe or use the arrow buttons to browse.">
+      <article class="sketchbook-item">
+        <img src="./assets/tappy.png" alt="Tappy the Tapeworm original character artwork" loading="lazy">
+        <div class="sketchbook-caption"><strong>Tappy the Tapeworm</strong><span>A character with a look and attitude all of his own.</span></div>
+      </article>
+      <article class="sketchbook-item">
+        <img src="./assets/tappy.webp" alt="Colour artwork of Tappy the Tapeworm" loading="lazy">
+        <div class="sketchbook-caption"><strong>From linework to colour</strong><span>The same character takes on a new life in colour.</span></div>
+      </article>
+      <article class="sketchbook-item">
+        <img src="./assets/nigel.png" alt="Nigel character illustration" loading="lazy">
+        <div class="sketchbook-caption"><strong>Nigel</strong><span>One of the characters waiting beyond Eric's opening chapter.</span></div>
+      </article>
+      <article class="sketchbook-item">
+        <img src="./assets/manni.png" alt="Manni character illustration" loading="lazy">
+        <div class="sketchbook-caption"><strong>Manni</strong><span>Another face from the wider WORMS ON ACID cast.</span></div>
+      </article>
+      <article class="sketchbook-item">
+        <img src="./assets/brian.png" alt="Brian character illustration" loading="lazy">
+        <div class="sketchbook-caption"><strong>Brian</strong><span>The world has always been bigger than one worm.</span></div>
+      </article>
+      <article class="sketchbook-item">
+        <img src="./assets/high-scraparral-canonical.jpg" alt="The High Scraparral, a location in the WORMS ON ACID world" loading="lazy">
+        <div class="sketchbook-caption"><strong>A world to explore</strong><span>The characters belong to a larger world of places, encounters and stories.</span></div>
+      </article>
+    </div>
+    <p class="sketchbook-footnote">The archive and current canonical artwork serve different purposes. Historical drawings are preserved as part of the project's creative history; new scenes follow the established character references.</p>
+  </section>
 
   <div class="about-stack">
     <section class="about-sheet">
@@ -139,6 +194,20 @@
   <small>A story being discovered as it happens.</small>
   <p><a href="./about.html">ABOUT WORMS ON ACID</a> · <a href="https://x.com/wormsonacid">@wormsonacid</a> · <a href="https://x.com/ericonacid">@ericonacid</a></p>
 </footer>
+<script>
+  (() => {
+    const track = document.querySelector('.sketchbook-track');
+    const previous = document.querySelector('.sketchbook-prev');
+    const next = document.querySelector('.sketchbook-next');
+    if (!track || !previous || !next) return;
+    const step = () => {
+      const item = track.querySelector('.sketchbook-item');
+      return item ? item.getBoundingClientRect().width + 14 : track.clientWidth * 0.8;
+    };
+    previous.addEventListener('click', () => track.scrollBy({left: -step(), behavior: 'smooth'}));
+    next.addEventListener('click', () => track.scrollBy({left: step(), behavior: 'smooth'}));
+  })();
+</script>
 <script src="./script.js?v=v2"></script>
 </body>
 </html>

@@ -33,8 +33,8 @@ const W=80,H=50,S=12,EMPTY=0,PLAYER=1,ROSTER=[
 {name:"Manni",src:"../../assets/manni.png",color:"#b66aa0"},
 {name:"Rufus",src:"../../assets/rufus.png",color:"#4f91a0"},
 {name:"Tappy",src:"../../assets/tappy.png",color:"#b3a04c"},
-{name:"Arthur",src:"../../assets/arthur.png",color:"#8d7caa"},
-{name:"Edwin",src:"../../assets/edwin.png",color:"#c16b53"},
+{name:"Arthur",src:null,color:"#8d7caa"},
+{name:"Edwin",src:null,color:"#c16b53"},
 {name:"Brian",src:"../../assets/brian.png",color:"#6a9b87"}
 ];
 const COLORS=["#789b43","#c17a42","#b56da0","#4c91a2","#b7a047","#8876a9","#c66d53","#659c86"];
@@ -42,10 +42,10 @@ let selected=0,grid,trailGrid,players,active=false,lastTick=0,acc=0,tickMs=105,f
 const dirs={up:{x:0,y:-1},down:{x:0,y:1},left:{x:-1,y:0},right:{x:1,y:0}};
 const idx=(x,y)=>y*W+x,inside=(x,y)=>x>=0&&y>=0&&x<W&&y<H;
 function imgFor(src){const im=new Image();im.src=src;im.onerror=()=>{im.failed=true};return im}
-ROSTER.forEach(c=>c.img=imgFor(c.src));
+ROSTER.forEach(c=>c.img=c.src?imgFor(c.src):null);
 bestEl.textContent=best+"%";
 const rosterEl=document.getElementById("roster");
-ROSTER.forEach((c,i)=>{const b=document.createElement("button");b.className="char";b.type="button";b.setAttribute("aria-pressed",String(i===selected));b.innerHTML='<img alt="" src="'+c.src+'"><span>'+c.name+'</span>';b.addEventListener("click",()=>{if(active)return;selected=i;rosterEl.querySelectorAll("button").forEach((x,j)=>x.setAttribute("aria-pressed",String(i===j)))});rosterEl.appendChild(b)});
+ROSTER.forEach((c,i)=>{const b=document.createElement("button");b.className="char";b.type="button";b.setAttribute("aria-pressed",String(i===selected));b.innerHTML=(c.src?'<img alt="" src="'+c.src+'">' : '<span class="char-fallback">'+c.name[0]+'</span>')+'<span>'+c.name+'</span>';b.addEventListener("click",()=>{if(active)return;selected=i;rosterEl.querySelectorAll("button").forEach((x,j)=>x.setAttribute("aria-pressed",String(i===j)))});rosterEl.appendChild(b)});
 function random(a,b){return Math.floor(Math.random()*(b-a+1))+a}
 function newPlayer(id,x,y,dir,ai){return {id,x,y,dir:{...dir},next:{...dir},ai,alive:true,trail:[],steps:0,excursion:0,turnTimer:random(3,10),color:COLORS[id-1],name:id===1?ROSTER[selected].name:ROSTER[(selected+id-1)%ROSTER.length].name,art:id===1?ROSTER[selected].img:ROSTER[(selected+id-1)%ROSTER.length].img,score:0}}
 function startGame(){

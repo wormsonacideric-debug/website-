@@ -186,4 +186,39 @@ function initGrid(){grid=new Int8Array(W*H);trailGrid=new Int8Array(W*H);draw()}
 initGrid();
 })();
 </script>
-</body></html>
+
+<style>
+.woa-fullscreen-button{display:inline-flex;align-items:center;justify-content:center;gap:6px;margin:8px 0;padding:9px 13px;border:1px solid #82775d;border-radius:6px;background:#29271f;color:#f1e7cf;font:700 12px/1.2 system-ui,sans-serif;letter-spacing:.04em;cursor:pointer}
+.woa-fullscreen-button:focus-visible{outline:2px solid #c6ff3b;outline-offset:2px}
+:fullscreen{background:#090b09!important}
+:fullscreen .peril-frame, :fullscreen.game-frame{width:100vw;height:100dvh;border:0;border-radius:0;box-shadow:none}
+:fullscreen .peril-frame iframe{width:100%;height:100dvh;min-height:0}
+:fullscreen.game-frame #early-birds-canvas{height:100dvh;min-height:0}
+:fullscreen.game-frame #early-birds-canvas canvas{width:100%!important;height:100%!important;max-height:100dvh;object-fit:contain}
+:fullscreen .hud{display:none}
+:fullscreen .overlay{max-height:100dvh}
+@media(orientation:landscape) and (max-height:600px){.woa-fullscreen-button{padding:7px 10px;margin:4px 0}}
+</style>
+<button class="woa-fullscreen-button" id="woa-fullscreen" type="button" aria-label="Play game in full screen">⛶ FULL SCREEN</button>
+<script>
+(()=>{
+ const button=document.getElementById('woa-fullscreen');
+ const target=document.querySelector('.gameframe');
+ if(!button||!target)return;
+ const enter=async()=>{
+   try{
+     if(!document.fullscreenElement){
+       await target.requestFullscreen();
+       if(screen.orientation&&screen.orientation.lock){try{await screen.orientation.lock('landscape')}catch(e){}}
+       button.textContent='⤢ EXIT FULL SCREEN';
+     }else{
+       await document.exitFullscreen();
+     }
+   }catch(e){button.textContent='FULL SCREEN UNAVAILABLE';}
+ };
+ button.addEventListener('click',enter);
+ document.addEventListener('fullscreenchange',()=>{
+   button.textContent=document.fullscreenElement?'⤢ EXIT FULL SCREEN':'⛶ FULL SCREEN';
+ });
+})();
+</script></body></html>

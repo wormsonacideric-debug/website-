@@ -516,3 +516,40 @@ footer small { display:block; text-align:center; }
 
 /* Section heading colour: distressed-banner off-white. */
 .section-title h2, .section-title .eyebrow { color: #f4e6c5; }
+
+
+
+/* CANONICAL CTA BUTTON STYLE — based on the approved WOA yellow button artwork. */
+.home-button,.story-start,.game-card__button,.character-card__button,.story-card__button,.button,.scene-card__link{
+  box-sizing:border-box;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:12px;
+  max-width:100%;
+  padding:10px 20px;
+  color:#21170d !important;
+  background:#ffc629 !important;
+  border:2px solid #80510f !important;
+  border-radius:12px !important;
+  box-shadow:inset 0 1px 0 #ffe68c,0 4px 0 #8b5b19 !important;
+  text-decoration:none !important;
+  font-family:Bangers,"Impact",sans-serif !important;
+  font-size:1.12rem;
+  font-weight:400;
+  line-height:1.1;
+  text-align:center;
+  transition:transform .12s ease,box-shadow .12s ease;
+}
+.home-button:hover,.story-start:hover,.game-card__button:hover,.character-card__button:hover,.story-card__button:hover,.button:hover,.scene-card__link:hover{
+  transform:translateY(-1px);
+  box-shadow:inset 0 1px 0 #ffe68c,0 5px 0 #8b5b19 !important;
+}
+.home-button:active,.story-start:active,.game-card__button:active,.character-card__button:active,.story-card__button:active,.button:active,.scene-card__link:active{
+  transform:translateY(2px);
+  box-shadow:inset 0 1px 0 #ffe68c,0 1px 0 #8b5b19 !important;
+}
+.home-button,.story-start,.game-card__button,.character-card__button,.story-card__button,.button{min-height:44px}
+.scene-card__link{align-self:flex-start;padding:8px 13px;font-size:1rem}
+.game-card__button--soon{cursor:default;background:#d8c9a6 !important;color:#514632 !important;border-color:#8c7b5b !important;box-shadow:inset 0 1px 0 #f1e6cb,0 4px 0 #8c7b5b !important}
+@media(max-width:800px){.home-button,.story-start,.game-card__button,.character-card__button,.story-card__button,.button{padding:10px 16px;font-size:1.05rem}}

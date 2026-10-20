@@ -1,0 +1,38 @@
+name: Extract original artwork archives
+
+on:
+  push:
+    paths:
+      - 'assets/original-artwork/*.zip'
+      - '.github/workflows/extract-original-artwork.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+      - name: Extract artwork archives
+        run: |
+          set -euo pipefail
+          mkdir -p assets/original-artwork/extracted
+          unzip -o assets/original-artwork/woa_reference_images.zip -d assets/original-artwork/extracted/woa_reference_images
+          unzip -o assets/original-artwork/web_optimized_images.zip -d assets/original-artwork/extracted/web_optimized_images
+      - name: Commit extracted files
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/original-artwork/extracted
+          if git diff --cached --quiet; then
+            echo 'No extracted-file changes to commit.'
+            exit 0
+          fi
+          git commit -m 'Extract original artwork archives'
+          git push

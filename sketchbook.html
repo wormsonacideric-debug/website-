@@ -166,11 +166,8 @@
     if (desk) {
       deskImage.src = desk.download_url;
       deskSection.hidden = false;
-      deskButton.addEventListener('click', () => {
-        gallery.push({name:desk.name,url:desk.download_url});
-        showImage(gallery.length - 1);
-        gallery.pop();
-      });
+      gallery.push({name:desk.name,url:desk.download_url});
+      deskButton.addEventListener('click', () => showImage(gallery.length - 1));
     }
   })
   .catch(() => {

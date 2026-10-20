@@ -29,9 +29,7 @@
     .sketchbook-track{display:grid;grid-auto-columns:minmax(76%,1fr);grid-auto-flow:column;gap:14px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-behavior:smooth;padding:2px 2px 14px;scrollbar-color:var(--acid) #18231c}
     .sketchbook-item{scroll-snap-align:start;min-width:0;background:#0b100d;border:1px solid #35463b}
     .sketchbook-item img{display:block;width:100%;height:290px;object-fit:contain;background:#f4f0e8}
-    .sketchbook-caption{padding:14px 16px 17px}
-    .sketchbook-caption strong{display:block;font-size:19px;margin-bottom:5px;color:var(--acid)}
-    .sketchbook-caption span{display:block;font-size:15px;line-height:1.45;color:#d1d8d0}
+    .sketchbook-status{color:#c8cec7;font-size:15px;line-height:1.5;grid-column:1/-1;padding:18px 0}
     .sketchbook-footnote{font-size:13px;color:#aab5ab;margin-top:8px}
     .about-sheet p{margin:0 0 16px}
     .about-sheet ul{padding-left:24px;margin:8px 0 20px}
@@ -91,30 +89,7 @@
     </div>
     <p class="sketchbook-intro">Before the stories, games and AI experiment, there were drawings. These glimpses of the characters and their world show the creative roots of WORMS ON ACID, from early ideas to artwork that helped bring the cast to life.</p>
     <div class="sketchbook-track" tabindex="0" aria-label="Original WORMS ON ACID artwork. Swipe or use the arrow buttons to browse.">
-      <article class="sketchbook-item">
-        <img src="./assets/tappy.png" alt="Tappy the Tapeworm original character artwork" loading="lazy">
-        <div class="sketchbook-caption"><strong>Tappy the Tapeworm</strong><span>A character with a look and attitude all of his own.</span></div>
-      </article>
-      <article class="sketchbook-item">
-        <img src="./assets/tappy.webp" alt="Colour artwork of Tappy the Tapeworm" loading="lazy">
-        <div class="sketchbook-caption"><strong>From linework to colour</strong><span>The same character takes on a new life in colour.</span></div>
-      </article>
-      <article class="sketchbook-item">
-        <img src="./assets/nigel.png" alt="Nigel character illustration" loading="lazy">
-        <div class="sketchbook-caption"><strong>Nigel</strong><span>One of the characters waiting beyond Eric's opening chapter.</span></div>
-      </article>
-      <article class="sketchbook-item">
-        <img src="./assets/manni.png" alt="Manni character illustration" loading="lazy">
-        <div class="sketchbook-caption"><strong>Manni</strong><span>Another face from the wider WORMS ON ACID cast.</span></div>
-      </article>
-      <article class="sketchbook-item">
-        <img src="./assets/brian.png" alt="Brian character illustration" loading="lazy">
-        <div class="sketchbook-caption"><strong>Brian</strong><span>The world has always been bigger than one worm.</span></div>
-      </article>
-      <article class="sketchbook-item">
-        <img src="./assets/high-scraparral-canonical.jpg" alt="The High Scraparral, a location in the WORMS ON ACID world" loading="lazy">
-        <div class="sketchbook-caption"><strong>A world to explore</strong><span>The characters belong to a larger world of places, encounters and stories.</span></div>
-      </article>
+      <p class="sketchbook-status" role="status">Loading original artwork…</p>
     </div>
     <p class="sketchbook-footnote">The archive and current canonical artwork serve different purposes. Historical drawings are preserved as part of the project's creative history; new scenes follow the established character references.</p>
   </section>
@@ -200,12 +175,54 @@
     const previous = document.querySelector('.sketchbook-prev');
     const next = document.querySelector('.sketchbook-next');
     if (!track || !previous || !next) return;
+
     const step = () => {
       const item = track.querySelector('.sketchbook-item');
       return item ? item.getBoundingClientRect().width + 14 : track.clientWidth * 0.8;
     };
     previous.addEventListener('click', () => track.scrollBy({left: -step(), behavior: 'smooth'}));
     next.addEventListener('click', () => track.scrollBy({left: step(), behavior: 'smooth'}));
+
+    // The public artwork folder is the source of truth. Any supported image
+    // added there is picked up automatically; ZIP archives and other files
+    // are ignored. No titles or descriptions are invented.
+    const artworkApi = 'https://api.github.com/repos/wormsonacideric-debug/website-/contents/assets/original-artwork?ref=main';
+    fetch(artworkApi, {headers: {Accept: 'application/vnd.github+json'}})
+      .then(response => {
+        if (!response.ok) throw new Error('Artwork list unavailable');
+        return response.json();
+      })
+      .then(files => {
+        const images = files
+          .filter(file => file.type === 'file' && /\.(avif|gif|jpe?g|png|webp)$/i.test(file.name))
+          .sort((a, b) => a.name.localeCompare(b.name, undefined, {numeric: true}));
+        track.replaceChildren();
+        if (!images.length) {
+          const status = document.createElement('p');
+          status.className = 'sketchbook-status';
+          status.textContent = 'No artwork images found in the archive folder yet.';
+          track.append(status);
+          return;
+        }
+        for (const file of images) {
+          const card = document.createElement('article');
+          card.className = 'sketchbook-item';
+          const img = document.createElement('img');
+          img.src = file.download_url;
+          img.alt = 'Original WORMS ON ACID artwork from the sketchbook';
+          img.loading = 'lazy';
+          img.decoding = 'async';
+          card.append(img);
+          track.append(card);
+        }
+      })
+      .catch(() => {
+        track.replaceChildren();
+        const status = document.createElement('p');
+        status.className = 'sketchbook-status';
+        status.textContent = 'The original artwork could not be loaded right now. Please try again later.';
+        track.append(status);
+      });
   })();
 </script>
 <script src="./script.js?v=v2"></script>

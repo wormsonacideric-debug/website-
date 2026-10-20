@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>The Sketchbook — WORMS ON ACID</title>
+  <meta name="description" content="Explore the original artwork archive behind WORMS ON ACID.">
+  <link rel="stylesheet" href="./styles.css?v=20261015-about-2">
+  <style>
+    .sketchbook-page{width:min(calc(100% - 32px),1180px);margin:24px auto 64px}
+    .sketchbook-hero{padding:clamp(24px,5vw,52px);background:#111b16;border:1px solid #35463b;border-left:5px solid var(--acid);margin:20px 0 28px}
+    .sketchbook-hero h1{font-size:clamp(44px,8vw,82px);line-height:.98;margin:12px 0 18px;color:var(--cream)}
+    .sketchbook-hero p{max-width:760px;font-size:clamp(19px,2.8vw,25px);line-height:1.45;color:#c8cec7;margin:0}
+    .gallery-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:28px 0 16px}
+    .gallery-heading h2{font-size:clamp(29px,4vw,42px);margin:0;color:var(--cream)}
+    .gallery-count{font-size:14px;color:#aab5ab;white-space:nowrap}
+    .artwork-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+    .artwork-tile{display:block;min-width:0;padding:0;border:1px solid #35463b;background:#0b100d;cursor:zoom-in;text-align:left;color:inherit}
+    .artwork-tile img{display:block;width:100%;height:clamp(150px,48vw,310px);object-fit:contain;background:#f4f0e8}
+    .artwork-tile:focus-visible{outline:3px solid var(--acid);outline-offset:3px}
+    .gallery-status{padding:24px 0;color:#c8cec7;font-size:18px}
+    .behind-scenes{margin-top:48px;padding:clamp(20px,4vw,34px);background:#111b16;border:1px solid #35463b}
+    .behind-scenes h2{font-size:clamp(28px,4vw,40px);margin:0 0 10px;color:var(--cream)}
+    .behind-scenes p{font-size:18px;line-height:1.5;color:#c8cec7;max-width:720px}
+    .behind-scenes figure{margin:20px 0 0;max-width:650px}
+    .behind-scenes button{display:block;width:100%;padding:0;border:1px solid #35463b;background:#f4f0e8;cursor:zoom-in}
+    .behind-scenes img{display:block;width:100%;max-height:560px;object-fit:contain}
+    .gallery-lightbox{width:min(96vw,1100px);max-width:none;max-height:94dvh;padding:12px;border:1px solid #536456;background:#0b100d;color:var(--cream)}
+    .gallery-lightbox::backdrop{background:rgba(0,0,0,.88)}
+    .lightbox-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:2px 2px 12px}
+    .lightbox-bar p{margin:0;color:#c8cec7;font-size:14px;overflow-wrap:anywhere}
+    .lightbox-actions{display:flex;gap:8px;flex-shrink:0}
+    .lightbox-actions button{min-width:42px;min-height:42px;background:#111b16;border:1px solid #536456;color:var(--cream);font-size:22px;cursor:pointer}
+    .lightbox-image-wrap{display:grid;place-items:center;min-height:140px}
+    .lightbox-image{display:block;max-width:100%;max-height:78dvh;object-fit:contain;background:#f4f0e8}
+    .gallery-footer{margin-top:42px;padding-top:20px;border-top:1px solid var(--line);font-family:Bangers;font-size:21px}
+    @media(min-width:700px){.artwork-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}.artwork-tile img{height:clamp(220px,27vw,340px)}}
+    @media(min-width:1050px){.artwork-grid{grid-template-columns:repeat(4,minmax(0,1fr))}.artwork-tile img{height:260px}}
+    @media(max-width:420px){.sketchbook-page{width:calc(100% - 24px)}.artwork-grid{gap:8px}.artwork-tile img{height:clamp(140px,44vw,200px)}.gallery-lightbox{padding:8px}}
+  </style>
+</head>
+<body>
+<header class="site-nav">
+  <a class="brand" href="./index.html#home" aria-label="WORMS ON ACID home"><img src="./assets/woa-logo-header-1.webp" alt="WORMS ON ACID"></a>
+  <button class="menu" aria-label="Menu" aria-expanded="false">☰</button>
+  <nav>
+    <a href="./index.html#home">HOME</a>
+    <a href="./index.html#story">STORY</a>
+    <a href="./index.html#games">GAMES</a>
+    <a href="./index.html#characters">CHARACTERS</a>
+    <a href="./index.html#world">WORLD</a>
+    <a href="./index.html#community">COMMUNITY</a>
+    <a href="./about.html">ABOUT</a>
+    <a href="./sketchbook.html" aria-current="page">SKETCHBOOK</a>
+  </nav>
+  <div class="social"><a href="https://x.com/wormsonacid" aria-label="WORMS ON ACID on X">𝕏</a><a href="https://x.com/ericonacid" aria-label="Eric on X">E</a></div>
+</header>
+<main class="sketchbook-page">
+  <a class="teaser-back" href="./about.html">← BACK TO ABOUT</a>
+  <section class="sketchbook-hero">
+    <span class="eyebrow">THE ORIGINAL ARTWORK</span>
+    <h1>FROM THE SKETCHBOOK</h1>
+    <p>The drawings behind WORMS ON ACID. Browse the archive and tap any image to see it larger. The collection is drawn directly from the artwork folder, so new images can appear here as the archive grows.</p>
+  </section>
+
+  <section aria-labelledby="artwork-heading">
+    <div class="gallery-heading">
+      <h2 id="artwork-heading">THE ARCHIVE</h2>
+      <span class="gallery-count" id="artwork-count"></span>
+    </div>
+    <div class="artwork-grid" id="artwork-grid" aria-live="polite">
+      <p class="gallery-status">Loading original artwork…</p>
+    </div>
+  </section>
+
+  <section class="behind-scenes" id="behind-the-scenes" hidden aria-labelledby="behind-heading">
+    <span class="eyebrow">A LITTLE CONTEXT</span>
+    <h2 id="behind-heading">BEHIND THE SCENES</h2>
+    <p>A glimpse beyond the drawings themselves.</p>
+    <figure><button type="button" id="desk-image-button" aria-label="Enlarge behind-the-scenes image"><img id="desk-image" alt="Behind-the-scenes photograph from the artwork archive" loading="lazy"></button></figure>
+  </section>
+
+  <nav class="gallery-footer" aria-label="Sketchbook navigation">
+    <a href="./about.html">← ABOUT WORMS ON ACID</a>
+    <span> · </span>
+    <a href="./index.html#home">BACK TO THE WORLD ↑</a>
+  </nav>
+</main>
+
+<dialog class="gallery-lightbox" id="gallery-lightbox" aria-label="Artwork viewer">
+  <div class="lightbox-bar">
+    <p id="lightbox-position"></p>
+    <div class="lightbox-actions">
+      <button type="button" id="lightbox-prev" aria-label="Previous image">‹</button>
+      <button type="button" id="lightbox-next" aria-label="Next image">›</button>
+      <button type="button" id="lightbox-close" aria-label="Close image viewer">×</button>
+    </div>
+  </div>
+  <div class="lightbox-image-wrap"><img class="lightbox-image" id="lightbox-image" alt=""></div>
+</dialog>
+
+<footer>
+  <a class="footer-brand" href="./index.html#home" aria-label="WORMS ON ACID home"><img src="./assets/woa-logo-header-1.webp" alt="WORMS ON ACID"></a>
+  <small>A story being discovered as it happens.</small>
+  <p><a href="./about.html">ABOUT WORMS ON ACID</a> · <a href="./sketchbook.html">THE SKETCHBOOK</a> · <a href="https://x.com/wormsonacid">@wormsonacid</a></p>
+</footer>
+<script>
+(() => {
+  const grid = document.querySelector('#artwork-grid');
+  const count = document.querySelector('#artwork-count');
+  const lightbox = document.querySelector('#gallery-lightbox');
+  const lightboxImage = document.querySelector('#lightbox-image');
+  const position = document.querySelector('#lightbox-position');
+  const deskSection = document.querySelector('#behind-the-scenes');
+  const deskImage = document.querySelector('#desk-image');
+  const deskButton = document.querySelector('#desk-image-button');
+  const deskFilename = 'FB_IMG_1789559076333.jpg';
+  let gallery = [];
+  let current = 0;
+
+  function showImage(index) {
+    if (!gallery.length) return;
+    current = (index + gallery.length) % gallery.length;
+    const item = gallery[current];
+    lightboxImage.src = item.url;
+    lightboxImage.alt = 'Original WORMS ON ACID artwork';
+    position.textContent = (current + 1) + ' of ' + gallery.length;
+    if (!lightbox.open) lightbox.showModal();
+  }
+  function addTile(item, index) {
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'artwork-tile';
+    button.setAttribute('aria-label', 'View original artwork ' + (index + 1));
+    const image = document.createElement('img');
+    image.src = item.url;
+    image.alt = 'Original WORMS ON ACID artwork';
+    image.loading = 'lazy';
+    image.decoding = 'async';
+    button.append(image);
+    button.addEventListener('click', () => showImage(index));
+    grid.append(button);
+  }
+
+  fetch('https://api.github.com/repos/wormsonacideric-debug/website-/contents/assets/original-artwork?ref=main', {
+    headers: {Accept: 'application/vnd.github+json'}
+  })
+  .then(response => {
+    if (!response.ok) throw new Error('Could not load the archive');
+    return response.json();
+  })
+  .then(files => {
+    const images = files
+      .filter(file => file.type === 'file' && /\.(avif|gif|jpe?g|png|webp)$/i.test(file.name))
+      .sort((a, b) => a.name.localeCompare(b.name, undefined, {numeric: true}));
+    const desk = images.find(file => file.name === deskFilename);
+    const artwork = images.filter(file => file.name !== deskFilename);
+    gallery = artwork.map(file => ({name:file.name,url:file.download_url}));
+    grid.replaceChildren();
+    if (!gallery.length) {
+      grid.innerHTML = '<p class="gallery-status">No artwork images found in the archive yet.</p>';
+    } else {
+      gallery.forEach(addTile);
+      count.textContent = gallery.length + ' images';
+    }
+    if (desk) {
+      deskImage.src = desk.download_url;
+      deskSection.hidden = false;
+      deskButton.addEventListener('click', () => {
+        gallery.push({name:desk.name,url:desk.download_url});
+        showImage(gallery.length - 1);
+        gallery.pop();
+      });
+    }
+  })
+  .catch(() => {
+    grid.replaceChildren();
+    const status = document.createElement('p');
+    status.className = 'gallery-status';
+    status.textContent = 'The artwork archive could not be loaded right now. Please try again later.';
+    grid.append(status);
+  });
+
+  document.querySelector('#lightbox-prev').addEventListener('click', () => showImage(current - 1));
+  document.querySelector('#lightbox-next').addEventListener('click', () => showImage(current + 1));
+  document.querySelector('#lightbox-close').addEventListener('click', () => lightbox.close());
+  lightbox.addEventListener('click', event => {
+    if (event.target === lightbox) lightbox.close();
+  });
+  document.addEventListener('keydown', event => {
+    if (!lightbox.open) return;
+    if (event.key === 'ArrowLeft') showImage(current - 1);
+    if (event.key === 'ArrowRight') showImage(current + 1);
+  });
+})();
+</script>
+<script src="./script.js?v=v2"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#111811">
+<title>WORMAGEDDON — WORMS ON ACID</title>
+<style>
+:root{color-scheme:dark;--acid:#d7f45a;--cream:#f6edcf;--rust:#a75b2c}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#101610;color:var(--cream);font-family:system-ui,-apple-system,Segoe UI,sans-serif}
+body{display:grid;place-items:center;padding:clamp(8px,2vw,22px);min-height:100svh}
+.shell{width:min(1100px,100%);margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;margin:0 0 10px}
+.brand{font-weight:1000;letter-spacing:.12em;color:var(--acid);font-size:clamp(18px,3vw,28px)}
+.sub{font-size:12px;letter-spacing:.16em;color:#aab49c}
+.hud{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;font-weight:900}
+.stat{background:#1c281c;border:1px solid #46543a;border-radius:10px;padding:7px 12px;font-size:13px}
+.stat b{color:var(--acid);font-variant-numeric:tabular-nums}
+.stage{position:relative;border:2px solid #56653e;border-radius:16px;overflow:hidden;background:#91a78a;box-shadow:0 18px 60px #0008}
+canvas{display:block;width:100%;height:auto;aspect-ratio:16/9;touch-action:none}
+.overlay{position:absolute;inset:0;display:grid;place-items:center;background:#071009b8;padding:18px;text-align:center}
+.overlay.hidden{display:none}
+.panel{width:min(520px,100%);padding:clamp(18px,4vw,34px);border:2px solid #d7f45a;border-radius:18px;background:#172318f2;box-shadow:0 12px 40px #0008}
+h1{margin:0 0 8px;color:var(--acid);font-size:clamp(30px,6vw,58px);line-height:.95;letter-spacing:.04em}
+.panel p{line-height:1.5;margin:10px 0;color:#e8e4d0}
+.kicker{font-size:11px;letter-spacing:.2em;color:#b4c58a;font-weight:900}
+button{border:0;border-radius:11px;padding:13px 20px;min-height:48px;background:var(--acid);color:#18200e;font-weight:1000;font-size:15px;cursor:pointer;touch-action:manipulation}
+button:active{transform:translateY(2px)}
+.controls{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:12px;flex-wrap:wrap}
+.hint{font-size:13px;color:#b9c2ae;line-height:1.45}
+.mobile{display:none;gap:8px}
+.mobile button{min-width:58px;padding:10px 14px;font-size:20px}
+.footer{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:10px;color:#8d9a83;font-size:11px;letter-spacing:.08em}
+@media(max-width:650px){body{padding:7px}.top{align-items:flex-start}.sub{display:none}.stat{padding:6px 9px}.mobile{display:flex}.controls{align-items:flex-start}.hint{max-width:58%}.footer{font-size:10px}}
+</style>
+</head>
+<body>
+<main class="shell">
+ <header class="top"><div><div class="brand">WORMAGEDDON</div><div class="sub">THE GREAT SCRAPYARD ESCAPE</div></div><div class="hud"><div class="stat">DISTANCE <b id="distance">0m</b></div><div class="stat">SCORE <b id="score">0</b></div><div class="stat">LIVES <b id="lives">3</b></div></div></header>
+ <section class="stage">
+  <canvas id="game" width="960" height="540" aria-label="Wormageddon scrapyard escape game"></canvas>
+  <div class="overlay" id="intro"><div class="panel"><div class="kicker">A HIGH SCRAPARRAL INCIDENT</div><h1>WORMAGEDDON</h1><p>Eric just wants to get across the scrapyard. Peter wants to eat him. Rufus has other ideas. Nigel's boot has absolutely no sense of personal responsibility.</p><p><b>Wriggle. Dodge. Survive.</b><br>Try not to get booted into next Tuesday.</p><button id="start">GET WRIGGLING</button></div></div>
+  <div class="overlay hidden" id="over"><div class="panel"><div class="kicker">THE SCRAPYARD HAS CLAIMED ANOTHER</div><h1 id="endTitle">SQUASHED.</h1><p id="endCopy"></p><p>FINAL SCORE: <b id="finalScore">0</b></p><div style="display:flex;gap:9px;justify-content:center;flex-wrap:wrap"><button id="again">HAVE ANOTHER GO</button><button id="share">SHARE THE DISASTER</button></div></div></div>
+ </section>
+ <div class="controls"><div class="hint">← → move · SPACE / ↑ wriggle-jump · Down burrow-slide<br>On mobile: use the buttons. Rufus occasionally saves your bacon.</div><div class="mobile"><button id="left" aria-label="Move left">◀</button><button id="jump" aria-label="Jump">↟</button><button id="slide" aria-label="Burrow">▼</button><button id="right" aria-label="Move right">▶</button></div></div>
+ <footer class="footer"><span>WORMS ON ACID · HIGH SCRAPARRAL</span><span>NO WORMS WERE INTENTIONALLY BOOTED IN THE MAKING OF THIS GAME</span></footer>
+</main>
+<script>
+(()=>{
+const canvas=document.getElementById('game'),ctx=canvas.getContext('2d'),W=960,H=540;
+const $=id=>document.getElementById(id);
+const assets={eric:'../../assets/eric-canon-transparent.webp',nigel:'../../assets/nigel.png',rufus:'../../assets/rufus.png',peter:'../../assets/peter-web-optimised.webp',yard:'../../assets/high-scraparral-canonical.jpg'};
+for(const [k,src] of Object.entries(assets)){const im=new Image();im.src=src;assets[k]=im}
+let state='intro',frame=0,score=0,distance=0,lives=3,camera=0,shake=0,invuln=0,bootTimer=280,enemyTimer=150,rufusTimer=500,toast='',toastTimer=0,particles=[],hazards=[],keys={},last=0;
+const player={x:150,y:390,vx:0,vy:0,w:62,h:42,onGround:true,slide:0,face:1};
+let boot={x:1100,y:270,active:false,phase:0},peter={x:1100,y:210,active:false,phase:0},rufus={x:-200,y:390,active:false,phase:0};
+const ground=442;
+function reset(){frame=0;score=0;distance=0;lives=3;camera=0;shake=0;invuln=0;bootTimer=280;enemyTimer=150;rufusTimer=500;particles=[];hazards=[];boot={x:1100,y:270,active:false,phase:0};peter={x:1100,y:210,active:false,phase:0};rufus={x:-200,y:390,active:false,phase:0};Object.assign(player,{x:150,y:390,vx:0,vy:0,onGround:true,slide:0,face:1});hud()}
+function hud(){$('distance').textContent=Math.floor(distance)+'m';$('score').textContent=score;$('lives').textContent=lives}
+function start(){reset();state='playing';$('intro').classList.add('hidden');$('over').classList.add('hidden');last=performance.now();requestAnimationFrame(loop)}
+function end(){state='over';$('finalScore').textContent=score;$('endTitle').textContent=lives===0?'ABSOLUTELY FLATTENED':'A VERY WORMY END';$('endCopy').textContent=toast||'Nigel says sorry. His boot says nothing. Peter is being unbearably smug.';$('over').classList.remove('hidden')}
+function say(t){toast=t;toastTimer=130}
+function hit(reason){if(invuln>0||state!=='playing')return;lives--;invuln=105;shake=18;player.vy=-5;player.vx=-4;burst(player.x+camera,player.y+20,'#d7f45a',14);say(reason);hud();if(lives<=0)setTimeout(()=>{if(state==='playing')end()},650)}
+function burst(x,y,c,n){for(let i=0;i<n;i++)particles.push({x,y,vx:(Math.random()-.5)*8,vy:(Math.random()-.8)*7,life:25+Math.random()*25,c,s:2+Math.random()*5})}
+function drawImage(key,x,y,w,h,flip=false,alpha=1){const im=assets[key];if(!im||!im.complete||!im.naturalWidth)return false;ctx.save();ctx.globalAlpha=alpha;if(flip){ctx.translate(x+w,y);ctx.scale(-1,1);ctx.drawImage(im,0,0,w,h)}else ctx.drawImage(im,x,y,w,h);ctx.restore();return true}
+function rounded(x,y,w,h,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.roundRect(x,y,w,h,r);ctx.fill()}
+function background(){const g=ctx.createLinearGradient(0,0,0,H);g.addColorStop(0,'#b7c6ae');g.addColorStop(.62,'#819477');g.addColorStop(.63,'#536747');g.addColorStop(1,'#263526');ctx.fillStyle=g;ctx.fillRect(0,0,W,H);
+ // distant hills and scrapyard silhouettes
+ for(let i=0;i<8;i++){let x=((i*190-camera*.18)%(W+220)+W+220)%(W+220)-110;ctx.fillStyle=i%2?'#687c5e':'#75896a';ctx.beginPath();ctx.moveTo(x,350);ctx.lineTo(x+45,260+(i%3)*18);ctx.lineTo(x+110,350);ctx.fill();rounded(x+15,315,110,35,5,'#59664d')}
+ // junk piles
+ for(let i=0;i<12;i++){let x=((i*145-camera*.48)%(W+170)+W+170)%(W+170)-90;ctx.fillStyle=['#59625a','#7b6650','#48564c'][i%3];ctx.beginPath();ctx.ellipse(x+40,414,48,24,0,0,Math.PI*2);ctx.fill();ctx.fillStyle='#a28c65';ctx.fillRect(x+12,393,48,8)}
+ // ground
+ ctx.fillStyle='#354a2d';ctx.fillRect(0,ground,W,H-ground);ctx.fillStyle='#71834a';ctx.fillRect(0,ground,W,8);
+ for(let i=0;i<40;i++){let x=((i*31-camera)%(W+40)+W+40)%(W+40);ctx.fillStyle=i%2?'#9b9b5c':'#586c3d';ctx.fillRect(x,ground+20+(i%5)*14,12,3)}
+}
+function drawEric(){let x=player.x,y=player.y,w=player.w,h=player.slide?26:player.h;if(invuln>0&&Math.floor(frame/5)%2===0)return; if(!drawImage('eric',x,y,w,h,player.face<0,1)){ctx.fillStyle='#b7d84c';ctx.beginPath();ctx.ellipse(x+w/2,y+h/2,w/2,h/2,0,0,7);ctx.fill();ctx.fillStyle='#17210f';ctx.fillRect(x+w*.7,y+h*.25,5,5)}}
+function drawBoot(){if(!boot.active)return;let x=boot.x-camera,y=boot.y;ctx.save();ctx.translate(x+42,y+55);ctx.rotate(Math.sin(boot.phase*.12)*.08);ctx.fillStyle='#24231e';ctx.beginPath();ctx.roundRect(-34,-65,54,86,15);ctx.fill();ctx.fillStyle='#66513b';ctx.beginPath();ctx.roundRect(-48,0,100,44,17);ctx.fill();ctx.fillStyle='#a68b64';ctx.fillRect(-35,13,70,7);ctx.restore();ctx.fillStyle='#fff2d0';ctx.font='bold 14px system-ui';ctx.fillText('NOT MY FAULT',x-12,y-18)}
+function drawPeter(){if(!peter.active)return;const x=peter.x-camera,y=peter.y+Math.sin(frame*.13)*22;if(!drawImage('peter',x,y,82,76,true)){ctx.fillStyle='#c54c2e';ctx.beginPath();ctx.ellipse(x+40,y+35,35,24,0,0,7);ctx.fill()}ctx.fillStyle='#fff';ctx.font='bold 13px system-ui';ctx.fillText('MINE!',x+10,y-5)}
+function drawRufus(){if(!rufus.active)return;const x=rufus.x-camera,y=rufus.y;if(!drawImage('rufus',x,y,104,78,true)){ctx.font='65px serif';ctx.fillText('🦈',x,y+55)}}
+function drawTappy(){let x=((650-camera*.9)%(W+150)+W+150)%(W+150)-80;ctx.font='40px system-ui';ctx.fillText('💤',x,390);ctx.font='bold 11px system-ui';ctx.fillStyle='#e8e4d0';ctx.fillText('TAPPY',x+4,401)}
+function draw(){ctx.save();if(shake>0){ctx.translate((Math.random()-.5)*shake,(Math.random()-.5)*shake);shake*=.82}background();drawTappy(); // obstacles / scrap
+ hazards.forEach(o=>{let x=o.x-camera;if(x>-80&&x<W+80){if(o.type==='tyre'){ctx.fillStyle='#202a25';ctx.beginPath();ctx.arc(x,o.y,27,0,7);ctx.fill();ctx.fillStyle='#829078';ctx.beginPath();ctx.arc(x,o.y,11,0,7);ctx.fill()}else{ctx.fillStyle='#8d6849';ctx.save();ctx.translate(x,o.y);ctx.rotate(o.rot);ctx.fillRect(-36,-7,72,14);ctx.restore()}}});
+ drawBoot();drawPeter();drawRufus();drawEric();
+ particles.forEach(p=>{ctx.globalAlpha=Math.max(0,p.life/45);ctx.fillStyle=p.c;ctx.fillRect(p.x-camera,p.y,p.s,p.s)});ctx.globalAlpha=1;
+ if(toastTimer>0){rounded(245,28,470,44,12,'#172318e8');ctx.fillStyle='#f6edcf';ctx.font='bold 17px system-ui';ctx.textAlign='center';ctx.fillText(toast,480,56);ctx.textAlign='left'}
+ // vignette
+ const vg=ctx.createLinearGradient(0,0,0,H);vg.addColorStop(0,'#00000022');vg.addColorStop(.5,'#00000000');vg.addColorStop(1,'#00000025');ctx.fillStyle=vg;ctx.fillRect(0,0,W,H);ctx.restore()}
+function spawnHazard(){const type=Math.random()<.65?'tyre':'beam';hazards.push({x:camera+W+80,y:type==='tyre'?ground-27:ground-55,type,rot:Math.random()*.4});}
+function update(){if(state!=='playing')return;frame++;distance+=.12;score+=.035;camera+=2.1+Math.min(distance/500,2);player.vx+=(keys.right?0.55:0)-(keys.left?0.55:0);player.vx*=.88;player.x+=player.vx;player.x=Math.max(45,Math.min(420,player.x));if(Math.abs(player.vx)>.2)player.face=player.vx>0?1:-1;
+ if((keys.jump||keys.up)&&player.onGround){player.vy=-11.8;player.onGround=false;burst(player.x+30,ground,'#d7f45a',4)}if(keys.down)player.slide=12;else player.slide=Math.max(0,player.slide-1);player.vy+=.55;player.y+=player.vy;if(player.y+player.h>=ground){player.y=ground-player.h;player.vy=0;player.onGround=true}
+ bootTimer--;enemyTimer--;rufusTimer--;if(bootTimer<=0&&!boot.active){boot.active=true;boot.x=camera+W+30;boot.y=140;boot.phase=0;bootTimer=380+Math.random()*160;say('Nigel: “Watch your step, Eric!”')}
+ if(boot.active){boot.phase++;boot.x-=5.8;if(boot.phase<36)boot.y+=Math.min(7,boot.phase*.24);else boot.y=ground-72+Math.sin(boot.phase*.1)*3;if(boot.phase===36){burst(boot.x,ground,'#a68b64',10);shake=13}if(boot.x<camera-150)boot.active=false;let bx=boot.x-camera+12,by=boot.y+18;if(player.x+player.w-12>bx&&player.x+12<bx+78&&player.y+player.h>by&&player.y<by+65&&boot.phase>25&&boot.phase<65){hit('Nigel: “ERIC! Sorry, mate!” Nigel: “YOU STUPID BOOT!”');boot.active=false;bootTimer=250}}
+ if(enemyTimer<=0&&!peter.active){peter.active=true;peter.x=camera+W+20;peter.y=100+Math.random()*160;peter.phase=0;enemyTimer=270+Math.random()*160}
+ if(peter.active){peter.phase++;peter.x-=4.2;peter.y+=Math.sin(peter.phase*.11)*2.3;if(peter.phase>25&&Math.abs(peter.x-camera-player.x)<45&&Math.abs(peter.y-player.y)<55){if(rufus.active){peter.x-=130;burst(peter.x, peter.y,'#d7f45a',8);say('RUFUS: “NOT THIS WORM.”');}else{hit('Peter nearly had you. What a smug little menace.');peter.x-=65}}if(peter.x<camera-130)peter.active=false}
+ if(rufusTimer<=0&&!rufus.active){rufus.active=true;rufus.x=camera-120;rufus.y=ground-82;rufus.phase=0;rufusTimer=640}
+ if(rufus.active){rufus.phase++;rufus.x+=7.5;if(peter.active&&rufus.x>peter.x-100){peter.x+=170;burst(peter.x,peter.y,'#f6edcf',12);say('RUFUS has entered the chat. Peter has left the chat.');peter.active=false;rufus.x+=90}if(rufus.x>camera+W+120)rufus.active=false}
+ if(frame%155===0)spawnHazard();hazards=hazards.filter(o=>o.x>camera-100);for(const o of hazards){let px=player.x+camera+player.w*.5;if(Math.abs(px-o.x)<38&&player.y+player.h>o.y-28&&player.y<o.y+20){if(player.slide&&o.type==='beam'){score+=10;burst(o.x,o.y,'#d7f45a',6);o.x=-999}else hit('A piece of Nigel’s scrap. It has seen better days.');}}
+ particles.forEach(p=>{p.x+=p.vx;p.y+=p.vy;p.vy+=.18;p.life--});particles=particles.filter(p=>p.life>0);if(invuln>0)invuln--;if(toastTimer>0)toastTimer--;score=Math.floor(distance*2)+Math.floor(score%1);hud();if(distance>1800){say('You escaped the scrapyard. Nigel is still arguing with his boot.');end()}}
+function loop(t){if(state!=='playing')return;const dt=Math.min(34,t-last);last=t;update(dt);draw();requestAnimationFrame(loop)}
+function setKey(k,v){keys[k]=v}
+window.addEventListener('keydown',e=>{const k=e.key.toLowerCase();if(['arrowleft','arrowright','arrowup','arrowdown',' '].includes(k))e.preventDefault();if(k==='arrowleft'||k==='a')setKey('left',true);if(k==='arrowright'||k==='d')setKey('right',true);if(k==='arrowup'||k==='w'||k===' ')setKey('jump',true);if(k==='arrowdown'||k==='s')setKey('down',true)});
+window.addEventListener('keyup',e=>{const k=e.key.toLowerCase();if(k==='arrowleft'||k==='a')setKey('left',false);if(k==='arrowright'||k==='d')setKey('right',false);if(k==='arrowup'||k==='w'||k===' ')setKey('jump',false);if(k==='arrowdown'||k==='s')setKey('down',false)});
+function bind(id,key){const el=$(id);el.addEventListener('pointerdown',e=>{e.preventDefault();setKey(key,true)});['pointerup','pointerleave','pointercancel'].forEach(ev=>el.addEventListener(ev,()=>setKey(key,false)))}
+bind('left','left');bind('right','right');bind('jump','jump');bind('slide','down');
+$('start').onclick=start;$('again').onclick=start;$('share').onclick=()=>{const text='I made it '+Math.floor(distance)+'m through the High Scraparral in WORMAGEDDON. Nigel’s boot is a menace. #WormsOnAcid';window.open('https://twitter.com/intent/tweet?text='+encodeURIComponent(text)+'&url='+encodeURIComponent('https://wormsonacid.com/games/wormageddon/'),'_blank','noopener')};
+draw();
+})();
+</script>
+</body>
+</html>

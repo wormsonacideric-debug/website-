@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Waking in a Scrap Camp — WORMS ON ACID</title>
+  <meta name="description" content="The live story of Eric and the crew, published as each update is approved.">
+  <link rel="stylesheet" href="../styles.css?v=20261105-live-story">
+  <style>
+    .live-story{width:min(calc(100% - 24px),980px);margin:22px auto 48px}
+    .live-story__heading{margin:0 0 20px}
+    .live-story__heading .eyebrow{display:block;margin-bottom:8px}
+    .live-story__heading h1{font-size:clamp(38px,7vw,76px);line-height:1.02;margin:0 0 10px;overflow-wrap:anywhere}
+    .live-story__heading p{font-size:clamp(18px,2.5vw,24px);margin:0;color:var(--paper)}
+    .live-story__transcript{margin:22px 0 8px;padding:clamp(16px,3vw,28px);background:#101713;border:1px solid #35463b;color:var(--cream);font-size:clamp(18px,2.3vw,22px);line-height:1.65}
+    .live-story__turn{margin:0 0 20px;white-space:normal}
+    .live-story__turn:last-child{margin-bottom:0}
+    .live-story__empty{margin:22px 0;padding:20px;background:#101713;border:1px solid #35463b;color:var(--paper);font-size:19px;line-height:1.5}
+    .live-story__status{min-height:1.5em;color:var(--paper);font-size:15px}
+    .live-story__back{display:inline-block;color:var(--acid);font-family:Bangers;font-size:20px;margin:0 0 18px}
+    @media(max-width:520px){.live-story{width:calc(100% - 16px);margin-top:14px}.live-story__transcript{padding:16px}}
+  </style>
+</head>
+<body>
+  <header class="site-nav">
+    <a class="brand" href="../index.html#home" aria-label="WORMS ON ACID home"><img src="../assets/woa-logo-header-1.webp" alt="WORMS ON ACID"></a>
+    <a class="world-nav-back" href="../index.html#story">← THE JOURNEY</a>
+  </header>
+  <main class="live-story">
+    <a class="live-story__back" href="../index.html#story">← ALL SCENES</a>
+    <header class="live-story__heading">
+      <span class="eyebrow">THE JOURNEY · LIVE STORY</span>
+      <h1 id="story-title">Waking in a Scrap Camp</h1>
+      <p>Eric and the crew, as the story unfolds.</p>
+    </header>
+    <p class="live-story__status" id="story-status" role="status" aria-live="polite"></p>
+    <section class="live-story__transcript" id="story-transcript" aria-label="Approved story conversation"></section>
+  </main>
+  <footer><a class="footer-brand" href="../index.html#home" aria-label="WORMS ON ACID home"><img src="../assets/woa-logo-header-1.webp" alt="WORMS ON ACID"></a><small>A story being discovered as it happens.</small></footer>
+  <script>
+    const title = document.getElementById('story-title');
+    const status = document.getElementById('story-status');
+    const transcript = document.getElementById('story-transcript');
+
+    function renderTurn(text) {
+      const turn = document.createElement('div');
+      turn.className = 'live-story__turn';
+      for (const paragraph of text.split(/\n\s*\n/)) {
+        if (!paragraph.trim()) continue;
+        const p = document.createElement('p');
+        p.textContent = paragraph.trim();
+        turn.append(p);
+      }
+      return turn;
+    }
+
+    fetch('./live-story.json', { cache: 'no-store' })
+      .then((response) => {
+        if (!response.ok) throw new Error('Story is not available');
+        return response.json();
+      })
+      .then((story) => {
+        if (typeof story.title === 'string' && story.title.trim()) title.textContent = story.title;
+        const messages = Array.isArray(story.messages) ? story.messages : [];
+        if (!messages.length) {
+          const empty = document.createElement('p');
+          empty.className = 'live-story__empty';
+          empty.textContent = 'The next part of the story is waiting for review.';
+          transcript.append(empty);
+          return;
+        }
+        for (const message of messages) {
+          if (typeof message.text === 'string') transcript.append(renderTurn(message.text));
+        }
+      })
+      .catch(() => {
+        status.textContent = 'The story could not be loaded just now. Please try again shortly.';
+      });
+  </script>
+</body>
+</html>
